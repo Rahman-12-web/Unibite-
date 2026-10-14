@@ -1,0 +1,835 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+<meta name="theme-color" content="#4A1942">
+<meta name="description" content="UniBite: food and cakes from campus vendors, for University of Ilesha students only.">
+<meta name="referrer" content="strict-origin-when-cross-origin">
+<link rel="preconnect" href="https://www.gstatic.com" crossorigin>
+<link rel="preconnect" href="https://firestore.googleapis.com" crossorigin>
+<link rel="preconnect" href="https://identitytoolkit.googleapis.com" crossorigin>
+<link rel="preconnect" href="https://securetoken.googleapis.com" crossorigin>
+<link rel="modulepreload" href="https://www.gstatic.com/firebasejs/10.14.1/firebase-app.js">
+<link rel="modulepreload" href="https://www.gstatic.com/firebasejs/10.14.1/firebase-auth.js">
+<link rel="modulepreload" href="https://www.gstatic.com/firebasejs/10.14.1/firebase-firestore.js">
+<title>UniBite · Good Food. Right Around Campus.</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="preload" as="style" href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&family=Plus+Jakarta+Sans:wght@600;700;800&display=swap" onload="this.onload=null;this.rel='stylesheet'">
+<noscript><link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&family=Plus+Jakarta+Sans:wght@600;700;800&display=swap"></noscript>
+<style>
+:root{--plum:#4A1942;--coral:#F26B5B;--gold:#F4C95D;--ivory:#FFF9F3;--ink:#211F23;--mute:#6f6873;--line:#eadfd6;--card:#fff;--ok:#2f8f5b;
+--r:12px;--sh:0 1px 2px rgba(74,25,66,.06),0 4px 14px rgba(74,25,66,.06);--nav:64px}
+*{box-sizing:border-box;margin:0}
+html{scroll-padding-top:70px}
+body{font:400 15px/1.5 Inter,system-ui,sans-serif;color:var(--ink);background:var(--ivory);padding-bottom:calc(var(--nav) + env(safe-area-inset-bottom))}
+h1,h2,h3,.brand{font-family:'Plus Jakarta Sans',Inter,sans-serif;color:var(--plum);line-height:1.2}
+h1{font-size:clamp(1.7rem,6vw,2.6rem);font-weight:800}
+h2{font-size:1.2rem;font-weight:700}h3{font-size:1rem;font-weight:700}
+a{color:inherit;text-decoration:none}
+img,svg{max-width:100%}
+:focus-visible{outline:3px solid var(--gold);outline-offset:2px}
+.top{position:sticky;top:0;z-index:20;display:flex;align-items:center;justify-content:space-between;padding:12px 16px;padding-top:calc(12px + env(safe-area-inset-top));background:var(--plum);color:#fff}
+.brand{display:flex;align-items:center;gap:10px;font-size:1.35rem;font-weight:800;color:#fff}.logo{display:grid;place-items:center;width:40px;height:40px;border-radius:11px;background:var(--ivory);flex:none}.logo img{width:auto;height:30px}.brand b{color:var(--gold)}
+.cartbtn{position:relative;display:grid;place-items:center;width:40px;height:40px;color:#fff}
+.hbtns{display:flex;gap:4px;align-items:center}.loginbtn{display:inline-flex;align-items:center;height:34px;padding:0 14px;margin-right:4px;border-radius:99px;background:var(--gold);color:var(--plum);font:600 .85rem Inter}[hidden]{display:none!important}#cartCount,#bellCount{position:absolute;top:0;right:0;min-width:18px;height:18px;padding:0 5px;border-radius:9px;background:var(--coral);font:600 11px/18px Inter;text-align:center}
+nav#nav{position:fixed;left:0;right:0;bottom:0;z-index:20;display:flex;height:calc(var(--nav) + env(safe-area-inset-bottom));padding-bottom:env(safe-area-inset-bottom);background:#fff;border-top:1px solid var(--line)}
+nav#nav a{flex:1;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:2px;font-size:11px;font-weight:500;color:var(--mute)}
+nav#nav a[aria-current=page]{color:var(--plum);font-weight:600}
+nav#nav a[aria-current=page] svg{stroke:var(--coral)}
+.ic{width:22px;height:22px;fill:none;stroke:currentColor;stroke-width:1.8;stroke-linecap:round;stroke-linejoin:round}
+main{max-width:1080px;margin:0 auto;padding:16px;outline:0}
+section{margin-top:28px}
+.row{display:flex;align-items:baseline;justify-content:space-between;gap:12px;margin-bottom:12px}
+.row a{color:var(--coral);font-weight:600;font-size:.9rem}
+.mute{color:var(--mute);font-size:.88rem}
+.hero{background:var(--plum);color:#fff;border-radius:var(--r);padding:24px 20px;position:relative;overflow:hidden}
+.hero h1{color:#fff}.hero p{margin:10px 0 18px;max-width:46ch;color:#e9d9e6}
+.hero-logo{display:block;width:76px;padding:8px 10px;margin-bottom:16px;background:var(--ivory);border-radius:18px;box-shadow:0 6px 18px rgba(0,0,0,.25)}
+.search{display:flex;gap:8px;position:relative;z-index:1;max-width:460px}
+.search input{flex:1;min-width:0}
+input,select,textarea{font:inherit;width:100%;padding:11px 12px;border:1px solid var(--line);border-radius:10px;background:#fff;color:var(--ink)}
+input:focus,select:focus,textarea:focus{border-color:var(--plum);outline:2px solid rgba(74,25,66,.15)}
+label{display:block;font-weight:500;font-size:.88rem;margin:12px 0 4px}
+.err{color:#b3261e;font-size:.82rem;margin-top:4px}
+.btn{display:inline-flex;align-items:center;justify-content:center;gap:6px;min-height:44px;padding:0 18px;border:0;border-radius:10px;background:var(--plum);color:#fff;font:600 .95rem Inter;cursor:pointer;transition:background .15s}
+.btn:hover{background:#611f57}.btn.coral{background:var(--coral)}.btn.coral:hover{background:#e25a49}
+.btn.ghost{background:transparent;color:var(--plum);border:1px solid var(--plum)}
+.btn.sm{min-height:36px;padding:0 12px;font-size:.85rem}.btn.block{width:100%}
+.btn[disabled]{background:#d9d2d6;color:#8d868b;cursor:not-allowed}
+.split{display:grid;gap:12px;grid-template-columns:1fr 1fr}
+.cat{display:block;padding:18px 16px;border-radius:var(--r);min-height:110px;box-shadow:var(--sh)}
+.cat.food{background:var(--coral);color:#fff}.cat.food h3{color:#fff}
+.cat.cakes{background:var(--gold)}.cat.cakes h3{color:var(--plum)}
+.cat p{font-size:.85rem;margin-top:4px}
+.grid{display:grid;gap:12px;grid-template-columns:repeat(auto-fill,minmax(240px,1fr))}
+.card{background:var(--card);border-radius:var(--r);box-shadow:var(--sh);overflow:hidden;position:relative}
+.card .body{padding:12px 14px 14px}
+.ph{aspect-ratio:16/9;background:repeating-linear-gradient(45deg,#f3ebe4,#f3ebe4 10px,#efe5dd 10px,#efe5dd 20px);display:grid;place-items:center;color:var(--mute);font-size:.78rem}
+.ph img{width:100%;height:100%;object-fit:cover}
+.badge{display:inline-block;padding:2px 9px;border-radius:99px;font-size:.75rem;font-weight:600;background:var(--gold);color:var(--plum)}
+.badge.food{background:#fde3df;color:#a63a2c}.badge.off{background:#eee;color:var(--mute)}
+.fav{position:absolute;top:8px;right:8px;width:36px;height:36px;display:grid;place-items:center;border:0;border-radius:50%;background:#fff;cursor:pointer;color:var(--mute)}
+.fav.on{color:var(--coral)}.fav.on svg{fill:var(--coral)}
+.prod{display:flex;gap:12px;padding:12px;align-items:center}
+.prod .ph{width:84px;aspect-ratio:1;border-radius:10px;flex:none;overflow:hidden}
+.prod .info{flex:1;min-width:0}.prod .info p{font-size:.82rem;color:var(--mute);overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
+.price{font-weight:700;color:var(--plum)}
+.qty{display:inline-flex;align-items:center;gap:10px}
+.qty button{width:32px;height:32px;border-radius:8px;border:1px solid var(--line);background:#fff;font-size:1.1rem;cursor:pointer}
+.tabs{display:flex;gap:6px;background:#f3ebe4;padding:4px;border-radius:10px;margin-bottom:14px}
+.tabs button{flex:1;min-height:38px;border:0;border-radius:8px;background:transparent;font:600 .9rem Inter;color:var(--mute);cursor:pointer}
+.tabs button[aria-selected=true]{background:#fff;color:var(--plum);box-shadow:var(--sh)}
+.steps{list-style:none;padding:0;margin:12px 0 0}
+.steps li{position:relative;padding:0 0 12px 30px;color:var(--mute);font-size:.9rem}
+.steps li:before{content:"";position:absolute;left:0;top:2px;width:18px;height:18px;border-radius:50%;border:2px solid var(--line);background:#fff}
+.steps li:after{content:"";position:absolute;left:8px;top:22px;bottom:0;width:2px;background:var(--line)}
+.steps li:last-child:after{display:none}
+.steps li.done{color:var(--ink)}.steps li.done:before{background:var(--ok);border-color:var(--ok);content:"✓";color:#fff;font-size:11px;text-align:center;line-height:14px}
+.steps li.now{color:var(--plum);font-weight:600}.steps li.now:before{border-color:var(--coral);background:var(--coral);box-shadow:0 0 0 4px rgba(242,107,91,.2)}
+.line{display:flex;justify-content:space-between;gap:12px;padding:6px 0}
+.total{border-top:1px dashed var(--line);margin-top:8px;padding-top:10px;font-weight:700;font-size:1.05rem}
+.pay{background:#fff6e0;border:1px solid var(--gold);border-radius:var(--r);padding:14px;margin-top:14px}
+.pay dt{font-size:.78rem;color:var(--mute)}.pay dd{font-weight:600;margin-bottom:8px;word-break:break-all}
+.empty{text-align:center;padding:40px 16px}.empty h3{margin:10px 0 4px}.empty .btn{margin-top:14px}
+.skel{height:120px;border-radius:var(--r);background:linear-gradient(90deg,#f3ebe4,#faf5f0,#f3ebe4);background-size:200% 100%;animation:sk 1.2s infinite}
+@keyframes sk{to{background-position:-200% 0}}
+dialog{border:0;border-radius:var(--r);padding:20px;max-width:min(92vw,380px);box-shadow:0 20px 50px rgba(0,0,0,.25)}
+dialog::backdrop{background:rgba(33,31,35,.5)}
+dialog .btns{display:flex;gap:8px;margin-top:16px;justify-content:flex-end}
+#toast{position:fixed;left:50%;bottom:calc(var(--nav) + 16px + env(safe-area-inset-bottom));transform:translate(-50%,20px);opacity:0;background:var(--ink);color:#fff;padding:10px 16px;border-radius:10px;z-index:40;transition:.2s;pointer-events:none;max-width:90vw}
+#toast.show{opacity:1;transform:translate(-50%,0)}
+.narrow{max-width:520px;margin:0 auto}.vgrid{grid-template-columns:repeat(2,minmax(0,1fr))}.vgrid .body{padding:10px}.vgrid h3{font-size:.95rem;overflow-wrap:anywhere}.vgrid .mute{font-size:.8rem;overflow-wrap:anywhere}.clamp{display:-webkit-box;-webkit-line-clamp:2;-webkit-box-orient:vertical;overflow:hidden}.actions{display:flex;gap:8px;flex-wrap:wrap;margin-top:10px}
+.sw{width:52px;height:30px;border-radius:99px;border:0;background:#d9d2d6;position:relative;cursor:pointer;flex:none;transition:background .15s}.sw span{position:absolute;top:3px;left:3px;width:24px;height:24px;border-radius:50%;background:#fff;transition:left .15s}.sw.on{background:var(--ok)}.sw.on span{left:25px}
+.chk{display:flex;align-items:center;gap:8px;margin:0;font-weight:500}input[type=checkbox]{width:20px;height:20px;padding:0;flex:none;accent-color:var(--plum)}
+.hrow{display:grid;grid-template-columns:62px minmax(0,1fr) auto minmax(0,1fr);gap:6px;align-items:center;margin-bottom:8px}.hrow input[type=time]{padding:8px 6px;min-width:0}
+.permbar{display:flex;align-items:center;gap:8px;flex-wrap:wrap;background:var(--gold);color:var(--plum);padding:10px 16px;font-size:.85rem;font-weight:500}.permbar span{flex:1;min-width:180px}
+.alarmbar{position:fixed;left:12px;right:12px;bottom:calc(var(--nav) + 12px + env(safe-area-inset-bottom));z-index:35;display:flex;align-items:center;justify-content:space-between;gap:10px;padding:12px 14px;border-radius:12px;background:var(--coral);color:#fff;font-weight:600;box-shadow:0 8px 24px rgba(0,0,0,.3)}.alarmbar span{display:flex;align-items:center;gap:8px}.alarmbar .btn{background:#fff;color:var(--plum)}@media(min-width:900px){.alarmbar{bottom:24px;left:auto;max-width:380px}}
+.care{position:fixed;right:14px;bottom:calc(var(--nav) + 16px + env(safe-area-inset-bottom));z-index:30;display:flex;align-items:center;gap:6px;height:46px;padding:0 16px;border-radius:99px;background:#128C4A;color:#fff;font:600 .9rem Inter,sans-serif;box-shadow:0 6px 18px rgba(0,0,0,.25)}.care .ic{width:22px;height:22px;stroke:#fff}body.ringing .care{display:none}@media(min-width:900px){.care{bottom:24px;right:24px}}
+.uni{display:inline-block;padding:4px 12px;border-radius:99px;background:var(--gold);color:var(--plum);font-weight:600;font-size:.8rem}.foot{max-width:1080px;margin:0 auto;padding:6px 16px 30px;text-align:center;font-size:.78rem;color:var(--mute)}.foot a{color:var(--coral);font-weight:600}.terms h2{margin:18px 0 6px}.terms p,.terms li{margin:4px 0;color:var(--ink)}.terms ul{padding-left:20px}
+.cp{display:flex;align-items:center;gap:8px}.copy{display:inline-grid;place-items:center;width:34px;height:34px;flex:none;border:1px solid var(--line);border-radius:8px;background:#fff;color:var(--plum);cursor:pointer}.copy .ic{width:18px;height:18px}.pay .btn .ic{width:18px;height:18px}
+.low{color:var(--coral);font-size:.8rem;font-weight:600}.tabs.five button{font-size:.78rem;padding:0 2px}
+.pick{display:grid;gap:6px}.pick-item{display:flex;align-items:center;gap:10px;min-height:44px;padding:0 12px;border:1px solid var(--line);border-radius:10px;background:#fff;font:500 .92rem Inter,sans-serif;color:var(--ink);text-align:left;cursor:pointer}
+.pick-item .dot{width:20px;height:20px;border-radius:50%;border:2px solid var(--line);display:grid;place-items:center;font-size:12px;flex:none;color:#fff}
+.pick-item.next:hover{border-color:var(--plum)}.pick-item.done{color:var(--mute);background:#f7f2ec;cursor:default}.pick-item.done .dot{background:var(--ok);border-color:var(--ok)}
+.pick-item.now{border-color:var(--coral);background:#fff1ef;color:var(--ink);font-weight:600;cursor:default}.pick-item.now .dot{background:var(--coral);border-color:var(--coral)}
+.rev{background:var(--plum);color:#fff;border-radius:var(--r);padding:18px;margin-bottom:12px}.rev p{color:#e9d9e6;font-size:.85rem}.rev h2{color:#fff;font-size:1.9rem;font-weight:800;margin:2px 0}
+.revrow{display:flex;gap:20px;flex-wrap:wrap;margin-top:12px;font-size:.8rem;color:#e9d9e6}.revrow b{display:block;color:var(--gold);font-size:1rem}@media(min-width:900px){.vgrid{grid-template-columns:repeat(3,minmax(0,1fr))}}.stats{display:grid;grid-template-columns:repeat(auto-fit,minmax(130px,1fr));gap:10px;margin-bottom:14px}.stars-in{display:flex;gap:2px;margin:4px 0 10px}.stars-in button{background:none;border:0;padding:0 2px;font-size:2rem;line-height:1;color:#d9d2d6;cursor:pointer}.stars-in button.on{color:#e0a800}
+@media(min-width:900px){
+ body{padding-bottom:0}
+ .top{gap:24px}.brand{order:0}
+ nav#nav{position:static;height:auto;padding:0;background:none;border:0;flex:1;justify-content:center;gap:4px}
+ nav#nav a{flex:none;flex-direction:row;gap:6px;padding:8px 14px;border-radius:8px;color:#e9d9e6;font-size:.9rem}
+ nav#nav a[aria-current=page]{background:rgba(255,255,255,.12);color:#fff}
+ nav#nav a[aria-current=page] svg{stroke:var(--gold)}
+ #toast{bottom:24px}
+ .hero{padding:44px 40px;min-height:300px}.hero>*:not(.hero-logo){max-width:58%}.hero-logo{position:absolute;right:48px;top:50%;transform:translateY(-50%);width:200px;padding:18px 22px;margin:0;border-radius:28px}
+}
+@media(prefers-reduced-motion:reduce){*{animation:none!important;transition:none!important}}
+</style>
+</head>
+<body>
+<header class="top">
+  <a class="brand" href="#/" aria-label="UniBite home"><span class="logo"><img src="data:image/webp;base64,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" alt="" width="30" height="33"></span><span>Uni<b>Bite</b></span></a>
+  <nav id="nav" aria-label="Main"></nav>
+  <div class="hbtns"><a class="loginbtn" id="loginBtn" href="#/auth">Log in</a><a class="cartbtn" id="bellBtn" href="#/notifications" aria-label="Notifications"><span id="bellIcon"></span><span id="bellCount" hidden>0</span></a><a class="cartbtn" href="#/cart" aria-label="Cart"><span id="cartIcon"></span><span id="cartCount" hidden>0</span></a></div>
+</header>
+<div id="perm"></div>
+<main id="app" tabindex="-1"><div class="grid"><div class="skel"></div><div class="skel"></div><div class="skel"></div><div class="skel"></div></div></main>
+<footer class="foot">UniBite is for <b>University of Ilesha (UNILESHA) students only</b> · <a href="#/terms">Terms &amp; Privacy</a> · <a href="#/help">Help</a></footer>
+<div id="alarm"></div>
+<a id="care" class="care" target="_blank" rel="noopener" aria-label="Chat with UniBite customer care on WhatsApp" href="#"><svg class="ic" viewBox="0 0 24 24" aria-hidden="true"><path d="M21 11.5a8.38 8.38 0 0 1-.9 3.8 8.5 8.5 0 0 1-7.6 4.7 8.38 8.38 0 0 1-3.8-.9L3 21l1.9-5.7a8.38 8.38 0 0 1-.9-3.8 8.5 8.5 0 0 1 4.7-7.6 8.38 8.38 0 0 1 3.8-.9h.5a8.48 8.48 0 0 1 8 8v.5z"/></svg><span>Help</span></a>
+<dialog id="dlg"></dialog>
+<div id="toast" role="status" aria-live="polite"></div>
+<script nomodule>document.getElementById('app').innerHTML='<div class="empty"><h3>Please use Chrome</h3><p class="mute">UniBite needs an up-to-date browser. Open this link in the latest Chrome.</p></div>';</script>
+<script>setTimeout(function(){if(!window.__ubReady){var a=document.getElementById('app');if(a)a.innerHTML='<div class="empty"><h3>Still loading…</h3><p class="mute">Check your internet connection. If this stays, open UniBite in the latest Chrome.</p></div>';}},20000);</script>
+<script type="module">
+import { initializeApp } from 'https://www.gstatic.com/firebasejs/10.14.1/firebase-app.js';
+import { getAuth, onAuthStateChanged, createUserWithEmailAndPassword, signInWithEmailAndPassword, signOut, sendEmailVerification, sendPasswordResetEmail } from 'https://www.gstatic.com/firebasejs/10.14.1/firebase-auth.js';
+import { getFirestore, initializeFirestore, doc, getDoc, getDocs, setDoc, addDoc, updateDoc, deleteDoc, collection, query, where, limit, writeBatch, onSnapshot, getCountFromServer, runTransaction, increment } from 'https://www.gstatic.com/firebasejs/10.14.1/firebase-firestore.js';
+/* UniBite: single-file app on Firebase Auth + Firestore (no Storage: images are small JPEGs saved inside documents). Security lives in firestore.rules; nothing in this file is a security boundary. */
+
+const $ = (s, r = document) => r.querySelector(s);
+const money = n => '₦' + Number(n).toLocaleString('en-NG');
+const esc = s => String(s ?? '').replace(/[&<>"']/g, c => ({ '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;', "'": '&#39;' }[c]));
+const fitImage = (im, W, H, q) => { const c = document.createElement('canvas'); c.width = W; c.height = H; const r = Math.max(W / im.width, H / im.height), w = im.width * r, x = im.height * r; c.getContext('2d').drawImage(im, (W - w) / 2, (H - x) / 2, w, x); return c.toDataURL('image/jpeg', q); };
+const safeImg = s => /^data:image\/(jpeg|png|webp);base64,[A-Za-z0-9+\/=]+$/.test(s || '') ? s : ''; /* only real image data is ever put in an <img> */
+const load = (k, d) => { try { return JSON.parse(localStorage.getItem(k)) ?? d; } catch { return d; } };
+const save = (k, v) => localStorage.setItem(k, JSON.stringify(v));
+const LOGO = $('.logo img').src; let ICON = LOGO; document.head.insertAdjacentHTML('beforeend', `<link rel="icon" href="${LOGO}">`);
+const TYPES = { food: 'Food', cakes: 'Cakes & Pastries' };
+const STATUS = [['pending', 'Payment verification pending'], ['paid', 'Payment confirmed'], ['received', 'Order received'], ['preparing', 'Preparing'], ['ready', 'Ready / out for delivery'], ['delivered', 'Delivered']];
+const P = { home: 'M3 11l9-8 9 8v9a1 1 0 0 1-1 1h-5v-6H9v6H4a1 1 0 0 1-1-1z', search: 'M11 4a7 7 0 1 0 0 14 7 7 0 0 0 0-14zM21 21l-4.3-4.3', orders: 'M6 3h12v18l-3-2-3 2-3-2-3 2zM9 8h6M9 12h6', heart: 'M12 20s-8-5-8-11a4.5 4.5 0 0 1 8-2.5A4.5 4.5 0 0 1 20 9c0 6-8 11-8 11z', user: 'M12 12a4 4 0 1 0 0-8 4 4 0 0 0 0 8zM4 21a8 8 0 0 1 16 0', bag: 'M5 8h14l-1 12H6zM9 8a3 3 0 0 1 6 0', bell: 'M6 9a6 6 0 0 1 12 0c0 6 2 7 2 7H4s2-1 2-7zM10 20a2 2 0 0 0 4 0', copy: 'M9 9h11v11H9zM5 15H4V4h11v1' };
+const ic = k => `<svg class="ic" viewBox="0 0 24 24" aria-hidden="true"><path d="${P[k]}"/></svg>`;
+
+/* UI gate only. The real check is in firestore.rules (the signed-in email must equal ADMIN_EMAIL). */
+const ADMIN_EMAIL = 'abdulrahmamayomide@gmail.com';
+const adminEmail = () => S.user?.email?.toLowerCase() === ADMIN_EMAIL;
+const isAdmin = () => adminEmail();
+const st = v => v.status || 'approved';
+const ownShop = id => !!S.user?.shops?.some(s => s.id === id);
+/* Opening hours (Nigeria time). Kitchen switch (open) always wins; the schedule only applies when switched on. */
+const DAYS = ['sun', 'mon', 'tue', 'wed', 'thu', 'fri', 'sat'], DAYN = { sun: 'Sunday', mon: 'Monday', tue: 'Tuesday', wed: 'Wednesday', thu: 'Thursday', fri: 'Friday', sat: 'Saturday' };
+const mins = t => +t.slice(0, 2) * 60 + +t.slice(3, 5);
+const fmt = t => { const x = +t.slice(0, 2); return `${x % 12 || 12}:${t.slice(3, 5)} ${x < 12 ? 'AM' : 'PM'}`; };
+const lagosFmt = new Intl.DateTimeFormat('en-GB', { timeZone: 'Africa/Lagos', weekday: 'short', hour: '2-digit', minute: '2-digit', hourCycle: 'h23' });
+const lagos = () => { const p = Object.fromEntries(lagosFmt.formatToParts(new Date()).map(x => [x.type, x.value])); return { day: p.weekday.toLowerCase().slice(0, 3), min: +p.hour * 60 + +p.minute }; };
+const isOpen = v => { if (!v || v.open === false) return false; const s = v.schedule; if (!s?.enabled) return true; const { day, min } = lagos(), d = s.days?.[day]; return !!(d?.on && min >= mins(d.from) && min < mins(d.to)); };
+const openInfo = v => {
+  if (v.open === false) return 'Closed · kitchen switched off';
+  if (!v.schedule?.enabled) return 'Open';
+  const { day, min } = lagos(); if (isOpen(v)) return `Open · closes ${fmt(v.schedule.days[day].to)}`;
+  for (let i = 0; i < 8; i++) { const k = DAYS[(DAYS.indexOf(day) + i) % 7], d = v.schedule.days?.[k]; if (d?.on && (i > 0 || min < mins(d.from))) return `Closed · opens ${i === 0 ? 'today' : i === 1 ? 'tomorrow' : DAYN[k]} ${fmt(d.from)}`; }
+  return 'Closed';
+};
+const whyClosed = v => openInfo(v).replace(/^Closed ?· ?/, '');
+const soldOut = p => p.qty != null && p.qty <= 0;
+const stockLabel = p => p.qty == null ? 'No limit set' : p.qty > 0 ? `${p.qty} in stock` : 'Sold out';
+/* WhatsApp quick message (free, works on every phone). Nigerian numbers: 080... becomes 23480... */
+const CARE = '08129758664'; /* UniBite customer care, WhatsApp only */
+const waLink = (phone, text) => { let d = String(phone || '').replace(/\D/g, ''); if (d.startsWith('0')) d = '234' + d.slice(1); else if (d.length === 10) d = '234' + d; return `https://wa.me/${d}?text=${encodeURIComponent(text)}`; };
+const DEF_SETTINGS = { registrationOpen: true, fee: 0, contact: '', bank: { bankName: '', accountName: '', accountNumber: '', instructions: '' } };
+const ORDER_MSG = { paid: ['Payment confirmed', 'The vendor confirmed your payment.'], received: ['Order accepted', 'The vendor has accepted your order.'], preparing: ['Preparing your order', 'Your food is being prepared.'], ready: ['Ready / out for delivery', 'Your order is ready or on its way.'], delivered: ['Delivered', 'Enjoy! You can now rate this vendor.'], rejected: ['Payment not confirmed', 'The vendor could not confirm your payment.'] };
+const ago = t => { const m = Math.round((Date.now() - t) / 6e4); return m < 1 ? 'now' : m < 60 ? m + 'm' : m < 1440 ? Math.round(m / 60) + 'h' : new Date(t).toLocaleDateString('en-NG'); };
+const NEXT = { pending: ['paid', 'Confirm payment'], paid: ['received', 'Accept order'], received: ['preparing', 'Mark preparing'], preparing: ['ready', 'Mark ready / out for delivery'], ready: ['delivered', 'Mark delivered'] };
+const meta = v => `${esc(v.location || 'Location not set')} · ${v.rating ? `★ ${v.rating} (${v.count})` : 'No ratings yet'}`;
+/* ---------- Firebase ---------- */
+const app = initializeApp({ apiKey: 'AIzaSyAZCkCtjqqaTw_wurR-7cX5JWEFujdRTnI', authDomain: 'unibite-cfde7.firebaseapp.com', projectId: 'unibite-cfde7', storageBucket: 'unibite-cfde7.firebasestorage.app', messagingSenderId: '55832848779', appId: '1:55832848779:web:86a3cd8eba222560e9e78e' });
+const APPCHECK_KEY = ''; /* reCAPTCHA v3 site key. Leave empty until App Check is set up in the Firebase console. */
+if (APPCHECK_KEY) { const ac = await import('https://www.gstatic.com/firebasejs/10.14.1/firebase-app-check.js'); ac.initializeAppCheck(app, { provider: new ac.ReCaptchaV3Provider(APPCHECK_KEY), isTokenAutoRefreshEnabled: true }); }
+const auth = getAuth(app), db = initializeFirestore(app, { experimentalAutoDetectLongPolling: true }); /* switches to a slower-but-working connection type automatically on networks that block the fast one */
+/* Firebase console > Project settings > Cloud Messaging > Web Push certificates > Generate key pair. Paste the key here. */
+const VAPID_KEY = 'PASTE_YOUR_VAPID_KEY_HERE';
+const C = { notifs: [], orders: [], vorders: [], un: [], oReady: Promise.resolve(), vReady: Promise.resolve() };
+let busy = false;
+const cache = {}, cached = (k, ms, fn) => { const c = cache[k]; if (c && Date.now() - c.t < ms) return c.p; const p = fn(); cache[k] = { t: Date.now(), p }; p.catch(() => delete cache[k]); return p; };
+const newOrderId = () => 'UB-' + Array.from(crypto.getRandomValues(new Uint8Array(6)), b => 'ABCDEFGHJKLMNPQRSTUVWXYZ23456789'[b % 32]).join('');
+const PM = {}; /* products already loaded, so adding to cart does not wait on the network */
+const bust = () => { Object.keys(cache).forEach(k => /^(p:|prods|v:|vs:|me:|rv:|pop)/.test(k) && delete cache[k]); Object.keys(PM).forEach(k => delete PM[k]); };
+const docs = s => s.docs.map(d => ({ ...d.data(), id: d.id })).filter(x => /^[\w@.-]{1,60}$/.test(x.id)); /* a document with an odd id is ignored, so ids are always safe to place in HTML */
+const col = n => collection(db, n);
+const ratings = () => cached('rev', 600000, async () => { const m = {}; docs(await getDocs(col('reviews'))).forEach(r => { const x = m[r.vendorId] ||= { s: 0, n: 0 }; x.s += r.stars; x.n++; }); return m; });
+let RM = {}; const rateSoon = () => ratings().then(m => { if (JSON.stringify(m) !== JSON.stringify(RM)) { RM = m; render(); } }).catch(() => {});
+const withRating = (v, m) => { const r = m[v.id]; return { ...v, count: r?.n || 0, rating: r ? (r.s / r.n).toFixed(1) : null }; };
+const authMsg = e => ({ 'auth/invalid-credential': 'Wrong email or password.', 'auth/wrong-password': 'Wrong email or password.', 'auth/user-not-found': 'Wrong email or password.', 'auth/invalid-email': 'Enter a valid email.', 'auth/email-already-in-use': 'We could not create that account. If it is yours, log in or reset your password.', 'auth/weak-password': 'Use a stronger password (8+ characters with letters and numbers).', 'auth/too-many-requests': 'Too many attempts. Try again in a few minutes.', 'auth/network-request-failed': 'Check your internet connection.' }[e.code] || 'Something went wrong. Please try again.');
+
+const api = {
+  vendors: type => cached('vs:' + (type || ''), 300000, async () => docs(await getDocs(query(col('vendors'), where('status', '==', 'approved'), ...(type ? [where('type', '==', type)] : []))))).then(l => { rateSoon(); return l.map(v => withRating(v, RM)); }),
+  vendor: id => cached('v:' + id, 60000, async () => { try { const s = await getDoc(doc(db, 'vendors', id)); return s.exists() ? { ...s.data(), id } : undefined; } catch { return undefined; } }).then(v => { if (v) rateSoon(); return v && withRating(v, RM); }),
+  products: vid => cached(vid ? 'p:' + vid : 'prods', 300000, async () => { const l = docs(await getDocs(vid ? query(col('products'), where('vendorId', '==', vid)) : query(col('products'), limit(300)))); l.forEach(p => (PM[p.id] = p)); return l; }),
+  popular: () => cached('pop', 300000, async () => { const l = docs(await getDocs(query(col('products'), where('available', '==', true), limit(8)))); l.forEach(p => (PM[p.id] = p)); return l; }),
+  product: async id => { if (PM[id]) return PM[id]; const s = await getDoc(doc(db, 'products', id)); return s.exists() ? (PM[id] = { ...s.data(), id }) : undefined; },
+  orders: async () => { await C.oReady; return [...C.orders].sort((a, b) => b.createdAt - a.createdAt); },
+  vendorOrders: async () => { await C.vReady; return C.vorders.filter(o => o.vendorId === S.user.vendorId).sort((a, b) => b.createdAt - a.createdAt); },
+  /* One transaction: shop must be open, every item must be in stock, stock goes down and the order is saved together or not at all. */
+  async placeOrder(o) {
+    const id = o.id || newOrderId(), qtyMap = {}; let sold = [];
+    o.items.forEach(i => { qtyMap[i.productId] = (qtyMap[i.productId] || 0) + i.qty; });
+    await runTransaction(db, async tx => {
+      const v = await tx.get(doc(db, 'vendors', o.vendorId));
+      if (!v.exists() || !isOpen(v.data())) throw Object.assign(new Error('closed'), { closed: true, info: v.exists() ? whyClosed(v.data()) : '' });
+      if (o.payTo && (v.data().bank || {}).accountNumber !== o.payTo.accountNumber) throw Object.assign(new Error('bank'), { bankChanged: true });
+      const snaps = await Promise.all(Object.keys(qtyMap).map(pid => tx.get(doc(db, 'products', pid))));
+      const short = snaps.filter(s => !s.exists() || s.data().available === false || (s.data().qty != null && s.data().qty < qtyMap[s.id])).map(s => ({ id: s.id, name: s.exists() ? s.data().name : 'An item', left: !s.exists() || s.data().available === false ? 0 : s.data().qty }));
+      if (short.length) throw Object.assign(new Error('stock'), { short });
+      sold = snaps.filter(s => s.data().qty != null && s.data().qty - qtyMap[s.id] === 0).map(s => s.data().name);
+      snaps.forEach(s => { if (s.data().qty != null) tx.update(s.ref, { qty: s.data().qty - qtyMap[s.id], lastOrder: id }); });
+      const { receipt, id: _oid, ...rest } = o;
+      tx.set(doc(db, 'orders', id), { ...rest, qtyMap, hasReceipt: !!receipt });
+      if (receipt) tx.set(doc(db, 'receipts', id), { uid: o.uid, ownerUid: o.ownerUid, receipt, createdAt: Date.now() });
+    });
+    bust();
+    if (sold.length) api.notify(o.ownerUid, 'Sold out', `${sold.join(', ')} ${sold.length > 1 ? 'are' : 'is'} sold out. Add stock to sell again.`, '#/vendor-menu', 'sold_out', id, 'sold_' + id);
+    api.notify(o.ownerUid, 'New order ' + id + ' · ' + o.vendorName, `${o.name} ordered ${money(o.total)}. Check the payment receipt.`, '#/vendor-orders', 'new_order', id, 'new_' + id);
+    return { ...o, id };
+  },
+  async setStatus(id, status) {
+    const o = C.vorders.find(x => x.id === id); if (!o) throw new Error('Not your order');
+    const ix = k => STATUS.findIndex(x => x[0] === k); if (status !== 'rejected' && ix(status) <= ix(o.status)) throw new Error('Invalid status change');
+    await updateDoc(doc(db, 'orders', id), { status, paymentStatus: status === 'rejected' ? 'rejected' : 'confirmed', updatedAt: Date.now() });
+    const m = ORDER_MSG[status]; api.notify(o.uid, `${m[0]} · ${id}`, m[1], '#/orders', 'stage', id, `stage_${id}_${status}`);
+  },
+  async addProduct(p) { await addDoc(col('products'), { ...p, vendorId: S.user.vendorId, createdAt: Date.now() }); bust(); },
+  async updateProduct(id, patch) { await updateDoc(doc(db, 'products', id), patch); bust(); },
+  async deleteProduct(id) { await deleteDoc(doc(db, 'products', id)); bust(); },
+  reviews: vid => cached('rv:' + vid, 600000, async () => docs(await getDocs(query(col('reviews'), where('vendorId', '==', vid)))).sort((a, b) => b.createdAt - a.createdAt)),
+  async saveReview(r) { await setDoc(doc(db, 'reviews', r.vendorId + '_' + r.uid), { ...r, createdAt: Date.now() }); delete cache.rev; bust(); RM = await ratings(); const v = await api.vendor(r.vendorId); if (v?.ownerUid) api.notify(v.ownerUid, 'New review · ' + v.name, `${r.name} gave ${r.stars} star${r.stars > 1 ? 's' : ''}${r.comment ? ': ' + r.comment.slice(0, 80) : ''}`, '#/vendor/' + r.vendorId, 'review', r.vendorId + '_' + r.uid, 'review_' + r.vendorId + '_' + r.uid); },
+  async updateVendor(id, patch) { await updateDoc(doc(db, 'vendors', id), patch); const sh = S.user?.shops?.find(x => x.id === id); if (sh && patch.name) sh.name = patch.name; bust(); },
+  myVendor: () => cached('me:' + S.user.vendorId, 20000, async () => { const s = await getDoc(doc(db, 'vendors', S.user.vendorId)); return s.exists() ? { ...s.data(), id: s.id } : undefined; }),
+  /* One account can own one shop per type. Shop id = uid_type, so a second shop (food + cakes) is a separate record with its own fee, receipt, approval, menu and orders. */
+  async applyVendor(a) {
+    if (!['food', 'cakes'].includes(a.type) || (S.user.shops || []).some(x => x.type === a.type)) throw new Error('Shop type already registered');
+    const { phone, regReceipt, ...pub } = a, uid = S.user.uid, id = `${uid}_${a.type}`, b = writeBatch(db);
+    b.set(doc(db, 'vendors', id), { open: true, img: '', bank: { bankName: '', accountName: '', accountNumber: '', instructions: '' }, ...pub, status: 'pending', bankVerified: false, ownerUid: uid, createdAt: Date.now() });
+    b.set(doc(db, 'vendorPrivate', id), { ownerUid: uid, ownerName: S.user.name, ownerEmail: S.user.email, phone, regReceipt, appliedAt: Date.now() });
+    await b.commit();
+    (S.user.shops ||= []).push({ id, type: a.type, name: a.name, status: 'pending' }); S.user.vendorId = id; localStorage.setItem('ub_shop', id); bust();
+    const s = await api.settings(); if (s.adminUid) api.notify(s.adminUid, `New ${TYPES[a.type]} vendor application`, `${a.name} wants to join UniBite.`, '#/admin', 'application', id, 'app_' + id);
+    return id;
+  },
+  settings: () => cached('set', 300000, async () => { const s = await getDoc(doc(db, 'settings', 'main')); return { ...DEF_SETTINGS, ...(s.exists() ? s.data() : {}) }; }),
+  async saveSettings(p) { await setDoc(doc(db, 'settings', 'main'), { ...p, adminUid: S.user.uid }, { merge: true }); delete cache.set; },
+  async allVendors() { const [a, b] = await Promise.all([getDocs(col('vendors')), getDocs(col('vendorPrivate'))]), pv = Object.fromEntries(docs(b).map(x => [x.id, x])); return docs(a).map(v => ({ ...v, ...pv[v.id], id: v.id })).sort((x, y) => (y.appliedAt || 0) - (x.appliedAt || 0)); },
+  async setVendorStatus(id, status) { await updateDoc(doc(db, 'vendors', id), { status }); bust(); const o = (await getDoc(doc(db, 'vendors', id))).data(), m = { approved: ['You’re approved', `Your ${TYPES[o.type]} shop is now open.`], rejected: ['Application not approved', `The admin could not confirm your ${TYPES[o.type]} registration payment.`], suspended: ['Shop suspended', `Your ${TYPES[o.type]} shop is hidden from students.`] }[status]; if (m && o.ownerUid && o.ownerUid !== 'demo') api.notify(o.ownerUid, m[0], m[1], '#/vendor-orders'); },
+  async setBankVerified(id, ok) { await updateDoc(doc(db, 'vendors', id), { bankVerified: ok }); bust(); },
+  /* Admin-only preview data: approved sample vendors and menus, marked isDemo so they can be removed in one tap. */
+  async addSamples() {
+    const names = { food: ['Mama’s Kitchen', 'Campus Grills', 'Amala Spot', 'Rice & Stew Hub', 'Suya Corner'], cakes: ['Sweet Crumbs', 'Oven Fresh', 'Cake Lab', 'Pie House', 'Dough & Co'] };
+    const items = { food: [['Jollof Rice', 1500, 'Rice'], ['Fried Rice & Chicken', 2200, 'Rice'], ['Pounded Yam & Egusi', 2500, 'Swallow']], cakes: [['Chocolate Cake (slice)', 1200, 'Cakes'], ['Meat Pie', 700, 'Pastries'], ['Doughnut', 400, 'Pastries']] }, b = writeBatch(db);
+    Object.entries(names).forEach(([type, list]) => list.forEach((name, i) => {
+      const id = `demo-${type}${i + 1}`;
+      b.set(doc(db, 'vendors', id), { name, type, desc: 'Sample vendor for previewing UniBite.', location: 'Near campus gate', open: i !== 3, img: '', bank: { bankName: 'Sample Bank', accountName: name, accountNumber: '0000000000', instructions: '' }, status: 'approved', bankVerified: false, ownerUid: 'demo', isDemo: true, createdAt: Date.now() });
+      items[type].forEach(([n, p, c], j) => b.set(doc(db, 'products', `${id}-p${j}`), { vendorId: id, name: n, desc: 'Short product description.', price: p + i * 100, qty: 25, category: c, available: true, img: '', isDemo: true, createdAt: Date.now() - j * 1e5 }));
+    }));
+    await b.commit(); bust();
+  },
+  async removeSamples() {
+    const [v, p] = await Promise.all([getDocs(query(col('vendors'), where('isDemo', '==', true))), getDocs(query(col('products'), where('isDemo', '==', true)))]), b = writeBatch(db);
+    [...v.docs, ...p.docs].forEach(d => b.delete(d.ref)); await b.commit(); bust();
+  },
+  async stats() { const [u, o] = await Promise.all([getCountFromServer(col('users')), getCountFromServer(col('orders'))]); return { students: u.data().count, orders: o.data().count }; },
+  /* Notifications are created from the client for now; Cloud Functions will make this tamper-proof. */
+  /* Every notification is tied to a real event (kind + ref) and, where it matters, has a fixed id, so the rules can check it is genuine and block spam. */
+  notify(uid, title, body, href, kind = 'admin', ref = '', id = '') { if (!uid) return; const data = { uid, title, body, href, kind, ref, read: false, createdAt: Date.now() }; (id ? setDoc(doc(db, 'notifications', id), data) : addDoc(col('notifications'), data)).catch(console.error); },
+  notifs: async () => C.notifs,
+  markRead(ids) { const b = writeBatch(db), t = C.notifs.filter(n => !n.read && (!ids || ids.includes(n.id))); t.forEach(n => { b.update(doc(db, 'notifications', n.id), { read: true }); n.read = true; }); if (t.length) b.commit().catch(console.error); chrome(); },
+  async confirmUnilesha() { await setDoc(doc(db, 'users', S.user.uid), { name: S.user.name, email: S.user.email, unilesha: true }, { merge: true }); S.user.unilesha = true; },
+  async students() { return docs(await getDocs(query(col('users'), limit(300)))).sort((a, b) => (b.createdAt || 0) - (a.createdAt || 0)); },
+  async setStudentSuspended(uid, on) { await updateDoc(doc(db, 'users', uid), { suspended: on }); },
+  async updateProfile(p) { await setDoc(doc(db, 'users', S.user.uid), { ...p, email: S.user.email, ...(S.user.unilesha ? { unilesha: true } : {}) }, { merge: true }); Object.assign(S.user, p); },
+  async register(d) {
+    busy = true;
+    try {
+      const { user } = await createUserWithEmailAndPassword(auth, d.email.trim(), d.pw);
+      await setDoc(doc(db, 'users', user.uid), { name: d.name.trim(), email: user.email, phone: d.phone.trim(), location: '', unilesha: true, createdAt: Date.now() });
+    } finally { busy = false; }
+    await loadUser(auth.currentUser);
+  },
+  async login(d) { busy = true; try { await signInWithEmailAndPassword(auth, d.email.trim(), d.pw); } finally { busy = false; } await loadUser(auth.currentUser); },
+  async signOut() { try { if (S.pushToken) await deleteDoc(doc(db, 'pushTokens', S.pushToken)); } catch {} S.pushToken = null; return signOut(auth); },
+  reset: email => sendPasswordResetEmail(auth, email)
+};
+/* Phone/desktop alerts that work when UniBite is closed: browser permission -> service worker -> FCM token saved in pushTokens.
+   A Cloud Function (functions/index.js) sends the alert whenever a notification document is created. */
+async function enablePush() {
+  if (!S.user || !('serviceWorker' in navigator) || !('Notification' in window) || Notification.permission !== 'granted' || VAPID_KEY.startsWith('PASTE')) return;
+  try {
+    const { getMessaging, getToken, isSupported } = await import('https://www.gstatic.com/firebasejs/10.14.1/firebase-messaging.js');
+    if (!(await isSupported())) return;
+    const reg = await navigator.serviceWorker.register('/firebase-messaging-sw.js');
+    const token = await getToken(getMessaging(app), { vapidKey: VAPID_KEY, serviceWorkerRegistration: reg });
+    if (token) { await setDoc(doc(db, 'pushTokens', token), { uid: S.user.uid, createdAt: Date.now() }); S.pushToken = token; }
+  } catch (e) { console.error('Push setup failed', e); }
+}
+const systemNotify = n => { try { if (Notification.permission !== 'granted') return; navigator.serviceWorker?.getRegistration().then(r => r ? r.showNotification(n.title, { body: n.body, icon: ICON, data: { href: n.href } }) : new Notification(n.title, { body: n.body, icon: ICON })).catch(() => {}); } catch {} };
+/* Alerts without a server: sound, vibration, tab badge, a system notification when the tab is in the background,
+   and a vendor "kitchen mode" that keeps the screen awake and rings until the new order is opened. */
+const audio = { ctx: null }, alarm = { t: null };
+const unlockAudio = () => { try { audio.ctx ||= new (window.AudioContext || window.webkitAudioContext)(); if (audio.ctx.state === 'suspended') audio.ctx.resume(); } catch {} };
+document.addEventListener('pointerdown', unlockAudio, { passive: true });
+const beep = loud => { const c = audio.ctx; if (!c || c.state !== 'running') return; [0, .2].forEach((t, i) => { const o = c.createOscillator(), g = c.createGain(), at = c.currentTime + t; o.type = 'sine'; o.frequency.value = i ? 988 : 784; g.gain.setValueAtTime(.0001, at); g.gain.exponentialRampToValueAtTime(loud ? .6 : .2, at + .02); g.gain.exponentialRampToValueAtTime(.0001, at + .17); o.connect(g); g.connect(c.destination); o.start(at); o.stop(at + .18); }); try { navigator.vibrate?.(loud ? [300, 150, 300] : 120); } catch {} };
+const stopAlarm = () => { clearInterval(alarm.t); alarm.t = null; document.body.classList.remove('ringing'); const a = $('#alarm'); if (a) a.innerHTML = ''; };
+const startAlarm = () => { stopAlarm(); document.body.classList.add('ringing'); beep(true); alarm.t = setInterval(() => beep(true), 3000); $('#alarm').innerHTML = `<div class="alarmbar"><span>${ic('bell')} New order!</span><button class="btn sm" data-act="stopalarm">Open orders</button></div>`; };
+const alertUser = n => { toast(n.title); if (S.kmode && n.title.startsWith('New order')) startAlarm(); else beep(false); if (document.visibilityState !== 'visible' && !S.pushToken) systemNotify(n); };
+async function setKitchenMode(on) { S.kmode = on; try { if (on) { unlockAudio(); S.wl = await navigator.wakeLock?.request('screen'); } else { await S.wl?.release(); S.wl = null; stopAlarm(); } } catch (e) { console.error(e); } }
+document.addEventListener('visibilitychange', () => { if (document.visibilityState === 'visible' && S.kmode && (!S.wl || S.wl.released)) navigator.wakeLock?.request('screen').then(w => (S.wl = w)).catch(() => {}); });
+async function loadUser(u) {
+  C.un.forEach(f => f()); C.un = []; C.notifs = []; C.orders = []; C.vorders = []; bust();
+  if (!u) { S.user = null; return; }
+  const [p, sv] = await Promise.all([getDoc(doc(db, 'users', u.uid)), getDocs(query(col('vendors'), where('ownerUid', '==', u.uid))).catch(() => null)]);
+  const shops = sv ? docs(sv).map(x => ({ id: x.id, type: x.type, name: x.name, status: x.status })) : [], saved = localStorage.getItem('ub_shop'), first = shops.find(x => x.id === saved) || shops.find(x => x.status === 'approved') || shops[0];
+  S.user = { name: u.email.split('@')[0], phone: '', location: '', ...(p.exists() ? p.data() : {}), uid: u.uid, email: u.email, shops, vendorId: first?.id };
+  if (adminEmail() && !S.user.unilesha) { S.user.unilesha = true; setDoc(doc(db, 'users', u.uid), { name: S.user.name, email: S.user.email, unilesha: true }, { merge: true }).catch(console.error); }
+  const uid = u.uid; let f = { n: true, o: true, v: true };
+  C.oReady = new Promise(r => (C.oR = r)); C.vReady = new Promise(r => (C.vR = r));
+  C.un.push(onSnapshot(query(col('notifications'), where('uid', '==', uid)), s => {
+    const added = f.n ? [] : s.docChanges().filter(c => c.type === 'added').map(c => c.doc.data()); f.n = false;
+    C.notifs = docs(s).sort((a, b) => b.createdAt - a.createdAt);
+    added.forEach(alertUser);
+    chrome(); if (location.hash === '#/notifications') render();
+  }, console.error));
+  C.un.push(onSnapshot(query(col('orders'), where('uid', '==', uid)), s => { C.orders = docs(s); C.oR(); if (!f.o && location.hash === '#/orders') render(); f.o = false; }, console.error));
+  C.un.push(onSnapshot(query(col('orders'), where('ownerUid', '==', uid)), s => { C.vorders = docs(s); C.vR(); if (!f.v && location.hash === '#/vendor-orders') render(); f.v = false; }, console.error));
+  if ('Notification' in window && Notification.permission === 'granted') enablePush();
+  if (isAdmin()) api.settings().then(s => s.adminUid !== uid && api.saveSettings({ registrationOpen: s.registrationOpen, fee: s.fee, contact: s.contact, bank: s.bank })).catch(console.error);
+}
+
+/* ---------- State ---------- */
+const S = { user: null, ready: false, cart: load('ub_cart', { vendorId: null, items: {} }), favs: load('ub_favs', []), tab: 'active', vtab: 'todo', atab: 'pending' };
+let pendingImg = null, pendingReceipt = null;
+const cartCount = () => Object.values(S.cart.items).reduce((a, b) => a + b, 0);
+const saveCart = () => { save('ub_cart', S.cart); chrome(); };
+const fail = e => { console.error(e); toast(e.code === 'permission-denied' ? 'You don’t have permission to do that.' : 'Something went wrong. Try again.'); };
+const toast = m => { const t = $('#toast'); t.textContent = m; t.classList.add('show'); clearTimeout(toast.t); toast.t = setTimeout(() => t.classList.remove('show'), 2400); };
+const ask = (title, text, ok) => new Promise(res => { const d = $('#dlg'); d.innerHTML = `<h3>${title}</h3><p class="mute" style="margin-top:6px">${text}</p><div class="btns"><button class="btn ghost sm" value="no">Cancel</button><button class="btn sm" value="yes">${ok}</button></div>`; d.onclick = e => { const v = e.target.value; if (v) { d.close(); res(v === 'yes'); } }; d.oncancel = () => res(false); d.showModal(); });
+
+/* ---------- Components ---------- */
+const ph = (img, label = 'Photo') => `<div class="ph">${safeImg(img) ? `<img src="${safeImg(img)}" alt="" loading="lazy" decoding="async">` : label}</div>`;
+const empty = (t, s, href, cta) => `<div class="empty">${ic('bag')}<h3>${t}</h3><p class="mute">${s}</p>${cta ? `<a class="btn" href="${href}">${cta}</a>` : ''}</div>`;
+const skeleton = () => `<div class="grid">${'<div class="skel"></div>'.repeat(4)}</div>`;
+const vendorCard = v => `<article class="card"><a href="#/vendor/${v.id}">${ph(v.img, 'Vendor photo')}<div class="body"><span class="badge ${v.type}">${TYPES[v.type]}</span> ${isOpen(v) ? '' : '<span class="badge off">Closed</span>'}<h3 style="margin-top:6px">${esc(v.name)}</h3><p class="mute clamp">${esc(v.desc || 'No description yet.')}</p><p class="mute" style="margin-top:6px">${meta(v)}</p></div></a><button class="fav ${S.favs.includes(v.id) ? 'on' : ''}" data-act="fav" data-id="${v.id}" aria-label="Favourite ${esc(v.name)}">${ic('heart')}</button></article>`;
+const prodRow = (p, v) => { const q = S.cart.vendorId === p.vendorId ? S.cart.items[p.id] || 0 : 0, out = soldOut(p), can = p.available && !out && isOpen(v); return `<div class="card prod">${ph(p.img, 'Photo')}<div class="info"><h3>${esc(p.name)}</h3><p>${esc(p.desc)}</p><span class="price">${money(p.price)}</span>${p.qty > 0 && p.qty <= 5 ? `<span class="low"> · Only ${p.qty} left</span>` : ''}</div>${!p.available ? '<span class="badge off">Unavailable</span>' : out ? '<span class="badge off">Sold out</span>' : q ? qtyCtl(p.id, q) : `<button class="btn sm" data-act="add" data-id="${p.id}" ${can ? '' : 'disabled'}>Add</button>`}</div>`; };
+const qtyCtl = (id, q) => `<div class="qty"><button data-act="dec" data-id="${id}" aria-label="Remove one">−</button><b>${q}</b><button data-act="inc" data-id="${id}" aria-label="Add one">+</button></div>`;
+
+/* ---------- Views ---------- */
+const views = {
+  async home() {
+    const [vs, ps] = await Promise.all([api.vendors(), api.popular()]);
+    const vm = Object.fromEntries(vs.map(v => [v.id, v])), pop = ps.filter(p => p.available && !soldOut(p) && vm[p.vendorId]).slice(0, 6);
+    return `<div class="hero"><img class="hero-logo" src="${LOGO}" alt="UniBite logo"><span class="uni" style="margin:0 0 10px">For University of Ilesha students only</span><h1>Good Food. Right Around Campus.</h1><p>Order from independent vendors on the University of Ilesha campus and pay them directly. Track every order from payment to your door.</p>
+    <form class="search" data-form="search"><input name="q" type="search" placeholder="Search vendors or dishes" aria-label="Search"><button class="btn coral">Search</button></form></div>
+    <section><div class="split"><a class="cat food" href="#/browse/food"><h3>Food</h3><p>${vs.filter(v => v.type === 'food').length} vendors</p></a><a class="cat cakes" href="#/browse/cakes"><h3>Cakes & Pastries</h3><p>${vs.filter(v => v.type === 'cakes').length} vendors</p></a></div></section>
+    ${(S.user?.shops || []).length > 1 ? '' : `<section><div class="card body" style="display:flex;gap:12px;align-items:center;justify-content:space-between;flex-wrap:wrap"><div><h3>Sell on UniBite</h3><p class="mute">Run a food or cake business? Get your own shop page and dashboard.</p></div><a class="btn coral sm" href="${S.user ? '#/vendor-apply' : '#/auth/vendor'}">${S.user?.shops?.length ? 'Add another shop' : 'Become a vendor'}</a></div></section>`}
+    <section><div class="row"><h2>Featured vendors</h2><a href="#/browse/food">See all</a></div>${vs.length ? `<div class="grid vgrid">${[...vs].sort((a, b) => isOpen(b) - isOpen(a)).slice(0, 4).map(vendorCard).join('')}</div>` : '<div class="card body mute">No vendors have joined yet. Check back soon.</div>'}</section>
+    ${pop.length ? `<section><h2 style="margin-bottom:12px">Popular right now</h2><div class="grid">${pop.map(p => `<a class="card" href="#/vendor/${p.vendorId}">${prodRow(p, vm[p.vendorId]).replace('card prod', 'prod').replace(/<(button|div class="qty")[\s\S]*$/, '</div>')}</a>`).join('')}</div></section>` : ''}`;
+  },
+  async browse(type, q) {
+    q = (q || '').toLowerCase();
+    let vs = await api.vendors(type === 'all' ? '' : type);
+    if (q) { const ps = await api.products(); const hit = new Set(ps.filter(p => p.name.toLowerCase().includes(q)).map(p => p.vendorId)); vs = vs.filter(v => v.name.toLowerCase().includes(q) || hit.has(v.id)); }
+    const t = type === 'all' ? '' : `<div class="tabs" role="tablist">${Object.entries(TYPES).map(([k, n]) => `<button role="tab" aria-selected="${k === type}" data-go="#/browse/${k}">${n}</button>`).join('')}</div>`;
+    return `<h1 style="font-size:1.6rem;margin-bottom:14px">${type === 'all' ? 'Search' : TYPES[type]}</h1>${t}<form data-form="search" style="margin-bottom:14px"><input name="q" type="search" value="${esc(q)}" placeholder="Search vendors or dishes" aria-label="Search"></form>${vs.length ? `<div class="grid vgrid">${vs.map(vendorCard).join('')}</div>` : empty('No vendors found', q ? 'Try a different search.' : 'No vendors have joined this section yet.', '#/browse/food', 'Explore Food')}`;
+  },
+  async vendor(id) {
+    const v = await api.vendor(id); if (!v) return empty('Vendor not found', 'This vendor may no longer be on UniBite.', '#/', 'Back home');
+    const ps = await api.products(id), cats = [...new Set(ps.map(p => p.category))];
+    return `<div class="card">${ph(v.img, 'Vendor image')}<div class="body"><span class="badge ${v.type}">${TYPES[v.type]}</span> <span class="badge ${isOpen(v) ? '' : 'off'}">${esc(openInfo(v))}</span><h1 style="font-size:1.5rem;margin-top:6px">${esc(v.name)}</h1>${ownShop(v.id) ? `<button class="btn ghost sm" style="margin:6px 0" data-act="editshop" data-id="${v.id}">Edit business profile</button>` : ''}<p class="mute">${esc(v.desc || 'No description yet.')}</p><p class="mute" style="margin-top:6px">${meta(v)}</p></div></div>
+    ${cats.map(c => `<section><h2 style="margin-bottom:10px">${esc(c)}</h2><div class="grid">${ps.filter(p => p.category === c).map(p => prodRow(p, v)).join('')}</div></section>`).join('') || empty('No items yet', 'This vendor has not added a menu.')}
+    ${await reviewsHtml(v)}
+    ${cartCount() && S.cart.vendorId === id ? `<div style="position:sticky;bottom:calc(var(--nav) + 8px);margin-top:20px"><a class="btn coral block" href="#/cart">View your order · ${cartCount()} item(s)</a></div>` : ''}`;
+  },
+  async cart() {
+    if (!cartCount()) return empty('Your cart is empty', 'Add items from one vendor to start an order.', '#/browse/food', 'Explore Food');
+    const v = await api.vendor(S.cart.vendorId), ps = await api.products(v.id), rows = ps.filter(p => S.cart.items[p.id]);
+    const total = rows.reduce((a, p) => a + p.price * S.cart.items[p.id], 0);
+    return `<div class="narrow"><h1 style="font-size:1.5rem">Your order from ${esc(v.name)}</h1><p class="mute" style="margin:4px 0 14px">Each vendor handles its own payment and delivery, so orders are placed one vendor at a time.</p>
+    <div class="card body">${rows.map(p => `<div class="line"><span>${esc(p.name)}<br><span class="mute">${money(p.price)}</span></span>${qtyCtl(p.id, S.cart.items[p.id])}</div>`).join('')}<div class="line total"><span>Total</span><span>${money(total)}</span></div></div>
+    ${isOpen(v) ? '<a class="btn coral block" style="margin-top:14px" href="#/checkout">Continue to checkout</a>' : `<p class="err" style="margin-top:12px">${esc(v.name)} is closed right now (${esc(whyClosed(v))}).</p><button class="btn block" style="margin-top:8px" disabled>Shop is closed</button>`}<button class="btn ghost block" style="margin-top:8px" data-act="clear">Clear cart</button></div>`;
+  },
+  async checkout() {
+    if (!cartCount()) return location.hash = '#/cart', '';
+    if (!S.user) { sessionStorage.setItem('ub_next', '#/checkout'); return location.hash = '#/auth', ''; }
+    delete cache['v:' + S.cart.vendorId];
+    const v = await api.vendor(S.cart.vendorId), ps = await api.products(v.id), rows = ps.filter(p => S.cart.items[p.id]);
+    const total = rows.reduce((a, p) => a + p.price * S.cart.items[p.id], 0), b = v.bank, ready = !!(b.accountNumber && b.bankName), open = isOpen(v); pendingReceipt = null; S.orderKey ||= newOrderId();
+    return `<div class="narrow"><h1 style="font-size:1.5rem">Checkout</h1><p class="mute">Order from ${esc(v.name)}</p>${open ? '' : `<p class="err">${esc(v.name)} is closed right now (${esc(whyClosed(v))}).</p>`}
+    <div class="card body" style="margin-top:12px">${rows.map(p => `<div class="line"><span>${esc(p.name)} × ${S.cart.items[p.id]}</span><span>${money(p.price * S.cart.items[p.id])}</span></div>`).join('')}<div class="line total"><span>Total</span><span>${money(total)}</span></div></div>
+    <form data-form="checkout" novalidate><input type="hidden" name="paybank" value="${esc(b.bankName)}"><input type="hidden" name="payname" value="${esc(b.accountName)}"><input type="hidden" name="payacct" value="${esc(b.accountNumber)}"><label>Name</label><input name="name" maxlength="80" value="${esc(S.user.name)}" required><label>Phone number (the vendor will call you about delivery)</label><input name="phone" maxlength="20" type="tel" autocomplete="tel" value="${esc(S.user.phone)}" required><label>Delivery location on campus (hostel, room or landmark)</label><input name="loc" maxlength="150" value="${esc(S.user.location || '')}" placeholder="Hostel, room or landmark" required><label>Note (optional)</label><textarea name="note" rows="2" maxlength="300"></textarea>
+    <div class="pay"><b>Pay ${esc(v.name)} directly</b>${v.bankVerified ? ' <span class="badge">Verified by UniBite</span>' : ''}${acctBox(b)}${b.instructions ? `<p style="margin-bottom:6px">${esc(b.instructions)}</p>` : ''}<p class="mute">${ready ? `Transfer ${money(total)} to this account, then upload your receipt below. The vendor checks it before preparing your order.` : 'This vendor has not added payment details yet. Please try again later.'}</p></div>
+    <label>Payment receipt</label><div id="rcPrev" class="mute" style="border:1px dashed var(--line);border-radius:var(--r);padding:14px;text-align:center;background:#fff">Upload a screenshot or photo of your transfer receipt</div><input type="file" accept="image/*" data-receipt style="margin-top:8px"><label>Transfer reference (optional)</label><input name="ref" maxlength="60"><p class="err" id="fe" role="alert"></p><button class="btn coral block" style="margin-top:14px" ${ready && open ? '' : 'disabled'}>I have paid, place order</button></form></div>`;
+  },
+  async orders() {
+    if (!S.user) return needAuth('Sign in to see your orders.');
+    const all = await api.orders(), list = all.filter(o => ['delivered', 'rejected'].includes(o.status) === (S.tab === 'history'));
+    return `<h1 style="font-size:1.6rem;margin-bottom:14px">Orders</h1><div class="tabs" role="tablist">${[['active', 'Active'], ['history', 'History']].map(([k, n]) => `<button role="tab" aria-selected="${S.tab === k}" data-act="tab" data-id="${k}">${n}</button>`).join('')}</div>
+    ${list.length ? `<div class="grid">${list.map(orderCard).join('')}</div>` : empty(S.tab === 'active' ? 'No orders yet.' : 'No past orders', 'Your orders will show up here.', '#/browse/food', 'Explore Food')}`;
+  },
+  async favourites() {
+    const vs = (await api.vendors()).filter(v => S.favs.includes(v.id));
+    return `<h1 style="font-size:1.6rem;margin-bottom:14px">Favourites</h1>${vs.length ? `<div class="grid vgrid">${vs.map(vendorCard).join('')}</div>` : empty('No favourites yet', 'Tap the heart on a vendor to save it.', '#/browse/food', 'Explore Food')}`;
+  },
+  async profile() {
+    if (!S.user) return needAuth('Log in to manage your profile.');
+    const u = S.user;
+    return `<div class="narrow"><h1 style="font-size:1.6rem">Profile</h1><div class="card body" style="margin:14px 0"><h3>${esc(u.name)}</h3><p class="mute">${esc(u.email)}</p></div>
+    <form data-form="pedit" novalidate><label>Full name</label><input name="name" maxlength="80" value="${esc(u.name)}" required><label>Phone number</label><input name="phone" maxlength="20" type="tel" value="${esc(u.phone)}" required><label>Delivery location</label><input name="location" maxlength="150" value="${esc(u.location || '')}" placeholder="Hostel, room or landmark"><p class="err" id="fe" role="alert"></p><button class="btn block" style="margin-top:12px">Save profile</button></form>
+    <div class="card" style="margin:18px 0">${[['#/orders', 'My orders'], ['#/favourites', 'Favourites'], ['#/notifications', 'Notifications'], ['#/help', 'Help & support']].map(([h, l]) => `<a class="line" style="padding:14px 16px;border-bottom:1px solid var(--line)" href="${h}"><span>${l}</span><span class="mute">›</span></a>`).join('')}</div>
+    ${adminEmail() ? '<a class="btn coral block" style="margin-bottom:8px" href="#/admin">Admin dashboard</a>' : ''}${vendorBlock(u)}<button class="btn block" style="margin-top:8px" data-act="logout">Log out</button></div>`;
+  },
+  async auth(mode) {
+    const vend = mode === 'vendor', reg = mode === 'register' || vend;
+    return `<div class="narrow"><h1 style="font-size:1.6rem">${vend ? 'Create your vendor account' : reg ? 'Create your account' : 'Welcome back'}</h1>${vend ? '<p class="mute" style="margin:4px 0">Step 1: create your account. Step 2: add your business details and pay the registration fee.</p>' : ''}<p class="uni" style="margin-top:10px">For University of Ilesha students only</p><form data-form="auth" data-mode="${reg ? 'register' : 'login'}" ${vend ? 'data-vendor="1"' : ''} novalidate>
+    ${reg ? '<label>Full name</label><input name="name" maxlength="80" required><label>Phone number</label><input name="phone" maxlength="20" type="tel" required><label class="chk" style="margin-top:14px;align-items:flex-start"><input type="checkbox" name="student"> <span>' + (vend ? 'I confirm my shop serves University of Ilesha students only.' : 'I confirm I am a current student of the University of Ilesha.') + ' I agree to the <a href="#/terms" style="color:var(--coral)">Terms</a>.</span></label>' : ''}
+    <label>Email</label><input name="email" type="email" autocomplete="email" required><label>Password</label><input name="pw" type="password" minlength="8" autocomplete="${reg ? 'new-password' : 'current-password'}" required><p class="err" id="fe" role="alert"></p>
+    <button class="btn block" style="margin-top:14px">${reg ? 'Create account' : 'Log in'}</button>${reg ? '' : '<p style="margin-top:10px"><a href="#" data-act="reset" style="color:var(--coral)">Forgot password?</a></p>'}</form><p class="mute" style="margin-top:14px">${reg ? 'Have an account? <a href="#/auth" style="color:var(--coral)">Log in</a>' : 'New here? <a href="#/auth/register" style="color:var(--coral)">Create an account</a>'}</p>${vend ? '' : '<div class="card body" style="margin-top:16px"><b>Own a food or cake business?</b><p class="mute" style="margin:2px 0 10px">Sell to Unilesha students with your own shop page and dashboard.</p><a class="btn coral sm" href="#/auth/vendor">Create a vendor account</a></div>'}</div>`;
+  }
+};
+views['vendor-profile'] = async () => {
+  const g = await vGuard(); if (g !== null) return g;
+  const v = await api.vendor(S.user.vendorId); pendingImg = v.img || null;
+  return `<div class="narrow">${vtabs('vendor-profile')}<h1 style="font-size:1.6rem">Business profile</h1><p class="mute" style="margin:4px 0">This is what students see on your vendor card.</p><form data-form="vprofile" novalidate>
+  <label>Photo or logo</label><div class="ph" id="imgPrev" style="border-radius:var(--r);overflow:hidden">${safeImg(v.img) ? `<img src="${safeImg(v.img)}" alt="">` : 'No image yet'}</div><input type="file" accept="image/*" data-img style="margin-top:8px"><button type="button" class="btn ghost sm" style="margin-top:8px" data-act="rmimg">Remove photo</button>
+  <label>Business name</label><input name="name" maxlength="80" value="${esc(v.name)}" required><label>Description</label><textarea name="desc" rows="3" maxlength="160">${esc(v.desc)}</textarea><label>Location</label><input name="location" maxlength="150" value="${esc(v.location)}" required><p class="err" id="fe" role="alert"></p><button class="btn coral block" style="margin-top:14px">Save changes</button></form></div>`;
+};
+async function reviewsHtml(v) {
+  const rs = await api.reviews(v.id), mine = S.user && rs.find(r => r.uid === S.user.uid), own = ownShop(v.id), done = S.user ? (await api.orders()).find(o => o.vendorId === v.id && o.status === 'delivered') : null;
+  const form = own ? '<p class="mute">Students can rate and comment on your page.</p>' : !S.user ? '<p class="mute" style="margin-bottom:8px">Log in to rate this vendor.</p><button class="btn ghost sm" data-act="login">Log in</button>' : !done ? '<p class="mute">You can leave a review once an order from this vendor has been delivered to you.</p>' : `<form data-form="review" data-vid="${v.id}" novalidate><input type="hidden" name="orderId" value="${esc(done.id)}"><b>Rate ${esc(v.name)}</b><div class="stars-in" id="starIn">${[1, 2, 3, 4, 5].map(n => `<button type="button" data-act="star" data-id="${n}" aria-label="${n} star${n > 1 ? 's' : ''}" class="${mine && n <= mine.stars ? 'on' : ''}">★</button>`).join('')}</div><input type="hidden" name="stars" value="${mine ? mine.stars : 0}"><textarea name="comment" rows="3" maxlength="400" placeholder="How were the food and delivery?" aria-label="Comment">${esc(mine?.comment || '')}</textarea><p class="err" id="fe" role="alert"></p><button class="btn sm" style="margin-top:10px">${mine ? 'Update review' : 'Post review'}</button></form>`;
+  return `<section><div class="row"><h2>Ratings & reviews</h2><span class="mute">${v.rating ? `★ ${v.rating} · ${v.count} review${v.count > 1 ? 's' : ''}` : 'No reviews yet'}</span></div><div class="card body">${form}</div>${rs.map(r => `<div class="card body" style="margin-top:10px"><div class="line"><b>${esc(r.name)}</b><span class="price">${'★'.repeat(r.stars)}${'☆'.repeat(5 - r.stars)}</span></div>${r.comment ? `<p>${esc(r.comment)}</p>` : ''}<p class="mute">${new Date(r.createdAt).toLocaleDateString('en-NG')}</p></div>`).join('')}</section>`;
+}
+const shopHead = () => {
+  const sh = S.user?.shops || [], a = sh.find(s => s.id === S.user?.vendorId); if (!a) return '';
+  return `<div style="margin-bottom:10px"><span class="badge ${a.type}">${TYPES[a.type]} shop</span> <b>${esc(a.name)}</b></div>${sh.length > 1 ? `<div class="tabs" role="tablist" aria-label="Switch shop">${sh.map(s => `<button role="tab" aria-selected="${s.id === a.id}" data-act="shop" data-id="${s.id}">${s.type === 'food' ? 'Food shop' : 'Cakes shop'}</button>`).join('')}</div>` : ''}`;
+};
+const vtabs = cur => `${shopHead()}<div class="tabs five" role="tablist">${[['vendor-orders', 'Orders'], ['vendor-menu', 'Menu'], ['vendor-hours', 'Hours'], ['vendor-profile', 'Profile'], ['vendor-payment', 'Pay']].map(([k, n]) => `<button role="tab" aria-selected="${k === cur}" data-go="#/${k}">${n}</button>`).join('')}</div>`;
+const vGuard = async () => {
+  if (!S.user?.vendorId) return S.user ? (location.hash = '#/vendor-apply', '') : needAuth('Log in to manage your business.');
+  const v = await api.myVendor(), s = await api.settings(); const sh = S.user.shops.find(x => x.id === v.id); if (sh) { sh.status = v.status; sh.name = v.name; } const m = { pending: ['Application under review', 'We have your receipt. You get access to your vendor dashboard once the admin confirms your payment.'], rejected: ['Application not approved', 'The admin could not confirm your registration payment.'], suspended: ['Account suspended', 'Your vendor account is on hold.'] }[st(v)];
+  return m ? `<div class="narrow">${shopHead()}${empty(m[0], m[1] + ` Need help? WhatsApp ${CARE}.`)}</div>` : null;
+};
+const label = o => o.status === 'rejected' ? 'Payment not confirmed' : STATUS.find(s => s[0] === o.status)[1];
+const stagePicker = o => {
+  if (o.status === 'rejected' || o.status === 'delivered') return '';
+  const cur = STATUS.findIndex(s => s[0] === o.status);
+  return `<p class="mute" style="margin:10px 0 6px">Tap the stage this order is at:</p><div class="pick">${STATUS.slice(1).map(([k, l], j) => { const i = j + 1, c = i < cur ? 'done' : i === cur ? 'now' : 'next'; return `<button class="pick-item ${c}" data-act="stage" data-id="${o.id}" data-s="${k}" ${c === 'next' ? '' : 'disabled'}><span class="dot">${i <= cur ? '✓' : ''}</span>${l}</button>`; }).join('')}</div>${o.status === 'pending' ? `<button class="btn ghost sm block" style="margin-top:8px" data-act="reject" data-id="${o.id}">Payment not received</button>` : ''}`;
+};
+const kitchenBar = v => `<div class="card body line" style="align-items:center;margin-bottom:12px"><div><b>Kitchen ${v.open === false ? 'OFF' : 'ON'}</b><p class="mute">${esc(openInfo(v))}</p></div><button class="sw ${v.open === false ? '' : 'on'}" data-act="kitchen" role="switch" aria-checked="${v.open !== false}" aria-label="Kitchen switch"><span></span></button></div>`;
+views['vendor-hours'] = async () => {
+  const g = await vGuard(); if (g !== null) return g;
+  const v = await api.vendor(S.user.vendorId), s = v.schedule || {}, days = s.days || {};
+  return `<div class="narrow">${vtabs('vendor-hours')}<h1 style="font-size:1.6rem;margin-bottom:12px">Opening hours</h1>${kitchenBar(v)}
+  <p class="mute" style="margin-bottom:12px">The switch turns your kitchen on or off right now. When it is OFF, students cannot order, whatever your schedule says.</p>
+  <form data-form="hours" novalidate><div class="card body"><label class="chk"><input type="checkbox" name="auto" ${s.enabled ? 'checked' : ''}> <b>Open and close automatically</b></label><p class="mute" style="margin-top:6px">Takes orders only during the hours below (Nigeria time), then closes by itself. Handy if you forget to switch off.</p></div>
+  <div class="card body" style="margin-top:12px">${['mon', 'tue', 'wed', 'thu', 'fri', 'sat', 'sun'].map(k => { const d = days[k] || { on: k !== 'sun', from: '08:00', to: '20:00' }; return `<div class="hrow"><label class="chk"><input type="checkbox" name="on_${k}" ${d.on ? 'checked' : ''}> ${DAYN[k].slice(0, 3)}</label><input type="time" name="from_${k}" value="${d.from}" aria-label="${DAYN[k]} opens"><span class="mute">to</span><input type="time" name="to_${k}" value="${d.to}" aria-label="${DAYN[k]} closes"></div>`; }).join('')}<button type="button" class="btn ghost sm" style="margin-top:6px" data-act="copyhours">Copy Monday’s hours to all days</button></div>
+  <p class="err" id="fe" role="alert"></p><button class="btn coral block" style="margin-top:12px">Save hours</button></form></div>`;
+};
+const kmodeBar = () => `<div class="card body line" style="align-items:center;margin-bottom:12px"><div><b>Kitchen mode ${S.kmode ? 'ON' : 'OFF'}</b><p class="mute">Keeps your screen awake and rings loudly for every new order. Keep UniBite open on this phone.</p></div><button class="sw ${S.kmode ? 'on' : ''}" data-act="kmode" role="switch" aria-checked="${!!S.kmode}" aria-label="Kitchen mode"><span></span></button></div>`;
+const vOrder = o => { const pay = o.paymentStatus || (o.status === 'pending' ? 'pending' : 'confirmed'); return `<article class="card body"><div class="line"><b>${o.id}</b><span class="badge ${pay === 'confirmed' ? '' : 'off'}">${{ pending: 'Payment to verify', confirmed: 'Payment confirmed', rejected: 'Not confirmed' }[pay]}</span></div>
+  <p><b>${esc(o.name)}</b> · <a href="tel:${esc(o.phone)}" style="color:var(--coral)">${esc(o.phone)}</a><br><span class="mute">${esc(o.location)}${o.note ? ' · Note: ' + esc(o.note) : ''}</span></p>
+  <p style="margin:6px 0">${o.items.map(i => `${esc(i.name)} × ${i.qty}`).join('<br>')}</p><div class="line"><b class="price">${money(o.total)}</b><span class="mute">${new Date(o.createdAt).toLocaleString('en-NG', { dateStyle: 'short', timeStyle: 'short' })}</span></div>
+  ${o.paymentRef ? `<p class="mute">Reference: ${esc(o.paymentRef)}</p>` : ''}${o.payTo ? `<p class="mute">Student was told to pay: ${esc(o.payTo.bankName)} · ${esc(o.payTo.accountNumber)}</p>` : ''}${o.receipt || o.hasReceipt ? `<button class="btn ghost sm" style="margin-top:6px" data-act="receipt" data-id="${o.id}">View receipt</button>` : ''}
+  <p class="mute" style="margin-top:8px">Status: <b>${label(o)}</b></p><div class="actions"><a class="btn sm" href="tel:${esc(o.phone)}">Call customer</a><a class="btn ghost sm" target="_blank" rel="noopener" href="${waLink(o.phone, `Hi ${o.name}, this is ${o.vendorName}. Your UniBite order ${o.id} is now: ${label(o)}.`)}">WhatsApp</a></div>${stagePicker(o)}</article>`; };
+views['vendor-orders'] = async () => {
+  const g = await vGuard(); if (g !== null) return g;
+  const vend = await api.vendor(S.user.vendorId), all = await api.vendorOrders(), day = new Date().toDateString(), fin = o => ['delivered', 'rejected'].includes(o.status), list = all.filter(o => fin(o) === (S.vtab === 'done'));
+  const paid = all.filter(o => !['pending', 'rejected'].includes(o.status)), sum = a => a.reduce((t, o) => t + o.total, 0), first = paid.length ? Math.min(...paid.map(o => o.createdAt)) : 0;
+  const del = sum(paid.filter(o => o.status === 'delivered')), tot = sum(paid), tod = sum(paid.filter(o => new Date(o.createdAt).toDateString() === day));
+  const revCard = `<div class="rev"><p>Total revenue</p><h2>${money(tot)}</h2><p>${paid.length ? `From ${paid.length} paid order${paid.length > 1 ? 's' : ''} since ${new Date(first).toLocaleDateString('en-NG', { dateStyle: 'medium' })}` : 'Your revenue appears here once you confirm your first payment.'}</p><div class="revrow"><span>Delivered<b>${money(del)}</b></span><span>In progress<b>${money(tot - del)}</b></span><span>Today<b>${money(tod)}</b></span></div><p style="font-size:.75rem;margin-top:10px">Counts every order whose payment you confirmed, all time.</p></div>`;
+  const st = [['Orders today', all.filter(o => new Date(o.createdAt).toDateString() === day).length], ['Payments to verify', all.filter(o => o.status === 'pending').length], ['Preparing', all.filter(o => o.status === 'preparing').length], ['Delivered orders', all.filter(o => o.status === 'delivered').length]];
+  return `${vtabs('vendor-orders')}${kitchenBar(vend)}${kmodeBar()}${revCard}<div class="stats">${st.map(([l, n]) => `<div class="card body"><b class="price" style="font-size:1.2rem">${n}</b><p class="mute">${l}</p></div>`).join('')}</div>
+  <div class="tabs" role="tablist">${[['todo', 'To do'], ['done', 'Completed']].map(([k, n]) => `<button role="tab" aria-selected="${S.vtab === k}" data-act="vtab" data-id="${k}">${n}</button>`).join('')}</div>
+  ${list.length ? `<div class="grid">${list.map(vOrder).join('')}</div>` : empty(S.vtab === 'todo' ? 'No orders to handle' : 'Nothing completed yet', 'New orders from students will appear here.')}`;
+};
+views['vendor-payment'] = async () => {
+  const g = await vGuard(); if (g !== null) return g;
+  const v = await api.vendor(S.user.vendorId), b = v.bank || {};
+  return `<div class="narrow">${vtabs('vendor-payment')}<h1 style="font-size:1.6rem">Payment details</h1><p class="mute" style="margin:4px 0 8px">Students pay this account directly. Check the number carefully: a wrong number sends money to someone else.</p>${b.accountNumber ? `<span class="badge ${v.bankVerified ? '' : 'off'}">${v.bankVerified ? 'Verified by UniBite' : 'Awaiting admin check'}</span>` : ''}
+  <form data-form="vpay" novalidate><label>Bank name</label><input name="bankName" value="${esc(b.bankName)}" required><label>Account name</label><input name="accountName" value="${esc(b.accountName)}" required><label>Account number</label><input name="accountNumber" inputmode="numeric" maxlength="10" value="${esc(b.accountNumber)}" required><label>Payment instructions (optional)</label><textarea name="instructions" rows="2" maxlength="200" placeholder="e.g. Use your order ID as the transfer narration">${esc(b.instructions)}</textarea><p class="err" id="fe" role="alert"></p><button class="btn coral block" style="margin-top:14px">Save payment details</button></form></div>`;
+};
+views['vendor-menu'] = async () => {
+  const g = await vGuard(); if (g !== null) return g;
+  pendingImg = null; const ps = await api.products(S.user.vendorId);
+  return `<div class="narrow">${vtabs('vendor-menu')}<h1 style="font-size:1.6rem">Menu</h1><p class="mute" style="margin-bottom:6px">New items are added to <b>${esc(S.user.shops.find(s => s.id === S.user.vendorId)?.name || '')}</b>.</p><form data-form="vprod" novalidate><label>Item name</label><input name="name" maxlength="80" required><label>Price (₦)</label><input name="price" type="number" min="50" inputmode="numeric" required><label>Quantity available</label><input name="qty" type="number" min="1" step="1" inputmode="numeric" placeholder="How many do you have?" required><label>Category</label><input name="category" maxlength="40" placeholder="e.g. Rice, Drinks, Cakes" required><label>Short description</label><input name="desc" maxlength="80"><label>Photo (optional)</label><div class="ph" id="imgPrev" style="aspect-ratio:1;max-width:160px;overflow:hidden;border-radius:10px">No image</div><input type="file" accept="image/*" data-img data-shape="square" style="margin-top:8px"><p class="err" id="fe" role="alert"></p><button class="btn coral block" style="margin-top:14px">Add item</button></form>
+  <section><h2 style="margin-bottom:10px">Your items</h2><button class="btn ghost sm" style="margin-bottom:10px" data-act="optimize">Make my photos load faster</button>${ps.length ? ps.map(p => `<div class="card prod" style="margin-bottom:10px">${ph(p.img, 'Photo')}<div class="info"><h3>${esc(p.name)}</h3><span class="price">${money(p.price)}</span><p>${esc(p.category)} · ${stockLabel(p)}${p.available ? '' : ' · Unavailable'}</p></div><div style="display:grid;gap:6px"><button class="btn sm" data-act="restock" data-id="${p.id}">Add stock</button><a class="btn ghost sm" href="#/vendor-edit/${p.id}">Edit</a><button class="btn ghost sm" data-act="pavail" data-id="${p.id}">${p.available ? 'Mark unavailable' : 'Mark available'}</button><button class="btn ghost sm" data-act="pdel" data-id="${p.id}">Delete</button></div></div>`).join('') : '<p class="mute">No items yet. Add your first item above.</p>'}</section></div>`;
+};
+views['vendor-edit'] = async id => {
+  const g = await vGuard(); if (g !== null) return g;
+  const s = await getDoc(doc(db, 'products', id)), p = s.exists() ? { ...s.data(), id } : null;
+  if (!p || p.vendorId !== S.user.vendorId) return empty('Item not found', 'This item does not exist or belongs to another shop.', '#/vendor-menu', 'Back to menu');
+  pendingImg = p.img || '';
+  return `<div class="narrow">${vtabs('vendor-menu')}<h1 style="font-size:1.6rem;margin-bottom:6px">Edit item</h1><form data-form="vedit" data-id="${p.id}" novalidate><label>Item name</label><input name="name" maxlength="80" value="${esc(p.name)}" required><label>Price (₦)</label><input name="price" type="number" min="50" inputmode="numeric" value="${p.price}" required><label>Quantity available</label><input name="qty" type="number" min="0" step="1" inputmode="numeric" value="${p.qty ?? ''}" required><label>Category</label><input name="category" maxlength="40" value="${esc(p.category)}" required><label>Short description</label><input name="desc" maxlength="80" value="${esc(p.desc)}"><label>Photo</label><div class="ph" id="imgPrev" style="aspect-ratio:1;max-width:160px;overflow:hidden;border-radius:10px">${safeImg(p.img) ? `<img src="${safeImg(p.img)}" alt="">` : 'No image'}</div><input type="file" accept="image/*" data-img data-shape="square" style="margin-top:8px"><button type="button" class="btn ghost sm" style="margin-top:8px" data-act="rmimg">Remove photo</button><p class="err" id="fe" role="alert"></p><button class="btn coral block" style="margin-top:14px">Save changes</button><a class="btn ghost block" style="margin-top:8px" href="#/vendor-menu">Cancel</a></form></div>`;
+};
+views['vendor-apply'] = async () => {
+  if (!S.user) return needAuth('Log in first, then apply to sell on UniBite.');
+  const have = new Set((S.user.shops || []).map(x => x.type)), avail = ['food', 'cakes'].filter(t => !have.has(t));
+  if (!avail.length) return location.hash = '#/vendor-orders', '';
+  delete cache.set; /* the admin's account number is always read fresh before anyone is told to pay it */
+  const s = await api.settings(), b = s.bank, ready = !!(b.accountNumber && b.bankName); pendingReceipt = null;
+  if (!s.registrationOpen) return empty('Vendor registration is closed', 'New vendors aren’t being accepted right now. Check back soon.', '#/', 'Back home');
+  return `<div class="narrow"><h1 style="font-size:1.6rem">${have.size ? 'Add another shop' : 'Become a vendor'}</h1><p class="mute" style="margin:4px 0">${have.size ? `You already sell ${[...have].map(t => TYPES[t]).join(' and ')}. A ${TYPES[avail[0]]} shop is a separate business with its own registration fee, receipt, approval, menu and orders.` : 'Add your business details, pay the registration fee, and upload your receipt. Your dashboard opens once the admin confirms your payment.'}</p><form data-form="vapply" novalidate><label>Business name</label><input name="name" maxlength="80" required>${avail.length === 1 ? `<input type="hidden" name="type" value="${avail[0]}"><label>Shop type</label><div class="card body"><span class="badge ${avail[0]}">${TYPES[avail[0]]}</span></div>` : '<label>Vendor type</label><select name="type"><option value="food">Food</option><option value="cakes">Cakes & Pastries</option></select>'}<label>Short description</label><textarea name="desc" rows="3" maxlength="160" required></textarea><label>Location</label><input name="location" maxlength="150" placeholder="e.g. Behind Faculty of Science" required><label>Contact phone</label><input name="phone" maxlength="20" type="tel" value="${esc(S.user.phone)}" required>
+  <div class="pay"><b>Registration payment${have.size ? ' for the ' + TYPES[avail[0]] + ' shop' : ''}</b>${s.fee ? `<p class="price" style="margin:4px 0">${money(s.fee)}</p>` : ''}${ready ? `${acctBox(b)}${b.instructions ? `<p>${esc(b.instructions)}</p>` : ''}` : '<p class="mute">The admin has not added payment details yet. Please try again later.</p>'}</div>
+  <label>Payment receipt</label><div id="rcPrev" class="mute" style="border:1px dashed var(--line);border-radius:var(--r);padding:14px;text-align:center;background:#fff">Upload a screenshot or photo of your transfer receipt</div><input type="file" accept="image/*" data-receipt style="margin-top:8px"><p class="err" id="fe" role="alert"></p><button class="btn coral block" style="margin-top:14px" ${ready ? '' : 'disabled'}>Send application</button></form></div>`;
+};
+const vAdmin = (v, all = []) => { const s = st(v), b = (a, l, c = '') => `<button class="btn ${c} sm" data-act="${a}" data-id="${v.id}">${l}</button>`; return `<article class="card body"><div class="line"><b>${esc(v.name)}</b><span class="badge ${v.type}">${TYPES[v.type]}</span></div>
+  <p class="mute">${esc(v.ownerName || 'Seed vendor')}${v.ownerEmail ? ' · ' + esc(v.ownerEmail) : ''}${v.phone ? ' · ' + esc(v.phone) : ''}</p>${v.ownerUid !== 'demo' && all.some(x => x.ownerUid === v.ownerUid && x.id !== v.id) ? `<p class="mute">Also owns a ${all.filter(x => x.ownerUid === v.ownerUid && x.id !== v.id).map(x => TYPES[x.type]).join(', ')} shop. This is an additional registration.</p>` : ''}<p style="margin:6px 0">${esc(v.desc || '')}</p><p class="mute">${esc(v.location || '')}</p>
+  ${v.bank?.accountNumber ? `<p class="mute" style="margin-top:6px">Payout account: ${esc(v.bank.bankName)} · ${esc(v.bank.accountName)} · ${esc(v.bank.accountNumber)} (${v.bankVerified ? 'verified' : 'not verified'})</p>` : ''}
+  <div class="actions">${v.regReceipt ? b('vreceipt', 'View receipt', 'ghost') : ''}${s === 'pending' ? b('vapprove', 'Approve') + b('vreject', 'Reject', 'ghost') : s === 'approved' ? b('vsuspend', 'Suspend', 'ghost') + (v.bank?.accountNumber ? b('bverify', v.bankVerified ? 'Unverify account' : 'Verify account', 'ghost') : '') : b('vapprove', s === 'suspended' ? 'Reactivate' : 'Approve')}</div></article>`; };
+const studentsHtml = list => list.length ? `<p class="mute" style="margin-bottom:10px">${list.length} account${list.length > 1 ? 's' : ''}. Suspend anyone who is not a University of Ilesha student.</p><div class="grid">${list.map(u => `<article class="card body"><div class="line"><b>${esc(u.name)}</b>${u.suspended ? '<span class="badge off">Suspended</span>' : u.unilesha ? '<span class="badge">Confirmed</span>' : '<span class="badge off">Not confirmed</span>'}</div><p class="mute">${esc(u.email)}${u.phone ? ' · ' + esc(u.phone) : ''}</p><p class="mute">${esc(u.location || 'No delivery location')}</p>${String(u.email || '').toLowerCase() === ADMIN_EMAIL ? '' : `<div class="actions"><button class="btn ${u.suspended ? '' : 'ghost'} sm" data-act="${u.suspended ? 'stuon' : 'stuoff'}" data-id="${u.id}">${u.suspended ? 'Reactivate' : 'Suspend'}</button></div>`}</article>`).join('')}</div>` : empty('No students yet', 'Accounts will appear here as people sign up.');
+views.admin = async () => {
+  if (!S.user) return needAuth('Log in with the admin email.');
+  if (!isAdmin()) return empty('Admin only', 'This area is only for the UniBite administrator.', '#/', 'Back home');
+  const [vs, s, x] = await Promise.all([api.allVendors(), api.settings(), api.stats()]), t = S.atab, b = s.bank; x.vendors = vs.filter(v => st(v) === 'approved').length; x.pending = vs.filter(v => st(v) === 'pending').length;
+  const list = vs.filter(v => t === 'pending' ? st(v) === 'pending' : t === 'approved' ? st(v) === 'approved' : ['rejected', 'suspended'].includes(st(v)));
+  const tabs = [['pending', `Pending (${x.pending})`], ['approved', 'Approved'], ['closed', 'Closed'], ['students', 'Students'], ['settings', 'Settings']];
+  const stu = t === 'students' ? await api.students() : [];
+  return `<h1 style="font-size:1.6rem;margin-bottom:12px">Admin</h1><div class="stats">${[['Students', x.students], ['Vendors', x.vendors], ['Applications', x.pending], ['Orders', x.orders]].map(([l, n]) => `<div class="card body"><b class="price" style="font-size:1.2rem">${n}</b><p class="mute">${l}</p></div>`).join('')}</div>
+  <div class="card body line" style="align-items:center;margin-bottom:14px"><span>Vendor registration: <b>${s.registrationOpen ? 'Open' : 'Closed'}</b></span><button class="btn sm ${s.registrationOpen ? 'ghost' : ''}" data-act="regtoggle">${s.registrationOpen ? 'Close registration' : 'Open registration'}</button></div>
+  <div class="tabs five" role="tablist">${tabs.map(([k, n]) => `<button role="tab" aria-selected="${t === k}" data-act="atab" data-id="${k}">${n}</button>`).join('')}</div>
+  ${t === 'students' ? studentsHtml(stu) : t === 'settings' ? `<div class="narrow"><h2>Registration payment</h2><p class="mute" style="margin:4px 0">Vendors see these details when they apply.</p><form data-form="asettings" novalidate><label>Registration fee (₦)</label><input name="fee" type="number" min="0" inputmode="numeric" value="${s.fee || ''}"><label>Bank name</label><input name="bankName" value="${esc(b.bankName)}"><label>Account name</label><input name="accountName" value="${esc(b.accountName)}"><label>Account number</label><input name="accountNumber" inputmode="numeric" maxlength="10" value="${esc(b.accountNumber)}"><label>Payment instructions (optional)</label><textarea name="instructions" rows="2" maxlength="200">${esc(b.instructions)}</textarea><label>Your contact for vendors (optional)</label><input name="contact" value="${esc(s.contact)}" placeholder="Phone or WhatsApp"><p class="err" id="fe" role="alert"></p><button class="btn coral block" style="margin-top:14px">Save settings</button></form><h2 style="margin-top:26px">Sample data</h2><p class="mute" style="margin:4px 0 10px">Fill the app with 10 sample vendors and menus to preview it. Orders to sample vendors can’t be processed, so remove them before launch.</p><div class="actions"><button class="btn sm" data-act="seed">Add sample vendors</button><button class="btn ghost sm" data-act="unseed">Remove sample vendors</button></div></div>` : list.length ? `<div class="grid">${list.map(v => vAdmin(v, vs)).join('')}</div>` : empty('Nothing here yet', t === 'pending' ? 'New vendor applications will appear here.' : 'No vendors in this list.')}`;
+};
+views.notifications = async () => {
+  if (!S.user) return needAuth('Log in to see your notifications.');
+  const ns = await api.notifs(), perm = 'Notification' in window ? Notification.permission : 'unsupported';
+  return `<div class="narrow"><div class="row"><h1 style="font-size:1.6rem">Notifications</h1>${ns.some(n => !n.read) ? '<a href="#" data-act="readall">Mark all read</a>' : ''}</div>
+  ${perm === 'default' ? '<div class="pay"><b>Get alerts on this device</b><p class="mute" style="margin:4px 0 8px">Allow notifications to get order updates as pop-ups on this device.</p><button class="btn sm" data-act="allow">Allow notifications</button></div>' : ''}${perm === 'granted' ? `<div class="card body line" style="align-items:center;margin-top:10px"><span class="mute">${S.pushToken ? 'Alerts are ON for this device, even when UniBite is closed.' : 'Alerts show while UniBite is open.'}</span><button class="btn ghost sm" data-act="testn">Send test</button></div>` : ''}${perm === 'denied' ? '<p class="err">Notifications are blocked. Tap the lock icon in your browser address bar, open Notifications and choose Allow.</p>' : ''}
+  ${ns.length ? ns.map(n => `<a class="card body" style="display:block;margin-top:10px;${n.read ? '' : 'border-left:4px solid var(--coral)'}" href="#" data-act="openn" data-id="${n.id}"><div class="line"><b>${esc(n.title)}</b><span class="mute">${ago(n.createdAt)}</span></div><p class="mute">${esc(n.body)}</p></a>`).join('') : empty('No notifications yet', 'Order updates will show up here.', '#/browse/food', 'Explore Food')}</div>`;
+};
+views.terms = async () => `<div class="narrow terms"><h1 style="font-size:1.6rem">Terms &amp; Privacy</h1><p class="mute">Short and simple. Last updated October 2026.</p>
+<h2>Who can use UniBite</h2><p>UniBite is for <b>current students of the University of Ilesha (UNILESHA) only</b>. Vendors on UniBite serve students on the University of Ilesha campus. When you sign up you confirm this. We may suspend any account that is not eligible.</p>
+<h2>Orders and payment</h2><ul><li>Vendors are independent businesses. UniBite connects you to them; it does not cook, deliver or hold your money.</li><li>You pay the vendor directly by bank transfer to the account shown at checkout, then upload your receipt. The vendor confirms your payment before preparing your order.</li><li>Always check the account name and number before you pay. Never upload a fake or edited receipt.</li><li>One order is with one vendor. If there is a problem, WhatsApp customer care on ${CARE}.</li></ul>
+<h2>Vendors</h2><ul><li>You are responsible for your food, prices, stock, delivery and for keeping your payment details correct.</li><li>Pay the registration fee shown when you apply. Each shop type (food, or cakes and pastries) is registered separately.</li><li>Shops that break these rules can be suspended.</li></ul>
+<h2>Your information</h2><ul><li>We keep your name, email, phone number, delivery location, orders and the receipts you upload, to run the service.</li><li>A vendor you order from can see your name, phone number, delivery location, order and receipt so they can deliver and confirm payment.</li><li>We do not sell your information. Data is stored with Google Firebase.</li><li>To correct or delete your account, WhatsApp customer care on ${CARE}.</li></ul>
+<h2>Behaviour</h2><p>No harassment, no fake orders, no fake receipts. Accounts can be suspended for misuse.</p></div>`;
+views.help = async () => {
+  const s = await api.settings(), faq = [['Who can use UniBite?', 'UniBite is for University of Ilesha students only. When you sign up you confirm you are a current student. Accounts that are not students can be suspended.'], ['How do I pay?', 'After you place an order, transfer the total to the vendor’s account shown at checkout and upload your receipt. The vendor confirms it before preparing your food.'], ['Why is my order still “payment verification pending”?', 'The vendor has not checked your receipt yet. Chat with customer care on WhatsApp if it takes long.'], ['My payment was not confirmed', 'The vendor could not see your transfer. Chat with customer care on WhatsApp or place a new order with the correct receipt.'], ['How do I sell on UniBite?', 'Open Profile, tap Become a vendor, pay the registration fee and upload your receipt. The admin approves you after checking it.']];
+  return `<div class="narrow"><h1 style="font-size:1.6rem;margin-bottom:12px">Help & support</h1>${faq.map(([q, a]) => `<details class="card body" style="margin-bottom:10px"><summary style="font-weight:600;cursor:pointer">${q}</summary><p class="mute" style="margin-top:8px">${a}</p></details>`).join('')}<div class="pay"><b>Still need help?</b><p style="margin:4px 0 10px">Chat with UniBite customer care on WhatsApp (${CARE}) and tell us the issue.</p><a class="btn block" style="background:#128C4A" target="_blank" rel="noopener" href="${waLink(CARE, 'Hello UniBite customer care, I need help with: ')}">Chat on WhatsApp</a></div></div>`;
+};
+const acctBox = b => `<dl style="margin-top:8px"><dt>Bank</dt><dd>${esc(b.bankName)}</dd><dt>Account name</dt><dd>${esc(b.accountName)}</dd><dt>Account number</dt><dd class="cp"><span>${esc(b.accountNumber)}</span><button type="button" class="copy" data-act="copy" data-id="${esc(b.accountNumber)}" aria-label="Copy account number">${ic('copy')}</button></dd></dl><button type="button" class="btn ghost sm" style="margin-bottom:8px" data-act="copy" data-id="${esc(`Bank: ${b.bankName}\nAccount name: ${b.accountName}\nAccount number: ${b.accountNumber}`)}">${ic('copy')} Copy all details</button>`;
+const vendorBlock = u => {
+  const sh = u.shops || [], have = new Set(sh.map(s => s.type)), miss = ['food', 'cakes'].filter(t => !have.has(t)), lab = { approved: 'Approved', pending: 'Awaiting approval', rejected: 'Not approved', suspended: 'Suspended' };
+  return `${sh.length ? `<h3 style="margin:6px 0 8px">My shops</h3>${sh.map(s => `<div class="card body line" style="margin-bottom:8px;align-items:center"><span><span class="badge ${s.type}">${TYPES[s.type]}</span> <b>${esc(s.name)}</b></span><span class="mute">${lab[st(s)]}</span></div>`).join('')}<a class="btn coral block" style="margin-bottom:8px" href="#/vendor-orders">Vendor dashboard</a>` : ''}${miss.length ? `<a class="btn ghost block" style="margin-bottom:8px" href="#/vendor-apply">${sh.length ? 'Add a ' + TYPES[miss[0]] + ' shop' : 'Become a vendor'}</a>${sh.length ? '<p class="mute" style="margin:-2px 0 8px">A second shop type has its own registration fee.</p>' : ''}` : ''}`;
+};
+const needAuth = m => `<div class="empty">${ic('user')}<h3>You’re not signed in</h3><p class="mute">${m}</p><div style="display:flex;gap:8px;justify-content:center;flex-wrap:wrap;margin-top:14px"><a class="btn" href="#/auth">Log in</a><a class="btn ghost" href="#/auth/register">Create account</a></div><p style="margin-top:16px"><a href="#/auth/vendor" style="color:var(--coral);font-weight:600">Sell on UniBite? Create a vendor account</a></p></div>`;
+const orderCardBase = o => { const cur = STATUS.findIndex(s => s[0] === o.status); return `<article class="card body"><div class="line"><b>${o.id}</b><span class="badge ${o.type}">${TYPES[o.type]}</span></div><p class="mute">${esc(o.vendorName)} · ${new Date(o.createdAt).toLocaleDateString('en-NG')}</p><p style="margin:6px 0">${o.items.map(i => `${esc(i.name)} × ${i.qty}`).join('<br>')}</p><b class="price">${money(o.total)}</b>
+  <ul class="steps">${STATUS.map((s, i) => `<li class="${i < cur || cur === 5 ? 'done' : i === cur ? 'now' : ''}">${s[1]}</li>`).join('')}</ul></article>`; };
+
+const orderCard = o => o.status !== 'rejected' ? orderCardBase(o) : `<article class="card body"><div class="line"><b>${o.id}</b><span class="badge off">Payment not confirmed</span></div><p class="mute">${esc(o.vendorName)}</p><p style="margin:6px 0">${o.items.map(i => `${esc(i.name)} × ${i.qty}`).join('<br>')}</p><b class="price">${money(o.total)}</b><p class="err" style="margin-top:8px">The vendor could not confirm your payment. Chat with customer care on WhatsApp or place a new order.</p></article>`;
+/* ---------- Actions ---------- */
+async function addItem(id, d = 1) {
+  const p = (await api.product(id)); if (!p || (!p.available && d > 0)) return toast('This item is unavailable');
+  if (ownShop(p.vendorId) && d > 0) return toast('You can’t order from your own shop');
+  if (d > 0) {
+    if (soldOut(p)) return toast('Sold out');
+    if (p.qty != null && (S.cart.vendorId === p.vendorId ? S.cart.items[id] || 0 : 0) + d > p.qty) return toast(`Only ${p.qty} left`);
+    if (S.cart.vendorId === p.vendorId && !S.cart.items[id] && Object.keys(S.cart.items).length >= 7) return toast('You can order up to 7 different items at once. Place this order first.');
+    const sv = await api.vendor(p.vendorId); if (!isOpen(sv)) return toast('This shop is closed right now');
+  }
+  if (S.cart.vendorId && S.cart.vendorId !== p.vendorId && cartCount()) { const v = await api.vendor(S.cart.vendorId); if (!await ask('Start a new order?', `Your cart has items from ${esc(v.name)}. Each vendor is a separate order.`, 'Start new')) return; S.cart = { vendorId: null, items: {} }; }
+  S.cart.vendorId = p.vendorId; const q = (S.cart.items[id] || 0) + d; q > 0 ? S.cart.items[id] = q : delete S.cart.items[id];
+  if (!cartCount()) S.cart.vendorId = null; saveCart(); render();
+}
+const act = {
+  add: id => addItem(id), inc: id => addItem(id), dec: id => addItem(id, -1),
+  clear: () => { S.cart = { vendorId: null, items: {} }; saveCart(); render(); },
+  fav: id => { S.favs = S.favs.includes(id) ? S.favs.filter(x => x !== id) : [...S.favs, id]; save('ub_favs', S.favs); render(); },
+  tab: id => { S.tab = id; render(); },
+  shop: id => { S.user.vendorId = id; localStorage.setItem('ub_shop', id); bust(); render(); },
+  editshop: id => { S.user.vendorId = id; localStorage.setItem('ub_shop', id); bust(); location.hash = '#/vendor-profile'; },
+  async stuoff(id) { if (!await ask('Suspend this account?', 'They will not be able to order or use UniBite until you reactivate them.', 'Suspend')) return; await api.setStudentSuspended(id, true); toast('Account suspended'); render(); },
+  async stuon(id) { await api.setStudentSuspended(id, false); toast('Account reactivated'); render(); },
+  async copy(text) {
+    try { await navigator.clipboard.writeText(text); }
+    catch { try { const t = document.createElement('textarea'); t.value = text; t.style.position = 'fixed'; t.style.opacity = '0'; document.body.appendChild(t); t.select(); document.execCommand('copy'); t.remove(); } catch {} }
+    toast(text.includes('\n') ? 'Account details copied' : 'Account number copied');
+  },
+  async optimize() {
+    if (S.opt) return; S.opt = true; toast('Making your photos lighter…');
+    try {
+      const sid = S.user.vendorId, shrink = (src, W, H) => new Promise(res => { const im = new Image(); im.onload = () => res(fitImage(im, W, H, .6)); im.onerror = () => res(null); im.src = src; });
+      let n = 0; const v = (await getDoc(doc(db, 'vendors', sid))).data();
+      if (safeImg(v.img) && v.img.length > 30000) { const s = await shrink(v.img, 360, 203); if (s && s.length < v.img.length) { await api.updateVendor(sid, { img: s }); n++; } }
+      const snap = await getDocs(query(col('products'), where('vendorId', '==', sid)));
+      for (const d of snap.docs) { const p = d.data(); if (safeImg(p.img) && p.img.length > 20000) { const s = await shrink(p.img, 200, 200); if (s && s.length < p.img.length) { await api.updateProduct(d.id, { img: s }); n++; } } }
+      toast(n ? `Done. ${n} photo${n > 1 ? 's' : ''} made lighter.` : 'Your photos are already light.');
+    } catch (e) { console.error(e); toast('Could not finish. Please try again.'); }
+    finally { S.opt = false; render(); }
+  },
+  atab: id => { S.atab = id; render(); },
+  async regtoggle() { const s = await api.settings(); await api.saveSettings({ registrationOpen: !s.registrationOpen }); toast(s.registrationOpen ? 'Registration closed' : 'Registration opened'); render(); },
+  async vreceipt(id) { const v = (await api.allVendors()).find(x => x.id === id), d = $('#dlg'); if (!safeImg(v.regReceipt)) return toast('No valid receipt found'); d.innerHTML = `<img src="${safeImg(v.regReceipt)}" alt="Registration receipt from ${esc(v.name)}" style="width:100%;border-radius:8px"><div class="btns"><button class="btn sm" value="x">Close</button></div>`; d.onclick = e => e.target.value && d.close(); d.showModal(); },
+  async vapprove(id) { await api.setVendorStatus(id, 'approved'); toast('Vendor approved'); render(); },
+  async vreject(id) { if (!await ask('Reject this application?', 'The vendor will see that their application was not approved.', 'Reject')) return; await api.setVendorStatus(id, 'rejected'); toast('Application rejected'); render(); },
+  async vsuspend(id) { if (!await ask('Suspend this vendor?', 'Their shop is hidden from students and their dashboard is locked.', 'Suspend')) return; await api.setVendorStatus(id, 'suspended'); toast('Vendor suspended'); render(); },
+  async bverify(id) { const v = (await api.allVendors()).find(x => x.id === id); await api.setBankVerified(id, !v.bankVerified); render(); },
+  readall: () => { api.markRead(); render(); },
+  openn: id => { const n = C.notifs.find(x => x.id === id); api.markRead([id]); location.hash = n?.href || '#/'; render(); },
+  async allow() { if (!('Notification' in window)) return toast('This browser does not support notifications'); const r = await Notification.requestPermission(); if (r === 'granted') await enablePush(); toast(r === 'granted' ? 'Notifications on' : 'Notifications are blocked in browser settings'); chrome(); render(); },
+  async seed() { await api.addSamples(); toast('Sample vendors added. Open Home to see them.'); },
+  async unseed() { if (!await ask('Remove sample vendors?', 'This deletes the sample vendors and their menus. Real vendors are not touched.', 'Remove')) return; await api.removeSamples(); toast('Sample vendors removed'); },
+  async kmode() { await setKitchenMode(!S.kmode); if (S.kmode) setTimeout(() => beep(false), 250); toast(S.kmode ? ('wakeLock' in navigator ? 'Kitchen mode ON. Keep UniBite open.' : 'Ringing is on, but this browser cannot keep the screen awake.') : 'Kitchen mode OFF'); render(); },
+  stopalarm: () => { stopAlarm(); location.hash = '#/vendor-orders'; },
+  rmimg: () => { pendingImg = ''; $('#imgPrev').innerHTML = 'No image'; },
+  noperm: () => { sessionStorage.setItem('ub_noperm', '1'); chrome(); },
+  testn: () => { api.notify(S.user.uid, 'Test notification', 'If you can see this, notifications work on this device.', '#/notifications', 'test'); toast('Test sent'); },
+  async reset() { const em = $('[name=email]').value.trim(); if (!em.includes('@')) return toast('Enter your email first'); try { await api.reset(em); } catch (e) { if (e.code !== 'auth/user-not-found') return toast(authMsg(e)); } toast('If that email has an account, a reset link is on its way.'); },
+  async reloadu() { await auth.currentUser.reload(); await loadUser(auth.currentUser); render(); },
+  resendv: () => sendEmailVerification(auth.currentUser).then(() => toast('Verification email sent')),
+  vtab: id => { S.vtab = id; render(); },
+  async receipt(id) { const o = (await api.vendorOrders()).find(x => x.id === id), d = $('#dlg'); let src = o.receipt; if (!src) { toast('Loading receipt…'); const r = await getDoc(doc(db, 'receipts', id)); src = r.exists() ? r.data().receipt : ''; } src = safeImg(src); if (!src) return toast('No valid receipt found'); d.innerHTML = `<img src="${src}" alt="Payment receipt for ${o.id}" style="width:100%;border-radius:8px"><div class="btns"><button class="btn sm" value="x">Close</button></div>`; d.onclick = e => e.target.value && d.close(); d.showModal(); },
+  async kitchen() {
+    const snap = await getDoc(doc(db, 'vendors', S.user.vendorId)), on = snap.data().open !== false;
+    await api.updateVendor(S.user.vendorId, { open: !on }); toast(on ? 'Kitchen is OFF. Students cannot order.' : 'Kitchen is ON. Students can order.'); render();
+  },
+  copyhours() {
+    const f = $('[data-form=hours]').elements, on = f.on_mon.checked, a = f.from_mon.value, b = f.to_mon.value;
+    DAYS.forEach(k => { f['on_' + k].checked = on; f['from_' + k].value = a; f['to_' + k].value = b; }); toast('Copied. Tap Save hours.');
+  },
+  async restock(id) {
+    const ps = await getDoc(doc(db, 'products', id)), p = { ...ps.data(), id }, d = $('#dlg');
+    d.innerHTML = `<h3>Add stock: ${esc(p.name)}</h3><p class="mute" style="margin-top:6px">Now: ${p.qty == null ? 'no limit set' : p.qty + ' in stock'}. How many more do you have?</p><input id="rq" type="number" min="1" step="1" inputmode="numeric" style="margin-top:10px"><div class="btns"><button class="btn ghost sm" value="no">Cancel</button><button class="btn sm" value="yes">Add stock</button></div>`;
+    const n = await new Promise(res => { d.onclick = e => { const v = e.target.value; if (!v) return; if (v === 'yes') { const q = Math.floor(+$('#rq').value); if (!(q >= 1)) return $('#rq').focus(); d.close(); return res(q); } d.close(); res(0); }; d.oncancel = () => res(0); d.showModal(); });
+    if (!n) return; await api.updateProduct(id, { qty: increment(n) }); toast(`Added ${n} to ${p.name}.`); render();
+  },
+  async stage(id, s) {
+    const o = (await api.vendorOrders()).find(x => x.id === id); if (!o) return;
+    const idx = k => STATUS.findIndex(x => x[0] === k); if (idx(s) <= idx(o.status)) return;
+    if (o.status === 'pending') { if (!await ask('Confirm payment?', 'Only continue after you see the money in your account. The student is told right away.', 'Confirm payment')) return; }
+    else if (s === 'delivered' && !await ask('Mark as delivered?', 'This closes the order and moves it to the student’s history.', 'Mark delivered')) return;
+    await api.setStatus(id, s); toast('Order updated'); render();
+  },
+  async reject(id) { if (!await ask('Payment not received?', 'The student will be told you could not confirm their payment.', 'Mark not received')) return; await api.setStatus(id, 'rejected'); toast('Order closed'); render(); },
+  async pavail(id) { const p = (await api.product(id)); await api.updateProduct(id, { available: !p.available }); render(); },
+  async pdel(id) { if (!await ask('Delete this item?', 'Students will no longer see it.', 'Delete')) return; await api.deleteProduct(id); toast('Item deleted'); render(); },
+  star: n => { $('[name=stars]').value = n; document.querySelectorAll('#starIn button').forEach((b, i) => b.classList.toggle('on', i < n)); },
+  login: () => { sessionStorage.setItem('ub_next', location.hash); location.hash = '#/auth'; },
+  logout: () => { api.signOut(); toast('Logged out'); location.hash = '#/'; render(); }
+};
+const forms = {
+  search: f => { const q = new FormData(f).get('q').trim(); location.hash = `#/search/${encodeURIComponent(q)}`; },
+  async vapply(f) {
+    const d = Object.fromEntries(new FormData(f)), fe = $('#fe');
+    if (d.name.trim().length < 2 || d.desc.trim().length < 10 || !d.location.trim() || d.phone.replace(/\D/g, '').length < 10 || !pendingReceipt) return fe.textContent = 'Add your business name, a description (10+ characters), location, phone and your payment receipt.';
+    await api.applyVendor({ name: d.name.trim(), type: d.type, desc: d.desc.trim(), location: d.location.trim(), phone: d.phone, regReceipt: pendingReceipt });
+    chrome(); toast('Application sent. The admin will confirm your payment.'); location.hash = '#/vendor-orders';
+  },
+  async vprofile(f) {
+    const d = Object.fromEntries(new FormData(f)), fe = $('#fe');
+    if (d.name.trim().length < 2 || !d.location.trim()) return fe.textContent = 'Business name and location are required.';
+    await api.updateVendor(S.user.vendorId, { name: d.name.trim(), desc: d.desc.trim(), location: d.location.trim(), img: pendingImg || '' });
+    if (!(await api.vendor(S.user.vendorId)).bank?.accountNumber) { toast('Profile saved. Now add your payment details.'); return location.hash = '#/vendor-payment'; }
+    toast('Profile saved'); location.hash = '#/vendor/' + S.user.vendorId;
+  },
+  async review(f) {
+    const d = Object.fromEntries(new FormData(f)), fe = $('#fe'), n = +d.stars;
+    if (n < 1) return fe.textContent = 'Tap a star to rate.';
+    if (!d.orderId) return fe.textContent = 'You can review after your order is delivered.';
+    await api.saveReview({ vendorId: f.dataset.vid, uid: S.user.uid, name: S.user.name.split(' ')[0].slice(0, 40), stars: n, comment: d.comment.trim(), orderId: d.orderId });
+    toast('Thanks for your review'); render();
+  },
+  async asettings(f) {
+    const d = Object.fromEntries(new FormData(f)), fe = $('#fe');
+    if (d.accountNumber.trim() && !/^\d{10}$/.test(d.accountNumber.trim())) return fe.textContent = 'Account number must be 10 digits.';
+    if (!(+d.fee >= 0)) return fe.textContent = 'Enter a valid fee.';
+    await api.saveSettings({ fee: Math.round(+d.fee || 0), contact: d.contact.trim(), bank: { bankName: d.bankName.trim(), accountName: d.accountName.trim(), accountNumber: d.accountNumber.trim(), instructions: d.instructions.trim() } });
+    toast('Settings saved'); render();
+  },
+  async vpay(f) {
+    const d = Object.fromEntries(new FormData(f)), fe = $('#fe');
+    if (!d.bankName.trim() || !d.accountName.trim() || !/^\d{10}$/.test(d.accountNumber.trim())) return fe.textContent = 'Enter the bank name, account name and a 10-digit account number.';
+    /* Real flow: save with bankVerified:false and let an admin verify; checkout should only show verified details. */
+    await api.updateVendor(S.user.vendorId, { bank: { bankName: d.bankName.trim(), accountName: d.accountName.trim(), accountNumber: d.accountNumber.trim(), instructions: d.instructions.trim() }, bankVerified: false });
+    toast('Payment details saved'); render();
+  },
+  async hours(f) {
+    const d = Object.fromEntries(new FormData(f)), fe = $('#fe'), days = {};
+    for (const k of DAYS) {
+      const on = d['on_' + k] === 'on', from = d['from_' + k], to = d['to_' + k];
+      if (on && (!from || !to || to <= from)) return fe.textContent = `${DAYN[k]}: closing time must be later than opening time.`;
+      days[k] = { on, from: from || '08:00', to: to || '20:00' };
+    }
+    await api.updateVendor(S.user.vendorId, { schedule: { enabled: d.auto === 'on', days } });
+    toast(d.auto === 'on' ? 'Saved. Your kitchen now opens and closes by itself.' : 'Hours saved. Turn on automatic opening to use them.'); render();
+  },
+  async vedit(f) {
+    const d = Object.fromEntries(new FormData(f)), fe = $('#fe');
+    if (d.name.trim().length < 2 || !(+d.price >= 50) || !d.category.trim() || d.qty === '' || !(Number.isInteger(+d.qty) && +d.qty >= 0)) return fe.textContent = 'Check the name, a price of ₦50 or more, a quantity of 0 or more, and the category.';
+    await api.updateProduct(f.dataset.id, { name: d.name.trim(), price: Math.round(+d.price), qty: Math.floor(+d.qty), category: d.category.trim(), desc: d.desc.trim(), img: pendingImg || '' });
+    toast('Item updated'); location.hash = '#/vendor-menu';
+  },
+  async vprod(f) {
+    const d = Object.fromEntries(new FormData(f)), fe = $('#fe');
+    if (d.name.trim().length < 2 || !(+d.price >= 50) || !d.category.trim() || !(Number.isInteger(+d.qty) && +d.qty >= 1)) return fe.textContent = 'Add an item name, a price of ₦50 or more, a quantity of 1 or more, and a category.';
+    await api.addProduct({ name: d.name.trim(), price: Math.round(+d.price), qty: Math.floor(+d.qty), category: d.category.trim(), desc: d.desc.trim(), img: pendingImg || '', available: true });
+    toast('Item added'); render();
+  },
+  async unilesha(f) {
+    const d = Object.fromEntries(new FormData(f)), fe = $('#fe');
+    if (d.student !== 'on') return fe.textContent = 'Please tick the box to confirm.';
+    await api.confirmUnilesha(); chrome(); toast('Thank you'); render();
+  },
+  async pedit(f) {
+    const d = Object.fromEntries(new FormData(f)), fe = $('#fe');
+    if (d.name.trim().length < 2 || d.phone.replace(/\D/g, '').length < 10) return fe.textContent = 'Enter your name and a valid phone number.';
+    await api.updateProfile({ name: d.name.trim(), phone: d.phone.trim(), location: d.location.trim() });
+    chrome(); toast('Profile saved'); render();
+  },
+  async auth(f) {
+    const d = Object.fromEntries(new FormData(f)), reg = f.dataset.mode === 'register', fe = $('#fe');
+    if (!reg && (S.lock || 0) > Date.now()) return fe.textContent = 'Too many tries. Please wait a minute and try again.';
+    if (!d.email.includes('@') || d.pw.length < 8 || (reg && (!d.name.trim() || d.phone.replace(/\D/g, '').length < 10))) return fe.textContent = 'Check your details. Password needs 8+ characters and phone needs 10+ digits.';
+    if (reg && d.student !== 'on') return fe.textContent = f.dataset.vendor ? 'Please confirm your shop serves University of Ilesha students only.' : 'Please confirm you are a University of Ilesha student.';
+    if (reg && !(/[A-Za-z]/.test(d.pw) && /\d/.test(d.pw))) return fe.textContent = 'Use a password with both letters and numbers.';
+    try { await api[reg ? 'register' : 'login'](d); S.fails = 0; } catch (e) { if (!reg) { S.fails = (S.fails || 0) + 1; if (S.fails >= 5) { S.lock = Date.now() + 60000; S.fails = 0; } } return fe.textContent = authMsg(e); }
+    chrome(); if (f.dataset.vendor) sessionStorage.setItem('ub_next', '#/vendor-apply'); location.hash = sessionStorage.getItem('ub_next') || '#/orders'; sessionStorage.removeItem('ub_next'); toast('Signed in');
+  },
+  async checkout(f) { if (S.placing) return; S.placing = true; try { return await forms.checkoutInner(f); } finally { S.placing = false; } },
+  async checkoutInner(f) {
+    if (!cartCount() || !S.cart.vendorId) return location.hash = '#/cart';
+    const d = Object.fromEntries(new FormData(f)), fe = $('#fe');
+    if (!d.name.trim() || d.phone.replace(/\D/g, '').length < 10 || !d.loc.trim() || !pendingReceipt) return fe.textContent = 'Fill in your name, phone and location, and upload your payment receipt.';
+    if (!d.payacct) return fe.textContent = 'This vendor has not added payment details yet.';
+    const v = await api.vendor(S.cart.vendorId), ps = await api.products(v.id), items = ps.filter(p => S.cart.items[p.id] && p.available).map(p => ({ productId: p.id, name: p.name, price: p.price, qty: S.cart.items[p.id] }));
+    if (!items.length) return fe.textContent = 'Those items are no longer available.';
+    try { await api.placeOrder({ id: S.orderKey || (S.orderKey = newOrderId()), uid: S.user.uid, vendorId: v.id, vendorName: v.name, ownerUid: v.ownerUid, payTo: { bankName: d.paybank, accountName: d.payname, accountNumber: d.payacct }, type: v.type, items, total: items.reduce((a, i) => a + i.price * i.qty, 0), name: d.name, phone: d.phone, location: d.loc, note: d.note, paymentRef: d.ref.trim(), receipt: pendingReceipt, paymentStatus: 'pending', status: 'pending', createdAt: Date.now(), updatedAt: Date.now() }); }
+    catch (e) {
+      if (e.bankChanged) { bust(); toast('This vendor just changed their payment details. Check the new account before you pay.'); return render(); }
+      if (e.closed) { bust(); toast(`${v.name} is closed right now${e.info ? ' (' + e.info + ')' : ''}.`); return render(); }
+      if (e.short) { e.short.forEach(s => { if (s.left > 0) S.cart.items[s.id] = s.left; else delete S.cart.items[s.id]; }); if (!cartCount()) S.cart.vendorId = null; saveCart(); bust(); toast('Stock changed: ' + e.short.map(s => s.left > 0 ? `only ${s.left} of ${s.name}` : `${s.name} is sold out`).join(', ') + '. Your cart was updated.'); return location.hash = S.cart.vendorId ? '#/cart' : '#/'; }
+      throw e;
+    }
+    S.orderKey = null; S.cart = { vendorId: null, items: {} }; S.tab = 'active'; saveCart(); toast('Order placed. Waiting for vendor to confirm payment.'); location.hash = '#/orders';
+  }
+};
+
+/* ---------- Router & shell ---------- */
+function chrome() {
+  const r = location.hash.split('/')[1] || 'home', cur = { '': 'home', browse: 'browse', search: 'browse', orders: 'orders', favourites: 'favourites', profile: 'profile', auth: 'profile', 'vendor-apply': 'profile', 'vendor-profile': 'profile', 'vendor-orders': 'profile', 'vendor-menu': 'profile', 'vendor-payment': 'profile', admin: 'profile', help: 'profile', notifications: 'profile', 'vendor-hours': 'profile', 'vendor-edit': 'profile' }[r === 'home' ? '' : r];
+  $('#nav').innerHTML = [['home', '#/', 'Home', 'home'], ['browse', '#/search/', 'Browse', 'search'], ['orders', '#/orders', 'Orders', 'orders'], ['favourites', '#/favourites', 'Favourites', 'heart'], ['profile', '#/profile', S.user ? 'Profile' : 'Log in', 'user']].map(([k, h, l, i]) => `<a href="${h}" ${cur === k ? 'aria-current="page"' : ''}>${ic(i)}<span>${l}</span></a>`).join('');
+  $('#cartIcon').innerHTML = ic('bag'); $('#bellIcon').innerHTML = ic('bell'); $('#loginBtn').hidden = !!S.user; $('#bellBtn').hidden = !S.user;
+  $('#care').href = waLink(CARE, `Hello UniBite customer care. ${S.user ? 'I am ' + S.user.name + '. ' : ''}My issue: `);
+  $('#perm').innerHTML = S.user && 'Notification' in window && Notification.permission === 'default' && !sessionStorage.getItem('ub_noperm') ? `<div class="permbar"><span>Turn on alerts so ${S.user.shops?.length ? 'new orders ring' : 'order updates pop up'} on this device while UniBite is open.</span><button class="btn coral sm" data-act="allow">Turn on</button><button class="btn ghost sm" data-act="noperm">Not now</button></div>` : ''; const nc = C.notifs.filter(n => !n.read).length; $('#bellCount').hidden = !nc; $('#bellCount').textContent = nc > 9 ? '9+' : nc; document.title = (nc ? `(${nc}) ` : '') + 'UniBite · Good Food. Right Around Campus.'; try { nc ? navigator.setAppBadge?.(nc) : navigator.clearAppBadge?.(); } catch {} const n = cartCount(); $('#cartCount').hidden = !n; $('#cartCount').textContent = n;
+}
+const gateHtml = r => {
+  if (!S.user || adminEmail() || r === 'help' || r === 'terms') return null;
+  if (S.user.suspended) return `<div class="narrow">${empty('Account suspended', `This account has been suspended. If you think this is a mistake, WhatsApp customer care on ${CARE}.`)}<button class="btn block" data-act="logout">Log out</button></div>`;
+  if (!S.user.unilesha) return `<div class="narrow"><h1 style="font-size:1.6rem">One quick step</h1><p class="mute" style="margin:6px 0 4px">UniBite is for University of Ilesha students only. Please confirm to keep using your account.</p><form data-form="unilesha" novalidate><label class="chk" style="margin-top:14px;align-items:flex-start"><input type="checkbox" name="student"> <span>I confirm I am a current student of the University of Ilesha (or, for vendors, that my shop serves UNILESHA students only). I agree to the <a href="#/terms" style="color:var(--coral)">Terms</a>.</span></label><p class="err" id="fe" role="alert"></p><button class="btn coral block" style="margin-top:14px">Confirm and continue</button></form><button class="btn ghost block" style="margin-top:8px" data-act="logout">Log out</button></div>`;
+  return null;
+};
+let renderId = 0; /* only the newest render may draw, so a slow page can never overwrite the one you moved to */
+async function render() {
+  if (!S.ready) return;
+  const my = ++renderId;
+  const [, r = '', a = ''] = location.hash.split('/'), app = $('#app'), y = scrollY; chrome();
+  if (!app.dataset.r || app.dataset.r !== location.hash) app.innerHTML = skeleton();
+  try {
+    const html = gateHtml(r) ?? (r === '' ? await views.home() : r === 'browse' ? await views.browse(a in TYPES ? a : 'food') : r === 'search' ? await views.browse('all', decodeURIComponent(a)) : r === 'vendor' ? await views.vendor(a) : r === 'auth' ? await views.auth(a) : r === 'vendor-edit' ? await views['vendor-edit'](a) : views[r] ? await views[r]() : empty('Page not found', 'That page does not exist.', '#/', 'Back home'));
+    if (my !== renderId) return;
+    if (html !== '') { app.innerHTML = html; app.dataset.r = location.hash; scrollTo(0, app.dataset.keep ? y : y); }
+  } catch (e) { console.error(e); if (my !== renderId) return; app.innerHTML = `<div class="empty"><h3>Something went wrong</h3><p class="mute">${e.code === 'permission-denied' ? 'The database rules have not been published yet.' : 'Check your connection and try again.'}</p><button class="btn" onclick="render()">Retry</button></div>`; }
+}
+document.addEventListener('click', e => {
+  const t = e.target.closest('[data-act],[data-go]'); if (!t) return;
+  if (t.dataset.go) return location.hash = t.dataset.go;
+  e.preventDefault(); Promise.resolve(act[t.dataset.act]?.(t.dataset.id, t.dataset.s)).catch(fail);
+});
+document.addEventListener('submit', e => { const f = e.target.closest('[data-form]'); if (!f) return; e.preventDefault(); Promise.resolve(forms[f.dataset.form](f)).catch(fail); });
+window.addEventListener('hashchange', () => { if (location.hash === '#/vendor-orders') stopAlarm(); $('#app').dataset.r = ''; render(); $('#app').focus(); });
+/* Vendor photo/logo: centre-cropped to 16:9 and shrunk before saving. With Firebase, upload this blob to Storage and save the URL. */
+document.addEventListener('change', e => {
+  const el = e.target.closest('[data-img]'), file = el?.files[0]; if (!file) return;
+  const im = new Image();
+  im.onload = () => { pendingImg = el.dataset.shape === 'square' ? fitImage(im, 200, 200, .6) : fitImage(im, 360, 203, .6); $('#imgPrev').innerHTML = `<img src="${pendingImg}" alt="">`; URL.revokeObjectURL(im.src); };
+  im.onerror = () => toast('Could not read that image');
+  im.src = URL.createObjectURL(file);
+});
+/* Payment receipt: shrunk before saving. With Firebase, upload to Storage (private, readable only by the student, that vendor and admin). */
+document.addEventListener('change', e => {
+  const file = e.target.closest('[data-receipt]')?.files[0]; if (!file) return;
+  const im = new Image();
+  im.onload = () => { const r = Math.min(1, 720 / im.width), c = document.createElement('canvas'); c.width = im.width * r; c.height = im.height * r; c.getContext('2d').drawImage(im, 0, 0, c.width, c.height); pendingReceipt = c.toDataURL('image/jpeg', .55); $('#rcPrev').innerHTML = `<img src="${pendingReceipt}" alt="Receipt preview" style="max-height:240px;width:auto;border-radius:8px">`; URL.revokeObjectURL(im.src); };
+  im.onerror = () => toast('Could not read that image');
+  im.src = URL.createObjectURL(file);
+});
+window.render = render;
+/* Home-screen app icon and manifest, generated here from the logo so no extra files are needed. */
+setTimeout(async () => {
+  if (!location.protocol.startsWith('http')) return;
+  try {
+    const img = $('.logo img'); await img.decode();
+    const make = s => { const c = document.createElement('canvas'); c.width = c.height = s; const x = c.getContext('2d'); x.fillStyle = '#FFF9F3'; x.fillRect(0, 0, s, s); const k = Math.min(s * .72 / img.naturalWidth, s * .72 / img.naturalHeight), w = img.naturalWidth * k, ht = img.naturalHeight * k; x.drawImage(img, (s - w) / 2, (s - ht) / 2, w, ht); return c.toDataURL('image/png'); };
+    ICON = make(192); const big = make(512);
+    const m = { name: 'UniBite', short_name: 'UniBite', description: 'Good Food. Right Around Campus.', start_url: location.origin + '/', scope: location.origin + '/', display: 'standalone', background_color: '#FFF9F3', theme_color: '#4A1942', icons: [{ src: ICON, sizes: '192x192', type: 'image/png' }, { src: big, sizes: '512x512', type: 'image/png' }] };
+    document.head.insertAdjacentHTML('beforeend', `<link rel="apple-touch-icon" href="${ICON}"><link rel="manifest" href="${URL.createObjectURL(new Blob([JSON.stringify(m)], { type: 'application/manifest+json' }))}">`);
+  } catch (e) { console.error(e); }
+}, 4000);
+setInterval(() => { const r = location.hash.split('/')[1] || ''; if (S.ready && ['', 'browse', 'search', 'vendor', 'cart'].includes(r) && !document.activeElement?.closest('form')) render(); }, 120000);
+$('#app').innerHTML = skeleton();
+api.vendors().catch(() => {}); api.popular().catch(() => {}); api.settings().catch(() => {}); /* start loading public data now, in parallel with sign-in */
+onAuthStateChanged(auth, async u => {
+  if (busy) return;
+  try { await loadUser(u); } catch (e) { console.error(e); S.user = null; }
+  S.ready = true; window.__ubReady = true; render();
+});
+</script>
+</body>
+</html>
