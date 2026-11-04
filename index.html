@@ -109,6 +109,17 @@ dialog .btns{display:flex;gap:8px;margin-top:16px;justify-content:flex-end}
 .care{position:fixed;right:14px;bottom:calc(var(--nav) + 16px + env(safe-area-inset-bottom));z-index:30;display:flex;align-items:center;gap:6px;height:46px;padding:0 16px;border-radius:99px;background:#128C4A;color:#fff;font:600 .9rem Inter,sans-serif;box-shadow:0 6px 18px rgba(0,0,0,.25)}.care .ic{width:22px;height:22px;stroke:#fff}body.ringing .care{display:none}@media(min-width:900px){.care{bottom:24px;right:24px}}
 .uni{display:inline-block;padding:4px 12px;border-radius:99px;background:var(--gold);color:var(--plum);font-weight:600;font-size:.8rem}.foot{max-width:1080px;margin:0 auto;padding:6px 16px 30px;text-align:center;font-size:.78rem;color:var(--mute)}.foot a{color:var(--coral);font-weight:600}.terms h2{margin:18px 0 6px}.terms p,.terms li{margin:4px 0;color:var(--ink)}.terms ul{padding-left:20px}
 .cp{display:flex;align-items:center;gap:8px}.copy{display:inline-grid;place-items:center;width:34px;height:34px;flex:none;border:1px solid var(--line);border-radius:8px;background:#fff;color:var(--plum);cursor:pointer}.copy .ic{width:18px;height:18px}.pay .btn .ic{width:18px;height:18px}
+#newpost{position:fixed;left:0;right:0;top:calc(66px + env(safe-area-inset-top));z-index:45;display:flex;justify-content:center;padding:0 12px;pointer-events:none}
+.npost{pointer-events:auto;display:flex;align-items:center;gap:12px;width:100%;max-width:520px;padding:10px 12px;background:#fff;border:1px solid var(--line);border-left:5px solid var(--gold);border-radius:14px;box-shadow:0 12px 32px rgba(74,25,66,.28);animation:npin .35s ease-out}
+@keyframes npin{from{transform:translateY(-16px);opacity:0}to{transform:none;opacity:1}}
+.npimg{width:52px;height:52px;border-radius:10px;overflow:hidden;background:#f3ebe4;display:grid;place-items:center;flex:none;color:var(--mute)}.npimg img{width:100%;height:100%;object-fit:cover}
+.npt{flex:1;min-width:0}.npt b{display:block;color:var(--plum);overflow:hidden;text-overflow:ellipsis;white-space:nowrap}.npt p{font-size:.82rem;line-height:1.3;color:var(--ink)}
+.npnew{display:inline-block;margin-right:6px;padding:1px 7px;border-radius:99px;background:var(--coral);color:#fff;font-size:.68rem;font-weight:700;letter-spacing:.04em}
+.npa{display:flex;align-items:center;gap:2px;flex:none}.npx{width:32px;height:32px;border:0;border-radius:50%;background:transparent;font-size:1.5rem;line-height:1;color:var(--mute);cursor:pointer}
+.hscroll{display:flex;gap:12px;overflow-x:auto;padding-bottom:6px;scroll-snap-type:x proximity;-webkit-overflow-scrolling:touch}
+.npcard{flex:none;width:150px;display:flex;flex-direction:column;gap:2px;background:#fff;border-radius:var(--r);box-shadow:var(--sh);padding-bottom:10px;overflow:hidden;scroll-snap-align:start}
+.npcard b,.npcard .price,.npcard .mute{padding:0 10px;overflow:hidden;text-overflow:ellipsis;white-space:nowrap;font-size:.85rem}
+.npcimg{position:relative;aspect-ratio:1;background:repeating-linear-gradient(45deg,#f3ebe4,#f3ebe4 10px,#efe5dd 10px,#efe5dd 20px)}.npcimg img{width:100%;height:100%;object-fit:cover}.npcimg .npnew{position:absolute;top:8px;left:8px;margin:0}
 .low{color:var(--coral);font-size:.8rem;font-weight:600}.tabs.five button{font-size:.78rem;padding:0 2px}
 .pick{display:grid;gap:6px}.pick-item{display:flex;align-items:center;gap:10px;min-height:44px;padding:0 12px;border:1px solid var(--line);border-radius:10px;background:#fff;font:500 .92rem Inter,sans-serif;color:var(--ink);text-align:left;cursor:pointer}
 .pick-item .dot{width:20px;height:20px;border-radius:50%;border:2px solid var(--line);display:grid;place-items:center;font-size:12px;flex:none;color:#fff}
@@ -139,6 +150,7 @@ dialog .btns{display:flex;gap:8px;margin-top:16px;justify-content:flex-end}
 <main id="app" tabindex="-1"><div class="grid"><div class="skel"></div><div class="skel"></div><div class="skel"></div><div class="skel"></div></div></main>
 <footer class="foot">UniBite is for <b>University of Ilesha (UNILESHA) students only</b> · <a href="#/terms">Terms &amp; Privacy</a> · <a href="#/help">Help</a></footer>
 <div id="alarm"></div>
+<div id="newpost"></div>
 <a id="care" class="care" target="_blank" rel="noopener" aria-label="Chat with UniBite customer care on WhatsApp" href="#"><svg class="ic" viewBox="0 0 24 24" aria-hidden="true"><path d="M21 11.5a8.38 8.38 0 0 1-.9 3.8 8.5 8.5 0 0 1-7.6 4.7 8.38 8.38 0 0 1-3.8-.9L3 21l1.9-5.7a8.38 8.38 0 0 1-.9-3.8 8.5 8.5 0 0 1 4.7-7.6 8.38 8.38 0 0 1 3.8-.9h.5a8.48 8.48 0 0 1 8 8v.5z"/></svg><span>Help</span></a>
 <dialog id="dlg"></dialog>
 <div id="toast" role="status" aria-live="polite"></div>
@@ -147,7 +159,7 @@ dialog .btns{display:flex;gap:8px;margin-top:16px;justify-content:flex-end}
 <script type="module">
 import { initializeApp } from 'https://www.gstatic.com/firebasejs/10.14.1/firebase-app.js';
 import { getAuth, onAuthStateChanged, createUserWithEmailAndPassword, signInWithEmailAndPassword, signOut, sendEmailVerification, sendPasswordResetEmail } from 'https://www.gstatic.com/firebasejs/10.14.1/firebase-auth.js';
-import { getFirestore, initializeFirestore, doc, getDoc, getDocs, setDoc, addDoc, updateDoc, deleteDoc, collection, query, where, limit, writeBatch, onSnapshot, getCountFromServer, runTransaction, increment } from 'https://www.gstatic.com/firebasejs/10.14.1/firebase-firestore.js';
+import { getFirestore, initializeFirestore, doc, getDoc, getDocs, setDoc, addDoc, updateDoc, deleteDoc, collection, query, where, limit, orderBy, writeBatch, onSnapshot, getCountFromServer, runTransaction, increment } from 'https://www.gstatic.com/firebasejs/10.14.1/firebase-firestore.js';
 /* UniBite: single-file app on Firebase Auth + Firestore (no Storage: images are small JPEGs saved inside documents). Security lives in firestore.rules; nothing in this file is a security boundary. */
 
 const $ = (s, r = document) => r.querySelector(s);
@@ -250,9 +262,18 @@ const api = {
     await updateDoc(doc(db, 'orders', id), { status, paymentStatus: status === 'rejected' ? 'rejected' : 'confirmed', updatedAt: Date.now() });
     const m = ORDER_MSG[status]; api.notify(o.uid, `${m[0]} · ${id}`, m[1], '#/orders', 'stage', id, `stage_${id}_${status}`);
   },
-  async addProduct(p) { await addDoc(col('products'), { ...p, vendorId: S.user.vendorId, createdAt: Date.now() }); bust(); },
+  /* A new item is announced to students only while the shop is open. One feed entry per item, so it can never repeat. */
+  async addProduct(p) {
+    const ref = await addDoc(col('products'), { ...p, vendorId: S.user.vendorId, createdAt: Date.now() }); bust();
+    let announced = false, closed = false;
+    try {
+      const shop = (await getDoc(doc(db, 'vendors', S.user.vendorId))).data();
+      if (isOpen(shop)) { await setDoc(doc(db, 'feed', ref.id), { vendorId: S.user.vendorId, vendorName: shop.name, type: shop.type, name: p.name, price: p.price, img: p.img || '', createdAt: Date.now() }); announced = true; } else closed = true;
+    } catch (e) { console.error(e); }
+    return { announced, closed };
+  },
   async updateProduct(id, patch) { await updateDoc(doc(db, 'products', id), patch); bust(); },
-  async deleteProduct(id) { await deleteDoc(doc(db, 'products', id)); bust(); },
+  async deleteProduct(id) { await deleteDoc(doc(db, 'products', id)); deleteDoc(doc(db, 'feed', id)).catch(() => {}); bust(); },
   reviews: vid => cached('rv:' + vid, 600000, async () => docs(await getDocs(query(col('reviews'), where('vendorId', '==', vid)))).sort((a, b) => b.createdAt - a.createdAt)),
   async saveReview(r) { await setDoc(doc(db, 'reviews', r.vendorId + '_' + r.uid), { ...r, createdAt: Date.now() }); delete cache.rev; bust(); RM = await ratings(); const v = await api.vendor(r.vendorId); if (v?.ownerUid) api.notify(v.ownerUid, 'New review · ' + v.name, `${r.name} gave ${r.stars} star${r.stars > 1 ? 's' : ''}${r.comment ? ': ' + r.comment.slice(0, 80) : ''}`, '#/vendor/' + r.vendorId, 'review', r.vendorId + '_' + r.uid, 'review_' + r.vendorId + '_' + r.uid); },
   async updateVendor(id, patch) { await updateDoc(doc(db, 'vendors', id), patch); const sh = S.user?.shops?.find(x => x.id === id); if (sh && patch.name) sh.name = patch.name; bust(); },
@@ -334,6 +355,31 @@ const startAlarm = () => { stopAlarm(); document.body.classList.add('ringing'); 
 const alertUser = n => { toast(n.title); if (S.kmode && n.title.startsWith('New order')) startAlarm(); else beep(false); if (document.visibilityState !== 'visible' && !S.pushToken) systemNotify(n); };
 async function setKitchenMode(on) { S.kmode = on; try { if (on) { unlockAudio(); S.wl = await navigator.wakeLock?.request('screen'); } else { await S.wl?.release(); S.wl = null; stopAlarm(); } } catch (e) { console.error(e); } }
 document.addEventListener('visibilitychange', () => { if (document.visibilityState === 'visible' && S.kmode && (!S.wl || S.wl.released)) navigator.wakeLock?.request('screen').then(w => (S.wl = w)).catch(() => {}); });
+/* ---------- "New from vendors": when a vendor posts an item, students see it straight away ---------- */
+let FEED = [], feedReady = false, postShowing = false; const feedIds = new Set(), postQ = [];
+const feedSeen = () => +(localStorage.getItem('ub_feedseen') || 0);
+const feedFresh = () => FEED.filter(x => /^[\w@.-]{1,60}$/.test(String(x.vendorId)) && Date.now() - Number(x.createdAt) < 72 * 3600 * 1000 && !ownShop(x.vendorId));
+const feedUnseen = () => feedFresh().filter(x => Number(x.createdAt) > feedSeen()).length;
+function showPost() {
+  const box = $('#newpost'), g = postQ.shift();
+  if (!box || !g) { postShowing = false; if (box) box.innerHTML = ''; return; }
+  postShowing = true; const it = g.items[0], many = g.items.length > 1;
+  box.innerHTML = `<div class="npost" role="status"><div class="npimg">${safeImg(it.img) ? `<img src="${safeImg(it.img)}" alt="">` : ic('bag')}</div><div class="npt"><b><span class="npnew">NEW</span>${esc(g.vendorName)}</b><p>${many ? `just posted ${g.items.length} new items, latest: <b style="display:inline;color:inherit">${esc(it.name)}</b>` : `just posted <b style="display:inline;color:inherit">${esc(it.name)}</b> · ${money(it.price)}`}</p></div><div class="npa"><button class="btn sm" data-act="seepost" data-id="${esc(g.vendorId)}">View menu</button><button class="npx" data-act="closepost" aria-label="Dismiss">×</button></div></div>`;
+  clearTimeout(showPost.t); showPost.t = setTimeout(() => { postShowing = false; box.innerHTML = ''; if (postQ.length) setTimeout(showPost, 400); }, 9000);
+}
+function startFeed() {
+  if (!localStorage.getItem('ub_feedseen')) localStorage.setItem('ub_feedseen', String(Date.now()));
+  onSnapshot(query(col('feed'), orderBy('createdAt', 'desc'), limit(10)), s => {
+    const list = docs(s), fresh = feedReady ? list.filter(x => !feedIds.has(x.id)) : [];
+    list.forEach(x => feedIds.add(x.id)); FEED = list; feedReady = true;
+    const blocked = S.user && !adminEmail() && (S.user.suspended || !S.user.unilesha), groups = {};
+    fresh.filter(x => /^[\w@.-]{1,60}$/.test(String(x.vendorId)) && !ownShop(x.vendorId) && Date.now() - Number(x.createdAt) < 600000)
+      .forEach(x => (groups[x.vendorId] ||= { vendorId: x.vendorId, vendorName: x.vendorName, items: [] }).items.push(x));
+    if (!blocked) Object.values(groups).forEach(g => { g.items.sort((a, b) => b.createdAt - a.createdAt); postQ.push(g); if (document.visibilityState !== 'visible') systemNotify({ title: `${g.vendorName} just posted`, body: g.items[0].name, href: '#/vendor/' + g.vendorId }); });
+    if (!blocked && Object.keys(groups).length) { beep(false); if (!postShowing) showPost(); }
+    chrome(); const r = location.hash.split('/')[1] || ''; if (['', 'notifications'].includes(r) && !document.activeElement?.closest?.('form')) render();
+  }, console.error);
+}
 async function loadUser(u) {
   C.un.forEach(f => f()); C.un = []; C.notifs = []; C.orders = []; C.vorders = []; bust();
   if (!u) { S.user = null; return; }
@@ -376,12 +422,13 @@ const qtyCtl = (id, q) => `<div class="qty"><button data-act="dec" data-id="${id
 const views = {
   async home() {
     const [vs, ps] = await Promise.all([api.vendors(), api.popular()]);
-    const vm = Object.fromEntries(vs.map(v => [v.id, v])), pop = ps.filter(p => p.available && !soldOut(p) && vm[p.vendorId]).slice(0, 6);
+    const vm = Object.fromEntries(vs.map(v => [v.id, v])), pop = ps.filter(p => p.available && !soldOut(p) && vm[p.vendorId]).slice(0, 6), jp = feedFresh().slice(0, 8);
     return `<div class="hero"><img class="hero-logo" src="${LOGO}" alt="UniBite logo"><span class="uni" style="margin:0 0 10px">For University of Ilesha students only</span><h1>Good Food. Right Around Campus.</h1><p>Order from independent vendors on the University of Ilesha campus and pay them directly. Track every order from payment to your door.</p>
     <form class="search" data-form="search"><input name="q" type="search" placeholder="Search vendors or dishes" aria-label="Search"><button class="btn coral">Search</button></form></div>
+    ${jp.length ? `<section><div class="row"><h2>Just posted</h2><span class="mute">last 3 days</span></div><div class="hscroll">${jp.map(x => `<a class="npcard" href="#/vendor/${esc(x.vendorId)}"><div class="npcimg">${safeImg(x.img) ? `<img src="${safeImg(x.img)}" alt="" loading="lazy" decoding="async">` : ''}<span class="npnew">NEW</span></div><b>${esc(x.name)}</b><span class="price">${money(x.price)}</span><span class="mute">${esc(x.vendorName)} · ${ago(x.createdAt)}</span></a>`).join('')}</div></section>` : ''}
     <section><div class="split"><a class="cat food" href="#/browse/food"><h3>Food</h3><p>${vs.filter(v => v.type === 'food').length} vendors</p></a><a class="cat cakes" href="#/browse/cakes"><h3>Cakes & Pastries</h3><p>${vs.filter(v => v.type === 'cakes').length} vendors</p></a></div></section>
     ${(S.user?.shops || []).length > 1 ? '' : `<section><div class="card body" style="display:flex;gap:12px;align-items:center;justify-content:space-between;flex-wrap:wrap"><div><h3>Sell on UniBite</h3><p class="mute">Run a food or cake business? Get your own shop page and dashboard.</p></div><a class="btn coral sm" href="${S.user ? '#/vendor-apply' : '#/auth/vendor'}">${S.user?.shops?.length ? 'Add another shop' : 'Become a vendor'}</a></div></section>`}
-    <section><div class="row"><h2>Featured vendors</h2><a href="#/browse/food">See all</a></div>${vs.length ? `<div class="grid vgrid">${[...vs].sort((a, b) => isOpen(b) - isOpen(a)).slice(0, 4).map(vendorCard).join('')}</div>` : '<div class="card body mute">No vendors have joined yet. Check back soon.</div>'}</section>
+    ${vs.length ? [['food', 'Food vendors'], ['cakes', 'Cakes & Pastries vendors']].map(([k, t]) => { const l = vs.filter(v => v.type === k).sort((a, b) => isOpen(b) - isOpen(a)); return l.length ? `<section><div class="row"><h2>${t} <span class="mute">(${l.length})</span></h2><a href="#/browse/${k}">Open section</a></div><div class="grid vgrid">${l.map(vendorCard).join('')}</div></section>` : ''; }).join('') : '<section><div class="card body mute">No vendors have joined yet. Check back soon.</div></section>'}
     ${pop.length ? `<section><h2 style="margin-bottom:12px">Popular right now</h2><div class="grid">${pop.map(p => `<a class="card" href="#/vendor/${p.vendorId}">${prodRow(p, vm[p.vendorId]).replace('card prod', 'prod').replace(/<(button|div class="qty")[\s\S]*$/, '</div>')}</a>`).join('')}</div></section>` : ''}`;
   },
   async browse(type, q) {
@@ -549,9 +596,12 @@ views.admin = async () => {
 };
 views.notifications = async () => {
   if (!S.user) return needAuth('Log in to see your notifications.');
-  const ns = await api.notifs(), perm = 'Notification' in window ? Notification.permission : 'unsupported';
+  const ns = await api.notifs(), perm = 'Notification' in window ? Notification.permission : 'unsupported', seenBefore = feedSeen(), fl = feedFresh().slice(0, 10);
+  localStorage.setItem('ub_feedseen', String(Date.now())); chrome();
+  const feedList = fl.length ? `<h2 style="margin:16px 0 4px">New from vendors</h2>${fl.map(x => `<a class="card body" style="display:flex;gap:12px;align-items:center;margin-top:8px;${Number(x.createdAt) > seenBefore ? 'border-left:4px solid var(--gold)' : ''}" href="#/vendor/${esc(x.vendorId)}"><div class="npimg">${safeImg(x.img) ? `<img src="${safeImg(x.img)}" alt="" loading="lazy">` : ic('bag')}</div><div style="flex:1;min-width:0"><div class="line"><b>${esc(x.vendorName)}</b><span class="mute">${ago(x.createdAt)}</span></div><p class="mute">just posted <b style="color:var(--ink)">${esc(x.name)}</b> · ${money(x.price)}</p></div></a>`).join('')}<h2 style="margin:18px 0 4px">Your updates</h2>` : '';
   return `<div class="narrow"><div class="row"><h1 style="font-size:1.6rem">Notifications</h1>${ns.some(n => !n.read) ? '<a href="#" data-act="readall">Mark all read</a>' : ''}</div>
   ${perm === 'default' ? '<div class="pay"><b>Get alerts on this device</b><p class="mute" style="margin:4px 0 8px">Allow notifications to get order updates as pop-ups on this device.</p><button class="btn sm" data-act="allow">Allow notifications</button></div>' : ''}${perm === 'granted' ? `<div class="card body line" style="align-items:center;margin-top:10px"><span class="mute">${S.pushToken ? 'Alerts are ON for this device, even when UniBite is closed.' : 'Alerts show while UniBite is open.'}</span><button class="btn ghost sm" data-act="testn">Send test</button></div>` : ''}${perm === 'denied' ? '<p class="err">Notifications are blocked. Tap the lock icon in your browser address bar, open Notifications and choose Allow.</p>' : ''}
+  ${feedList}
   ${ns.length ? ns.map(n => `<a class="card body" style="display:block;margin-top:10px;${n.read ? '' : 'border-left:4px solid var(--coral)'}" href="#" data-act="openn" data-id="${n.id}"><div class="line"><b>${esc(n.title)}</b><span class="mute">${ago(n.createdAt)}</span></div><p class="mute">${esc(n.body)}</p></a>`).join('') : empty('No notifications yet', 'Order updates will show up here.', '#/browse/food', 'Explore Food')}</div>`;
 };
 views.terms = async () => `<div class="narrow terms"><h1 style="font-size:1.6rem">Terms &amp; Privacy</h1><p class="mute">Short and simple. Last updated October 2026.</p>
@@ -614,6 +664,8 @@ const act = {
     } catch (e) { console.error(e); toast('Could not finish. Please try again.'); }
     finally { S.opt = false; render(); }
   },
+  closepost: () => { clearTimeout(showPost.t); postShowing = false; const b = $('#newpost'); if (b) b.innerHTML = ''; if (postQ.length) setTimeout(showPost, 300); },
+  seepost: id => { act.closepost(); if (/^[\w@.-]{1,60}$/.test(String(id))) location.hash = '#/vendor/' + id; },
   atab: id => { S.atab = id; render(); },
   async regtoggle() { const s = await api.settings(); await api.saveSettings({ registrationOpen: !s.registrationOpen }); toast(s.registrationOpen ? 'Registration closed' : 'Registration opened'); render(); },
   async vreceipt(id) { const v = (await api.allVendors()).find(x => x.id === id), d = $('#dlg'); if (!safeImg(v.regReceipt)) return toast('No valid receipt found'); d.innerHTML = `<img src="${safeImg(v.regReceipt)}" alt="Registration receipt from ${esc(v.name)}" style="width:100%;border-radius:8px"><div class="btns"><button class="btn sm" value="x">Close</button></div>`; d.onclick = e => e.target.value && d.close(); d.showModal(); },
@@ -719,8 +771,8 @@ const forms = {
   async vprod(f) {
     const d = Object.fromEntries(new FormData(f)), fe = $('#fe');
     if (d.name.trim().length < 2 || !(+d.price >= 50) || !d.category.trim() || !(Number.isInteger(+d.qty) && +d.qty >= 1)) return fe.textContent = 'Add an item name, a price of ₦50 or more, a quantity of 1 or more, and a category.';
-    await api.addProduct({ name: d.name.trim(), price: Math.round(+d.price), qty: Math.floor(+d.qty), category: d.category.trim(), desc: d.desc.trim(), img: pendingImg || '', available: true });
-    toast('Item added'); render();
+    const r = await api.addProduct({ name: d.name.trim(), price: Math.round(+d.price), qty: Math.floor(+d.qty), category: d.category.trim(), desc: d.desc.trim(), img: pendingImg || '', available: true });
+    toast(r.announced ? 'Item added. Students have been notified.' : r.closed ? 'Item added. Students are told about new items only while your kitchen is open.' : 'Item added'); render();
   },
   async unilesha(f) {
     const d = Object.fromEntries(new FormData(f)), fe = $('#fe');
@@ -767,7 +819,7 @@ function chrome() {
   $('#nav').innerHTML = [['home', '#/', 'Home', 'home'], ['browse', '#/search/', 'Browse', 'search'], ['orders', '#/orders', 'Orders', 'orders'], ['favourites', '#/favourites', 'Favourites', 'heart'], ['profile', '#/profile', S.user ? 'Profile' : 'Log in', 'user']].map(([k, h, l, i]) => `<a href="${h}" ${cur === k ? 'aria-current="page"' : ''}>${ic(i)}<span>${l}</span></a>`).join('');
   $('#cartIcon').innerHTML = ic('bag'); $('#bellIcon').innerHTML = ic('bell'); $('#loginBtn').hidden = !!S.user; $('#bellBtn').hidden = !S.user;
   $('#care').href = waLink(CARE, `Hello UniBite customer care. ${S.user ? 'I am ' + S.user.name + '. ' : ''}My issue: `);
-  $('#perm').innerHTML = S.user && 'Notification' in window && Notification.permission === 'default' && !sessionStorage.getItem('ub_noperm') ? `<div class="permbar"><span>Turn on alerts so ${S.user.shops?.length ? 'new orders ring' : 'order updates pop up'} on this device while UniBite is open.</span><button class="btn coral sm" data-act="allow">Turn on</button><button class="btn ghost sm" data-act="noperm">Not now</button></div>` : ''; const nc = C.notifs.filter(n => !n.read).length; $('#bellCount').hidden = !nc; $('#bellCount').textContent = nc > 9 ? '9+' : nc; document.title = (nc ? `(${nc}) ` : '') + 'UniBite · Good Food. Right Around Campus.'; try { nc ? navigator.setAppBadge?.(nc) : navigator.clearAppBadge?.(); } catch {} const n = cartCount(); $('#cartCount').hidden = !n; $('#cartCount').textContent = n;
+  $('#perm').innerHTML = S.user && 'Notification' in window && Notification.permission === 'default' && !sessionStorage.getItem('ub_noperm') ? `<div class="permbar"><span>Turn on alerts so ${S.user.shops?.length ? 'new orders ring' : 'order updates pop up'} on this device while UniBite is open.</span><button class="btn coral sm" data-act="allow">Turn on</button><button class="btn ghost sm" data-act="noperm">Not now</button></div>` : ''; const nc = C.notifs.filter(n => !n.read).length + feedUnseen(); $('#bellCount').hidden = !nc; $('#bellCount').textContent = nc > 9 ? '9+' : nc; document.title = (nc ? `(${nc}) ` : '') + 'UniBite · Good Food. Right Around Campus.'; try { nc ? navigator.setAppBadge?.(nc) : navigator.clearAppBadge?.(); } catch {} const n = cartCount(); $('#cartCount').hidden = !n; $('#cartCount').textContent = n;
 }
 const gateHtml = r => {
   if (!S.user || adminEmail() || r === 'help' || r === 'terms') return null;
@@ -829,6 +881,7 @@ onAuthStateChanged(auth, async u => {
   if (busy) return;
   try { await loadUser(u); } catch (e) { console.error(e); S.user = null; }
   S.ready = true; window.__ubReady = true; render();
+  if (!S.feedOn) { S.feedOn = true; startFeed(); }
 });
 </script>
 </body>
