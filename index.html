@@ -109,17 +109,12 @@ dialog .btns{display:flex;gap:8px;margin-top:16px;justify-content:flex-end}
 .care{position:fixed;right:14px;bottom:calc(var(--nav) + 16px + env(safe-area-inset-bottom));z-index:30;display:flex;align-items:center;gap:6px;height:46px;padding:0 16px;border-radius:99px;background:#128C4A;color:#fff;font:600 .9rem Inter,sans-serif;box-shadow:0 6px 18px rgba(0,0,0,.25)}.care .ic{width:22px;height:22px;stroke:#fff}body.ringing .care{display:none}@media(min-width:900px){.care{bottom:24px;right:24px}}
 .uni{display:inline-block;padding:4px 12px;border-radius:99px;background:var(--gold);color:var(--plum);font-weight:600;font-size:.8rem}.foot{max-width:1080px;margin:0 auto;padding:6px 16px 30px;text-align:center;font-size:.78rem;color:var(--mute)}.foot a{color:var(--coral);font-weight:600}.terms h2{margin:18px 0 6px}.terms p,.terms li{margin:4px 0;color:var(--ink)}.terms ul{padding-left:20px}
 .cp{display:flex;align-items:center;gap:8px}.copy{display:inline-grid;place-items:center;width:34px;height:34px;flex:none;border:1px solid var(--line);border-radius:8px;background:#fff;color:var(--plum);cursor:pointer}.copy .ic{width:18px;height:18px}.pay .btn .ic{width:18px;height:18px}
-#newpost{position:fixed;left:0;right:0;top:calc(66px + env(safe-area-inset-top));z-index:45;display:flex;justify-content:center;padding:0 12px;pointer-events:none}
-.npost{pointer-events:auto;display:flex;align-items:center;gap:12px;width:100%;max-width:520px;padding:10px 12px;background:#fff;border:1px solid var(--line);border-left:5px solid var(--gold);border-radius:14px;box-shadow:0 12px 32px rgba(74,25,66,.28);animation:npin .35s ease-out}
-@keyframes npin{from{transform:translateY(-16px);opacity:0}to{transform:none;opacity:1}}
-.npimg{width:52px;height:52px;border-radius:10px;overflow:hidden;background:#f3ebe4;display:grid;place-items:center;flex:none;color:var(--mute)}.npimg img{width:100%;height:100%;object-fit:cover}
-.npt{flex:1;min-width:0}.npt b{display:block;color:var(--plum);overflow:hidden;text-overflow:ellipsis;white-space:nowrap}.npt p{font-size:.82rem;line-height:1.3;color:var(--ink)}
-.npnew{display:inline-block;margin-right:6px;padding:1px 7px;border-radius:99px;background:var(--coral);color:#fff;font-size:.68rem;font-weight:700;letter-spacing:.04em}
-.npa{display:flex;align-items:center;gap:2px;flex:none}.npx{width:32px;height:32px;border:0;border-radius:50%;background:transparent;font-size:1.5rem;line-height:1;color:var(--mute);cursor:pointer}
-.hscroll{display:flex;gap:12px;overflow-x:auto;padding-bottom:6px;scroll-snap-type:x proximity;-webkit-overflow-scrolling:touch}
-.npcard{flex:none;width:150px;display:flex;flex-direction:column;gap:2px;background:#fff;border-radius:var(--r);box-shadow:var(--sh);padding-bottom:10px;overflow:hidden;scroll-snap-align:start}
-.npcard b,.npcard .price,.npcard .mute{padding:0 10px;overflow:hidden;text-overflow:ellipsis;white-space:nowrap;font-size:.85rem}
-.npcimg{position:relative;aspect-ratio:1;background:repeating-linear-gradient(45deg,#f3ebe4,#f3ebe4 10px,#efe5dd 10px,#efe5dd 20px)}.npcimg img{width:100%;height:100%;object-fit:cover}.npcimg .npnew{position:absolute;top:8px;left:8px;margin:0}
+.today{position:absolute;top:8px;left:8px;display:inline-flex;align-items:center;gap:6px;padding:3px 10px 3px 3px;border-radius:99px;background:rgba(74,25,66,.94);color:#fff;font:600 .75rem Inter,sans-serif;box-shadow:0 2px 8px rgba(0,0,0,.25)}.today b{display:grid;place-items:center;min-width:22px;height:22px;padding:0 5px;border-radius:99px;background:var(--coral);font-size:.8rem}
+.todayline{margin-top:6px;font-size:.85rem;font-weight:600;color:var(--ok)}.todayline b{font-size:1rem}
+.chips{display:flex;gap:8px;margin-bottom:14px}.chip{min-height:36px;padding:0 14px;border:1px solid var(--line);border-radius:99px;background:#fff;color:var(--ink);font:500 .85rem Inter,sans-serif;cursor:pointer}.chip.on{background:var(--plum);border-color:var(--plum);color:#fff}
+.eta{display:flex;align-items:center;gap:4px;margin-top:3px;font-size:.78rem;font-weight:600;color:var(--ok)}.eta .ic{width:14px;height:14px}
+.etabox{display:flex;align-items:center;gap:10px;margin-top:12px;padding:12px 14px;border-radius:var(--r);background:#eaf6ef;border:1px solid #bfe3cf;color:#1d6b43}.etabox div{display:grid;gap:2px;font-size:.85rem}.etabox span{color:#3b7a58;font-size:.8rem}
+.eta2{display:grid;grid-template-columns:1fr auto 1fr;gap:8px;align-items:center}
 .low{color:var(--coral);font-size:.8rem;font-weight:600}.tabs.five button{font-size:.78rem;padding:0 2px}
 .pick{display:grid;gap:6px}.pick-item{display:flex;align-items:center;gap:10px;min-height:44px;padding:0 12px;border:1px solid var(--line);border-radius:10px;background:#fff;font:500 .92rem Inter,sans-serif;color:var(--ink);text-align:left;cursor:pointer}
 .pick-item .dot{width:20px;height:20px;border-radius:50%;border:2px solid var(--line);display:grid;place-items:center;font-size:12px;flex:none;color:#fff}
@@ -150,7 +145,6 @@ dialog .btns{display:flex;gap:8px;margin-top:16px;justify-content:flex-end}
 <main id="app" tabindex="-1"><div class="grid"><div class="skel"></div><div class="skel"></div><div class="skel"></div><div class="skel"></div></div></main>
 <footer class="foot">UniBite is for <b>University of Ilesha (UNILESHA) students only</b> · <a href="#/terms">Terms &amp; Privacy</a> · <a href="#/help">Help</a></footer>
 <div id="alarm"></div>
-<div id="newpost"></div>
 <a id="care" class="care" target="_blank" rel="noopener" aria-label="Chat with UniBite customer care on WhatsApp" href="#"><svg class="ic" viewBox="0 0 24 24" aria-hidden="true"><path d="M21 11.5a8.38 8.38 0 0 1-.9 3.8 8.5 8.5 0 0 1-7.6 4.7 8.38 8.38 0 0 1-3.8-.9L3 21l1.9-5.7a8.38 8.38 0 0 1-.9-3.8 8.5 8.5 0 0 1 4.7-7.6 8.38 8.38 0 0 1 3.8-.9h.5a8.48 8.48 0 0 1 8 8v.5z"/></svg><span>Help</span></a>
 <dialog id="dlg"></dialog>
 <div id="toast" role="status" aria-live="polite"></div>
@@ -159,7 +153,7 @@ dialog .btns{display:flex;gap:8px;margin-top:16px;justify-content:flex-end}
 <script type="module">
 import { initializeApp } from 'https://www.gstatic.com/firebasejs/10.14.1/firebase-app.js';
 import { getAuth, onAuthStateChanged, createUserWithEmailAndPassword, signInWithEmailAndPassword, signOut, sendEmailVerification, sendPasswordResetEmail } from 'https://www.gstatic.com/firebasejs/10.14.1/firebase-auth.js';
-import { getFirestore, initializeFirestore, doc, getDoc, getDocs, setDoc, addDoc, updateDoc, deleteDoc, collection, query, where, limit, orderBy, writeBatch, onSnapshot, getCountFromServer, runTransaction, increment } from 'https://www.gstatic.com/firebasejs/10.14.1/firebase-firestore.js';
+import { getFirestore, initializeFirestore, doc, getDoc, getDocs, setDoc, addDoc, updateDoc, deleteDoc, collection, query, where, limit, orderBy, writeBatch, onSnapshot, getCountFromServer, runTransaction, increment, Timestamp } from 'https://www.gstatic.com/firebasejs/10.14.1/firebase-firestore.js';
 /* UniBite: single-file app on Firebase Auth + Firestore (no Storage: images are small JPEGs saved inside documents). Security lives in firestore.rules; nothing in this file is a security boundary. */
 
 const $ = (s, r = document) => r.querySelector(s);
@@ -172,7 +166,7 @@ const save = (k, v) => localStorage.setItem(k, JSON.stringify(v));
 const LOGO = $('.logo img').src; let ICON = LOGO; document.head.insertAdjacentHTML('beforeend', `<link rel="icon" href="${LOGO}">`);
 const TYPES = { food: 'Food', cakes: 'Cakes & Pastries' };
 const STATUS = [['pending', 'Payment verification pending'], ['paid', 'Payment confirmed'], ['received', 'Order received'], ['preparing', 'Preparing'], ['ready', 'Ready / out for delivery'], ['delivered', 'Delivered']];
-const P = { home: 'M3 11l9-8 9 8v9a1 1 0 0 1-1 1h-5v-6H9v6H4a1 1 0 0 1-1-1z', search: 'M11 4a7 7 0 1 0 0 14 7 7 0 0 0 0-14zM21 21l-4.3-4.3', orders: 'M6 3h12v18l-3-2-3 2-3-2-3 2zM9 8h6M9 12h6', heart: 'M12 20s-8-5-8-11a4.5 4.5 0 0 1 8-2.5A4.5 4.5 0 0 1 20 9c0 6-8 11-8 11z', user: 'M12 12a4 4 0 1 0 0-8 4 4 0 0 0 0 8zM4 21a8 8 0 0 1 16 0', bag: 'M5 8h14l-1 12H6zM9 8a3 3 0 0 1 6 0', bell: 'M6 9a6 6 0 0 1 12 0c0 6 2 7 2 7H4s2-1 2-7zM10 20a2 2 0 0 0 4 0', copy: 'M9 9h11v11H9zM5 15H4V4h11v1' };
+const P = { home: 'M3 11l9-8 9 8v9a1 1 0 0 1-1 1h-5v-6H9v6H4a1 1 0 0 1-1-1z', search: 'M11 4a7 7 0 1 0 0 14 7 7 0 0 0 0-14zM21 21l-4.3-4.3', orders: 'M6 3h12v18l-3-2-3 2-3-2-3 2zM9 8h6M9 12h6', heart: 'M12 20s-8-5-8-11a4.5 4.5 0 0 1 8-2.5A4.5 4.5 0 0 1 20 9c0 6-8 11-8 11z', user: 'M12 12a4 4 0 1 0 0-8 4 4 0 0 0 0 8zM4 21a8 8 0 0 1 16 0', bag: 'M5 8h14l-1 12H6zM9 8a3 3 0 0 1 6 0', bell: 'M6 9a6 6 0 0 1 12 0c0 6 2 7 2 7H4s2-1 2-7zM10 20a2 2 0 0 0 4 0', copy: 'M9 9h11v11H9zM5 15H4V4h11v1', phone: 'M5 4h4l2 5-2.5 1.5a11 11 0 0 0 5 5L15 13l5 2v4a2 2 0 0 1-2 2A16 16 0 0 1 3 6a2 2 0 0 1 2-2z', clock: 'M12 3a9 9 0 1 0 0 18 9 9 0 0 0 0-18zM12 7v5l3 2' };
 const ic = k => `<svg class="ic" viewBox="0 0 24 24" aria-hidden="true"><path d="${P[k]}"/></svg>`;
 
 /* UI gate only. The real check is in firestore.rules (the signed-in email must equal ADMIN_EMAIL). */
@@ -187,8 +181,10 @@ const mins = t => +t.slice(0, 2) * 60 + +t.slice(3, 5);
 const fmt = t => { const x = +t.slice(0, 2); return `${x % 12 || 12}:${t.slice(3, 5)} ${x < 12 ? 'AM' : 'PM'}`; };
 const lagosFmt = new Intl.DateTimeFormat('en-GB', { timeZone: 'Africa/Lagos', weekday: 'short', hour: '2-digit', minute: '2-digit', hourCycle: 'h23' });
 const lagos = () => { const p = Object.fromEntries(lagosFmt.formatToParts(new Date()).map(x => [x.type, x.value])); return { day: p.weekday.toLowerCase().slice(0, 3), min: +p.hour * 60 + +p.minute }; };
-const isOpen = v => { if (!v || v.open === false) return false; const s = v.schedule; if (!s?.enabled) return true; const { day, min } = lagos(), d = s.days?.[day]; return !!(d?.on && min >= mins(d.from) && min < mins(d.to)); };
-const openInfo = v => {
+const isOpen = v => { try { if (!v || v.open === false || st(v) !== 'approved') return false; const s = v.schedule; if (!s?.enabled) return true; const { day, min } = lagos(), d = s.days?.[day]; return !!(d?.on && min >= mins(d.from) && min < mins(d.to)); } catch { return false; } }; /* a malformed schedule counts as closed instead of breaking the page */
+const openInfo = v => { try { return openInfoRaw(v); } catch { return 'Closed'; } };
+const openInfoRaw = v => {
+  if (st(v) !== 'approved') return 'Closed · shop unavailable';
   if (v.open === false) return 'Closed · kitchen switched off';
   if (!v.schedule?.enabled) return 'Open';
   const { day, min } = lagos(); if (isOpen(v)) return `Open · closes ${fmt(v.schedule.days[day].to)}`;
@@ -198,6 +194,19 @@ const openInfo = v => {
 const whyClosed = v => openInfo(v).replace(/^Closed ?· ?/, '');
 const soldOut = p => p.qty != null && p.qty <= 0;
 const stockLabel = p => p.qty == null ? 'No limit set' : p.qty > 0 ? `${p.qty} in stock` : 'Sold out';
+/* Posts live for 24 hours. expiresAt (a Firestore Timestamp) lets a Firestore TTL policy delete them for good; the app also hides them the moment they expire. */
+const POST_TTL = 864e5, SAFE_ID = /^[\w@.-]{1,128}$/;
+const dayKey = (t = Date.now()) => new Intl.DateTimeFormat('en-CA', { timeZone: 'Africa/Lagos' }).format(t); /* 2026-11-07, Nigeria date */
+const expMs = p => { const e = p.expiresAt; if (e?.toMillis) return e.toMillis(); if (e) return Number(e) || 0; return p.isDemo ? Infinity : (Number(p.createdAt) || 0) + POST_TTL; };
+const expired = p => expMs(p) <= Date.now();
+const leftLabel = p => { const m = Math.max(0, Math.floor((expMs(p) - Date.now()) / 6e4)); return m >= 60 ? `${Math.floor(m / 60)}h ${m % 60}m` : `${m}m`; };
+/* Estimated time to get an order ready, in minutes, set by the vendor on each item. An order shows the longest range among its items. */
+const etaOf = p => { const a = Number(p?.etaMin), b = Number(p?.etaMax); return a >= 1 && b >= a ? [a, b] : null; };
+const etaText = e => e ? (e[0] === e[1] ? `${e[0]} min` : `${e[0]}–${e[1]} min`) : '';
+const orderEta = rows => rows.reduce((m, p) => { const e = etaOf(p); return e ? [Math.max(m?.[0] || 0, e[0]), Math.max(m?.[1] || 0, e[1])] : m; }, null);
+const nl = s => String(s ?? '').replace(/\r\n?/g, '\n').trim(); /* browsers send line breaks as 2 characters; count them as 1 */
+const clip = (s, n) => { s = String(s ?? ''); return s.length > n ? s.slice(0, n - 1) + '…' : s; };
+const telHref = ph => 'tel:' + String(ph || '').replace(/[^\d+]/g, '');
 /* WhatsApp quick message (free, works on every phone). Nigerian numbers: 080... becomes 23480... */
 const CARE = '08129758664'; /* UniBite customer care, WhatsApp only */
 const waLink = (phone, text) => { let d = String(phone || '').replace(/\D/g, ''); if (d.startsWith('0')) d = '234' + d.slice(1); else if (d.length === 10) d = '234' + d; return `https://wa.me/${d}?text=${encodeURIComponent(text)}`; };
@@ -218,8 +227,8 @@ let busy = false;
 const cache = {}, cached = (k, ms, fn) => { const c = cache[k]; if (c && Date.now() - c.t < ms) return c.p; const p = fn(); cache[k] = { t: Date.now(), p }; p.catch(() => delete cache[k]); return p; };
 const newOrderId = () => 'UB-' + Array.from(crypto.getRandomValues(new Uint8Array(6)), b => 'ABCDEFGHJKLMNPQRSTUVWXYZ23456789'[b % 32]).join('');
 const PM = {}; /* products already loaded, so adding to cart does not wait on the network */
-const bust = () => { Object.keys(cache).forEach(k => /^(p:|prods|v:|vs:|me:|rv:|pop)/.test(k) && delete cache[k]); Object.keys(PM).forEach(k => delete PM[k]); };
-const docs = s => s.docs.map(d => ({ ...d.data(), id: d.id })).filter(x => /^[\w@.-]{1,60}$/.test(x.id)); /* a document with an odd id is ignored, so ids are always safe to place in HTML */
+const bust = () => { Object.keys(cache).forEach(k => /^(p:|prods|v:|vs:|me:|rv:|pop|cnt)/.test(k) && delete cache[k]); Object.keys(PM).forEach(k => delete PM[k]); };
+const docs = s => s.docs.map(d => ({ ...d.data(), id: d.id })).filter(x => SAFE_ID.test(x.id)); /* a document with an odd id is ignored, so ids are always safe to place in HTML */
 const col = n => collection(db, n);
 const ratings = () => cached('rev', 600000, async () => { const m = {}; docs(await getDocs(col('reviews'))).forEach(r => { const x = m[r.vendorId] ||= { s: 0, n: 0 }; x.s += r.stars; x.n++; }); return m; });
 let RM = {}; const rateSoon = () => ratings().then(m => { if (JSON.stringify(m) !== JSON.stringify(RM)) { RM = m; render(); } }).catch(() => {});
@@ -229,8 +238,10 @@ const authMsg = e => ({ 'auth/invalid-credential': 'Wrong email or password.', '
 const api = {
   vendors: type => cached('vs:' + (type || ''), 300000, async () => docs(await getDocs(query(col('vendors'), where('status', '==', 'approved'), ...(type ? [where('type', '==', type)] : []))))).then(l => { rateSoon(); return l.map(v => withRating(v, RM)); }),
   vendor: id => cached('v:' + id, 60000, async () => { try { const s = await getDoc(doc(db, 'vendors', id)); return s.exists() ? { ...s.data(), id } : undefined; } catch { return undefined; } }).then(v => { if (v) rateSoon(); return v && withRating(v, RM); }),
-  products: vid => cached(vid ? 'p:' + vid : 'prods', 300000, async () => { const l = docs(await getDocs(vid ? query(col('products'), where('vendorId', '==', vid)) : query(col('products'), limit(300)))); l.forEach(p => (PM[p.id] = p)); return l; }),
-  popular: () => cached('pop', 300000, async () => { const l = docs(await getDocs(query(col('products'), where('available', '==', true), limit(8)))); l.forEach(p => (PM[p.id] = p)); return l; }),
+  products: vid => cached(vid ? 'p:' + vid : 'prods', 300000, async () => { const l = docs(await getDocs(vid ? query(col('products'), where('vendorId', '==', vid)) : query(col('products'), where('expiresAt', '>', Timestamp.now()), limit(300)))); l.forEach(p => (PM[p.id] = p)); return l; }),
+  popular: () => cached('pop', 300000, async () => { const l = docs(await getDocs(query(col('products'), where('available', '==', true), where('day', '==', dayKey()), limit(8)))); l.forEach(p => (PM[p.id] = p)); return l; }),
+  /* How many items each shop posted today (Nigeria date). Count queries return a number only, so no photos are downloaded. */
+  counts: () => cached('cnt:' + dayKey(), 120000, async () => { const d = dayKey(), o = {}, vs = await api.vendors(); await Promise.all(vs.map(async v => { try { o[v.id] = (await getCountFromServer(query(col('products'), where('vendorId', '==', v.id), where('day', '==', d)))).data().count; } catch { o[v.id] = 0; } })); return o; }),
   product: async id => { if (PM[id]) return PM[id]; const s = await getDoc(doc(db, 'products', id)); return s.exists() ? (PM[id] = { ...s.data(), id }) : undefined; },
   orders: async () => { await C.oReady; return [...C.orders].sort((a, b) => b.createdAt - a.createdAt); },
   vendorOrders: async () => { await C.vReady; return C.vorders.filter(o => o.vendorId === S.user.vendorId).sort((a, b) => b.createdAt - a.createdAt); },
@@ -242,9 +253,13 @@ const api = {
       const v = await tx.get(doc(db, 'vendors', o.vendorId));
       if (!v.exists() || !isOpen(v.data())) throw Object.assign(new Error('closed'), { closed: true, info: v.exists() ? whyClosed(v.data()) : '' });
       if (o.payTo && (v.data().bank || {}).accountNumber !== o.payTo.accountNumber) throw Object.assign(new Error('bank'), { bankChanged: true });
+      o.vendorPhone = v.data().phone || ''; o.vendorName = v.data().name; /* always the shop's current details, so a recent rename or phone change can't block the order */
       const snaps = await Promise.all(Object.keys(qtyMap).map(pid => tx.get(doc(db, 'products', pid))));
-      const short = snaps.filter(s => !s.exists() || s.data().available === false || (s.data().qty != null && s.data().qty < qtyMap[s.id])).map(s => ({ id: s.id, name: s.exists() ? s.data().name : 'An item', left: !s.exists() || s.data().available === false ? 0 : s.data().qty }));
+      const gone = s => !s.exists() || s.data().available === false || s.data().vendorId !== o.vendorId || expired(s.data());
+      const short = snaps.filter(s => gone(s) || (s.data().qty != null && s.data().qty < qtyMap[s.id])).map(s => ({ id: s.id, name: s.exists() ? s.data().name : 'An item', left: gone(s) ? 0 : s.data().qty }));
       if (short.length) throw Object.assign(new Error('stock'), { short });
+      const moved = o.items.filter(i => snaps.find(s => s.id === i.productId)?.data().price !== i.price).map(i => i.name);
+      if (moved.length) throw Object.assign(new Error('price'), { moved });
       sold = snaps.filter(s => s.data().qty != null && s.data().qty - qtyMap[s.id] === 0).map(s => s.data().name);
       snaps.forEach(s => { if (s.data().qty != null) tx.update(s.ref, { qty: s.data().qty - qtyMap[s.id], lastOrder: id }); });
       const { receipt, id: _oid, ...rest } = o;
@@ -256,24 +271,29 @@ const api = {
     api.notify(o.ownerUid, 'New order ' + id + ' · ' + o.vendorName, `${o.name} ordered ${money(o.total)}. Check the payment receipt.`, '#/vendor-orders', 'new_order', id, 'new_' + id);
     return { ...o, id };
   },
+  /* When payment is not confirmed the items go back on the shelf. Only whole numbers, only this shop's own products. */
+  async restoreStock(o) {
+    const ids = Object.entries(o.qtyMap || {}).map(([id, q]) => [id, Math.floor(Number(q))]).filter(([id, q]) => SAFE_ID.test(id) && q >= 1 && q <= 200);
+    if (!ids.length) return;
+    await runTransaction(db, async tx => {
+      const snaps = await Promise.all(ids.map(([id]) => tx.get(doc(db, 'products', id))));
+      snaps.forEach((sn, i) => { const d = sn.exists() && sn.data(); if (d && d.vendorId === o.vendorId && d.qty != null) tx.update(sn.ref, { qty: Math.min(100000, d.qty + ids[i][1]) }); });
+    }); bust();
+  },
   async setStatus(id, status) {
     const o = C.vorders.find(x => x.id === id); if (!o) throw new Error('Not your order');
     const ix = k => STATUS.findIndex(x => x[0] === k); if (status !== 'rejected' && ix(status) <= ix(o.status)) throw new Error('Invalid status change');
     await updateDoc(doc(db, 'orders', id), { status, paymentStatus: status === 'rejected' ? 'rejected' : 'confirmed', updatedAt: Date.now() });
+    if (status === 'rejected') await api.restoreStock(o).catch(console.error); /* a rejected order gives its items back to stock */
     const m = ORDER_MSG[status]; api.notify(o.uid, `${m[0]} · ${id}`, m[1], '#/orders', 'stage', id, `stage_${id}_${status}`);
   },
-  /* A new item is announced to students only while the shop is open. One feed entry per item, so it can never repeat. */
   async addProduct(p) {
-    const ref = await addDoc(col('products'), { ...p, vendorId: S.user.vendorId, createdAt: Date.now() }); bust();
-    let announced = false, closed = false;
-    try {
-      const shop = (await getDoc(doc(db, 'vendors', S.user.vendorId))).data();
-      if (isOpen(shop)) { await setDoc(doc(db, 'feed', ref.id), { vendorId: S.user.vendorId, vendorName: shop.name, type: shop.type, name: p.name, price: p.price, img: p.img || '', createdAt: Date.now() }); announced = true; } else closed = true;
-    } catch (e) { console.error(e); }
-    return { announced, closed };
+    const now = Date.now();
+    await addDoc(col('products'), { ...p, vendorId: S.user.vendorId, createdAt: now, day: dayKey(now), expiresAt: Timestamp.fromMillis(now + POST_TTL) }); bust();
   },
+  async repostProduct(id) { const now = Date.now(); await updateDoc(doc(db, 'products', id), { createdAt: now, day: dayKey(now), expiresAt: Timestamp.fromMillis(now + POST_TTL) }); bust(); },
   async updateProduct(id, patch) { await updateDoc(doc(db, 'products', id), patch); bust(); },
-  async deleteProduct(id) { await deleteDoc(doc(db, 'products', id)); deleteDoc(doc(db, 'feed', id)).catch(() => {}); bust(); },
+  async deleteProduct(id) { await deleteDoc(doc(db, 'products', id)); bust(); },
   reviews: vid => cached('rv:' + vid, 600000, async () => docs(await getDocs(query(col('reviews'), where('vendorId', '==', vid)))).sort((a, b) => b.createdAt - a.createdAt)),
   async saveReview(r) { await setDoc(doc(db, 'reviews', r.vendorId + '_' + r.uid), { ...r, createdAt: Date.now() }); delete cache.rev; bust(); RM = await ratings(); const v = await api.vendor(r.vendorId); if (v?.ownerUid) api.notify(v.ownerUid, 'New review · ' + v.name, `${r.name} gave ${r.stars} star${r.stars > 1 ? 's' : ''}${r.comment ? ': ' + r.comment.slice(0, 80) : ''}`, '#/vendor/' + r.vendorId, 'review', r.vendorId + '_' + r.uid, 'review_' + r.vendorId + '_' + r.uid); },
   async updateVendor(id, patch) { await updateDoc(doc(db, 'vendors', id), patch); const sh = S.user?.shops?.find(x => x.id === id); if (sh && patch.name) sh.name = patch.name; bust(); },
@@ -282,7 +302,7 @@ const api = {
   async applyVendor(a) {
     if (!['food', 'cakes'].includes(a.type) || (S.user.shops || []).some(x => x.type === a.type)) throw new Error('Shop type already registered');
     const { phone, regReceipt, ...pub } = a, uid = S.user.uid, id = `${uid}_${a.type}`, b = writeBatch(db);
-    b.set(doc(db, 'vendors', id), { open: true, img: '', bank: { bankName: '', accountName: '', accountNumber: '', instructions: '' }, ...pub, status: 'pending', bankVerified: false, ownerUid: uid, createdAt: Date.now() });
+    b.set(doc(db, 'vendors', id), { open: true, img: '', bank: { bankName: '', accountName: '', accountNumber: '', instructions: '' }, ...pub, phone: phone.trim(), status: 'pending', bankVerified: false, ownerUid: uid, createdAt: Date.now() });
     b.set(doc(db, 'vendorPrivate', id), { ownerUid: uid, ownerName: S.user.name, ownerEmail: S.user.email, phone, regReceipt, appliedAt: Date.now() });
     await b.commit();
     (S.user.shops ||= []).push({ id, type: a.type, name: a.name, status: 'pending' }); S.user.vendorId = id; localStorage.setItem('ub_shop', id); bust();
@@ -293,6 +313,7 @@ const api = {
   async saveSettings(p) { await setDoc(doc(db, 'settings', 'main'), { ...p, adminUid: S.user.uid }, { merge: true }); delete cache.set; },
   async allVendors() { const [a, b] = await Promise.all([getDocs(col('vendors')), getDocs(col('vendorPrivate'))]), pv = Object.fromEntries(docs(b).map(x => [x.id, x])); return docs(a).map(v => ({ ...v, ...pv[v.id], id: v.id })).sort((x, y) => (y.appliedAt || 0) - (x.appliedAt || 0)); },
   async setVendorStatus(id, status) { await updateDoc(doc(db, 'vendors', id), { status }); bust(); const o = (await getDoc(doc(db, 'vendors', id))).data(), m = { approved: ['You’re approved', `Your ${TYPES[o.type]} shop is now open.`], rejected: ['Application not approved', `The admin could not confirm your ${TYPES[o.type]} registration payment.`], suspended: ['Shop suspended', `Your ${TYPES[o.type]} shop is hidden from students.`] }[status]; if (m && o.ownerUid && o.ownerUid !== 'demo') api.notify(o.ownerUid, m[0], m[1], '#/vendor-orders'); },
+  async resetVendor(id) { const v = (await getDoc(doc(db, 'vendors', id))).data(), b = writeBatch(db); b.delete(doc(db, 'vendors', id)); b.delete(doc(db, 'vendorPrivate', id)); await b.commit(); bust(); if (v?.ownerUid) api.notify(v.ownerUid, 'You can apply again', 'The admin reset your application. Open Profile to submit it again.', '#/profile'); },
   async setBankVerified(id, ok) { await updateDoc(doc(db, 'vendors', id), { bankVerified: ok }); bust(); },
   /* Admin-only preview data: approved sample vendors and menus, marked isDemo so they can be removed in one tap. */
   async addSamples() {
@@ -300,8 +321,8 @@ const api = {
     const items = { food: [['Jollof Rice', 1500, 'Rice'], ['Fried Rice & Chicken', 2200, 'Rice'], ['Pounded Yam & Egusi', 2500, 'Swallow']], cakes: [['Chocolate Cake (slice)', 1200, 'Cakes'], ['Meat Pie', 700, 'Pastries'], ['Doughnut', 400, 'Pastries']] }, b = writeBatch(db);
     Object.entries(names).forEach(([type, list]) => list.forEach((name, i) => {
       const id = `demo-${type}${i + 1}`;
-      b.set(doc(db, 'vendors', id), { name, type, desc: 'Sample vendor for previewing UniBite.', location: 'Near campus gate', open: i !== 3, img: '', bank: { bankName: 'Sample Bank', accountName: name, accountNumber: '0000000000', instructions: '' }, status: 'approved', bankVerified: false, ownerUid: 'demo', isDemo: true, createdAt: Date.now() });
-      items[type].forEach(([n, p, c], j) => b.set(doc(db, 'products', `${id}-p${j}`), { vendorId: id, name: n, desc: 'Short product description.', price: p + i * 100, qty: 25, category: c, available: true, img: '', isDemo: true, createdAt: Date.now() - j * 1e5 }));
+      b.set(doc(db, 'vendors', id), { name, type, desc: 'Sample vendor for previewing UniBite.', location: 'Near campus gate', open: i !== 3, img: '', bank: { bankName: 'Sample Bank', accountName: name, accountNumber: '0000000000', instructions: '' }, status: 'approved', bankVerified: false, ownerUid: 'demo', isDemo: true, phone: '08012345678', createdAt: Date.now() });
+      items[type].forEach(([n, p, c], j) => b.set(doc(db, 'products', `${id}-p${j}`), { vendorId: id, name: n, desc: 'Short product description.', price: p + i * 100, qty: 25, category: c, available: true, img: '', isDemo: true, createdAt: Date.now() - j * 1e5, day: dayKey(), expiresAt: Timestamp.fromMillis(Date.now() + 30 * POST_TTL), etaMin: 15, etaMax: 25 }));
     }));
     await b.commit(); bust();
   },
@@ -312,7 +333,7 @@ const api = {
   async stats() { const [u, o] = await Promise.all([getCountFromServer(col('users')), getCountFromServer(col('orders'))]); return { students: u.data().count, orders: o.data().count }; },
   /* Notifications are created from the client for now; Cloud Functions will make this tamper-proof. */
   /* Every notification is tied to a real event (kind + ref) and, where it matters, has a fixed id, so the rules can check it is genuine and block spam. */
-  notify(uid, title, body, href, kind = 'admin', ref = '', id = '') { if (!uid) return; const data = { uid, title, body, href, kind, ref, read: false, createdAt: Date.now() }; (id ? setDoc(doc(db, 'notifications', id), data) : addDoc(col('notifications'), data)).catch(console.error); },
+  notify(uid, title, body, href, kind = 'admin', ref = '', id = '') { if (!uid) return; const data = { uid, title: clip(title, 115), body: clip(body, 290), href, kind, ref, read: false, createdAt: Date.now() }; (id ? setDoc(doc(db, 'notifications', id), data) : addDoc(col('notifications'), data)).catch(console.error); },
   notifs: async () => C.notifs,
   markRead(ids) { const b = writeBatch(db), t = C.notifs.filter(n => !n.read && (!ids || ids.includes(n.id))); t.forEach(n => { b.update(doc(db, 'notifications', n.id), { read: true }); n.read = true; }); if (t.length) b.commit().catch(console.error); chrome(); },
   async confirmUnilesha() { await setDoc(doc(db, 'users', S.user.uid), { name: S.user.name, email: S.user.email, unilesha: true }, { merge: true }); S.user.unilesha = true; },
@@ -355,32 +376,7 @@ const startAlarm = () => { stopAlarm(); document.body.classList.add('ringing'); 
 const alertUser = n => { toast(n.title); if (S.kmode && n.title.startsWith('New order')) startAlarm(); else beep(false); if (document.visibilityState !== 'visible' && !S.pushToken) systemNotify(n); };
 async function setKitchenMode(on) { S.kmode = on; try { if (on) { unlockAudio(); S.wl = await navigator.wakeLock?.request('screen'); } else { await S.wl?.release(); S.wl = null; stopAlarm(); } } catch (e) { console.error(e); } }
 document.addEventListener('visibilitychange', () => { if (document.visibilityState === 'visible' && S.kmode && (!S.wl || S.wl.released)) navigator.wakeLock?.request('screen').then(w => (S.wl = w)).catch(() => {}); });
-/* ---------- "New from vendors": when a vendor posts an item, students see it straight away ---------- */
-let FEED = [], feedReady = false, postShowing = false; const feedIds = new Set(), postQ = [];
-const feedSeen = () => +(localStorage.getItem('ub_feedseen') || 0);
-const feedFresh = () => FEED.filter(x => /^[\w@.-]{1,60}$/.test(String(x.vendorId)) && Date.now() - Number(x.createdAt) < 72 * 3600 * 1000 && !ownShop(x.vendorId));
-const feedUnseen = () => feedFresh().filter(x => Number(x.createdAt) > feedSeen()).length;
-function showPost() {
-  const box = $('#newpost'), g = postQ.shift();
-  if (!box || !g) { postShowing = false; if (box) box.innerHTML = ''; return; }
-  postShowing = true; const it = g.items[0], many = g.items.length > 1;
-  box.innerHTML = `<div class="npost" role="status"><div class="npimg">${safeImg(it.img) ? `<img src="${safeImg(it.img)}" alt="">` : ic('bag')}</div><div class="npt"><b><span class="npnew">NEW</span>${esc(g.vendorName)}</b><p>${many ? `just posted ${g.items.length} new items, latest: <b style="display:inline;color:inherit">${esc(it.name)}</b>` : `just posted <b style="display:inline;color:inherit">${esc(it.name)}</b> · ${money(it.price)}`}</p></div><div class="npa"><button class="btn sm" data-act="seepost" data-id="${esc(g.vendorId)}">View menu</button><button class="npx" data-act="closepost" aria-label="Dismiss">×</button></div></div>`;
-  clearTimeout(showPost.t); showPost.t = setTimeout(() => { postShowing = false; box.innerHTML = ''; if (postQ.length) setTimeout(showPost, 400); }, 9000);
-}
-function startFeed() {
-  if (!localStorage.getItem('ub_feedseen')) localStorage.setItem('ub_feedseen', String(Date.now()));
-  onSnapshot(query(col('feed'), orderBy('createdAt', 'desc'), limit(10)), s => {
-    const list = docs(s), fresh = feedReady ? list.filter(x => !feedIds.has(x.id)) : [];
-    list.forEach(x => feedIds.add(x.id)); FEED = list; feedReady = true;
-    const blocked = S.user && !adminEmail() && (S.user.suspended || !S.user.unilesha), groups = {};
-    fresh.filter(x => /^[\w@.-]{1,60}$/.test(String(x.vendorId)) && !ownShop(x.vendorId) && Date.now() - Number(x.createdAt) < 600000)
-      .forEach(x => (groups[x.vendorId] ||= { vendorId: x.vendorId, vendorName: x.vendorName, items: [] }).items.push(x));
-    if (!blocked) Object.values(groups).forEach(g => { g.items.sort((a, b) => b.createdAt - a.createdAt); postQ.push(g); if (document.visibilityState !== 'visible') systemNotify({ title: `${g.vendorName} just posted`, body: g.items[0].name, href: '#/vendor/' + g.vendorId }); });
-    if (!blocked && Object.keys(groups).length) { beep(false); if (!postShowing) showPost(); }
-    chrome(); const r = location.hash.split('/')[1] || ''; if (['', 'notifications'].includes(r) && !document.activeElement?.closest?.('form')) render();
-  }, console.error);
-}
-async function loadUser(u) {
+async function loadUserNow(u) {
   C.un.forEach(f => f()); C.un = []; C.notifs = []; C.orders = []; C.vorders = []; bust();
   if (!u) { S.user = null; return; }
   const [p, sv] = await Promise.all([getDoc(doc(db, 'users', u.uid)), getDocs(query(col('vendors'), where('ownerUid', '==', u.uid))).catch(() => null)]);
@@ -394,12 +390,15 @@ async function loadUser(u) {
     C.notifs = docs(s).sort((a, b) => b.createdAt - a.createdAt);
     added.forEach(alertUser);
     chrome(); if (location.hash === '#/notifications') render();
-  }, console.error));
-  C.un.push(onSnapshot(query(col('orders'), where('uid', '==', uid)), s => { C.orders = docs(s); C.oR(); if (!f.o && location.hash === '#/orders') render(); f.o = false; }, console.error));
-  C.un.push(onSnapshot(query(col('orders'), where('ownerUid', '==', uid)), s => { C.vorders = docs(s); C.vR(); if (!f.v && location.hash === '#/vendor-orders') render(); f.v = false; }, console.error));
+  }, e => console.error(e)));
+  C.un.push(onSnapshot(query(col('orders'), where('uid', '==', uid)), s => { C.orders = docs(s); C.oR(); if (!f.o && location.hash === '#/orders') render(); f.o = false; }, e => { console.error(e); C.oR(); }));
+  C.un.push(onSnapshot(query(col('orders'), where('ownerUid', '==', uid)), s => { C.vorders = docs(s); C.vR(); if (!f.v && location.hash === '#/vendor-orders') render(); f.v = false; }, e => { console.error(e); C.vR(); }));
   if ('Notification' in window && Notification.permission === 'granted') enablePush();
   if (isAdmin()) api.settings().then(s => s.adminUid !== uid && api.saveSettings({ registrationOpen: s.registrationOpen, fee: s.fee, contact: s.contact, bank: s.bank })).catch(console.error);
 }
+
+let loadChain = Promise.resolve(); /* sign-in can trigger two loads at once; run them one after the other so listeners are never doubled */
+const loadUser = u => (loadChain = loadChain.catch(() => {}).then(() => loadUserNow(u)));
 
 /* ---------- State ---------- */
 const S = { user: null, ready: false, cart: load('ub_cart', { vendorId: null, items: {} }), favs: load('ub_favs', []), tab: 'active', vtab: 'todo', atab: 'pending' };
@@ -411,56 +410,69 @@ const toast = m => { const t = $('#toast'); t.textContent = m; t.classList.add('
 const ask = (title, text, ok) => new Promise(res => { const d = $('#dlg'); d.innerHTML = `<h3>${title}</h3><p class="mute" style="margin-top:6px">${text}</p><div class="btns"><button class="btn ghost sm" value="no">Cancel</button><button class="btn sm" value="yes">${ok}</button></div>`; d.onclick = e => { const v = e.target.value; if (v) { d.close(); res(v === 'yes'); } }; d.oncancel = () => res(false); d.showModal(); });
 
 /* ---------- Components ---------- */
+const contactRow = (phone, msg) => phone ? `<div class="actions"><a class="btn sm" href="${telHref(phone)}">${ic('phone')} Call ${esc(phone)}</a><a class="btn ghost sm" target="_blank" rel="noopener" href="${waLink(phone, msg)}">WhatsApp</a></div>` : '';
+const etaBox = e => e ? `<div class="etabox">${ic('clock')}<div><b>Estimated ready time: ${etaText(e)}</b><span>Counted from when the vendor confirms your payment.</span></div></div>` : '';
+const orderEtaOf = o => etaOf({ etaMin: o.etaMin, etaMax: o.etaMax });
+const itemsHtml = o => (Array.isArray(o.items) ? o.items : []).filter(i => i && typeof i === 'object').map(i => `${esc(i.name)} × ${Number(i.qty) || 0}`).join('<br>');
+const resetCart = () => { S.cart = { vendorId: null, items: {} }; saveCart(); };
+/* Drops anything in the cart that is sold out, expired, deleted or switched off. Returns true if something was removed. */
+const pruneCart = rows => { const keep = new Set(rows.map(p => p.id)); let ch = false; Object.keys(S.cart.items).forEach(k => { if (!keep.has(k)) { delete S.cart.items[k]; ch = true; } }); if (!cartCount()) S.cart.vendorId = null; if (ch) saveCart(); return ch; };
 const ph = (img, label = 'Photo') => `<div class="ph">${safeImg(img) ? `<img src="${safeImg(img)}" alt="" loading="lazy" decoding="async">` : label}</div>`;
 const empty = (t, s, href, cta) => `<div class="empty">${ic('bag')}<h3>${t}</h3><p class="mute">${s}</p>${cta ? `<a class="btn" href="${href}">${cta}</a>` : ''}</div>`;
 const skeleton = () => `<div class="grid">${'<div class="skel"></div>'.repeat(4)}</div>`;
-const vendorCard = v => `<article class="card"><a href="#/vendor/${v.id}">${ph(v.img, 'Vendor photo')}<div class="body"><span class="badge ${v.type}">${TYPES[v.type]}</span> ${isOpen(v) ? '' : '<span class="badge off">Closed</span>'}<h3 style="margin-top:6px">${esc(v.name)}</h3><p class="mute clamp">${esc(v.desc || 'No description yet.')}</p><p class="mute" style="margin-top:6px">${meta(v)}</p></div></a><button class="fav ${S.favs.includes(v.id) ? 'on' : ''}" data-act="fav" data-id="${v.id}" aria-label="Favourite ${esc(v.name)}">${ic('heart')}</button></article>`;
-const prodRow = (p, v) => { const q = S.cart.vendorId === p.vendorId ? S.cart.items[p.id] || 0 : 0, out = soldOut(p), can = p.available && !out && isOpen(v); return `<div class="card prod">${ph(p.img, 'Photo')}<div class="info"><h3>${esc(p.name)}</h3><p>${esc(p.desc)}</p><span class="price">${money(p.price)}</span>${p.qty > 0 && p.qty <= 5 ? `<span class="low"> · Only ${p.qty} left</span>` : ''}</div>${!p.available ? '<span class="badge off">Unavailable</span>' : out ? '<span class="badge off">Sold out</span>' : q ? qtyCtl(p.id, q) : `<button class="btn sm" data-act="add" data-id="${p.id}" ${can ? '' : 'disabled'}>Add</button>`}</div>`; };
+const vendorCard = (v, cn = {}) => `<article class="card"><a href="#/vendor/${v.id}">${ph(v.img, 'Vendor photo')}<div class="body"><span class="badge ${v.type}">${TYPES[v.type]}</span> ${isOpen(v) ? '' : '<span class="badge off">Closed</span>'}<h3 style="margin-top:6px">${esc(v.name)}</h3><p class="mute clamp">${esc(v.desc || 'No description yet.')}</p><p class="mute" style="margin-top:6px">${meta(v)}</p></div></a>${cn[v.id] > 0 ? `<span class="today" aria-label="${cn[v.id]} item${cn[v.id] > 1 ? 's' : ''} posted today"><b>${cn[v.id]}</b> today</span>` : ''}<button class="fav ${S.favs.includes(v.id) ? 'on' : ''}" data-act="fav" data-id="${v.id}" aria-label="Favourite ${esc(v.name)}">${ic('heart')}</button></article>`;
+const prodRow = (p, v) => { const q = S.cart.vendorId === p.vendorId ? S.cart.items[p.id] || 0 : 0, out = soldOut(p), can = p.available && !out && !expired(p) && isOpen(v); return `<div class="card prod">${ph(p.img, 'Photo')}<div class="info"><h3>${esc(p.name)}</h3><p>${esc(p.desc)}</p><span class="price">${money(p.price)}</span>${p.qty > 0 && p.qty <= 5 ? `<span class="low"> · Only ${p.qty} left</span>` : ''}${etaOf(p) ? `<span class="eta">${ic('clock')} Ready in ${etaText(etaOf(p))}</span>` : ''}</div>${!p.available ? '<span class="badge off">Unavailable</span>' : out ? '<span class="badge off">Sold out</span>' : q ? qtyCtl(p.id, q) : `<button class="btn sm" data-act="add" data-id="${p.id}" ${can ? '' : 'disabled'}>Add</button>`}</div>`; };
 const qtyCtl = (id, q) => `<div class="qty"><button data-act="dec" data-id="${id}" aria-label="Remove one">−</button><b>${q}</b><button data-act="inc" data-id="${id}" aria-label="Add one">+</button></div>`;
 
 /* ---------- Views ---------- */
 const views = {
   async home() {
-    const [vs, ps] = await Promise.all([api.vendors(), api.popular()]);
-    const vm = Object.fromEntries(vs.map(v => [v.id, v])), pop = ps.filter(p => p.available && !soldOut(p) && vm[p.vendorId]).slice(0, 6), jp = feedFresh().slice(0, 8);
+    const [vs, ps, cn] = await Promise.all([api.vendors(), api.popular(), api.counts()]);
+    const vm = Object.fromEntries(vs.map(v => [v.id, v])), pop = ps.filter(p => p.available && !soldOut(p) && vm[p.vendorId] && !expired(p)).slice(0, 6);
     return `<div class="hero"><img class="hero-logo" src="${LOGO}" alt="UniBite logo"><span class="uni" style="margin:0 0 10px">For University of Ilesha students only</span><h1>Good Food. Right Around Campus.</h1><p>Order from independent vendors on the University of Ilesha campus and pay them directly. Track every order from payment to your door.</p>
     <form class="search" data-form="search"><input name="q" type="search" placeholder="Search vendors or dishes" aria-label="Search"><button class="btn coral">Search</button></form></div>
-    ${jp.length ? `<section><div class="row"><h2>Just posted</h2><span class="mute">last 3 days</span></div><div class="hscroll">${jp.map(x => `<a class="npcard" href="#/vendor/${esc(x.vendorId)}"><div class="npcimg">${safeImg(x.img) ? `<img src="${safeImg(x.img)}" alt="" loading="lazy" decoding="async">` : ''}<span class="npnew">NEW</span></div><b>${esc(x.name)}</b><span class="price">${money(x.price)}</span><span class="mute">${esc(x.vendorName)} · ${ago(x.createdAt)}</span></a>`).join('')}</div></section>` : ''}
-    <section><div class="split"><a class="cat food" href="#/browse/food"><h3>Food</h3><p>${vs.filter(v => v.type === 'food').length} vendors</p></a><a class="cat cakes" href="#/browse/cakes"><h3>Cakes & Pastries</h3><p>${vs.filter(v => v.type === 'cakes').length} vendors</p></a></div></section>
+    <section><div class="split"><a class="cat food" href="#/browse/food"><h3>Food</h3><p>${vs.filter(v => v.type === 'food').length} vendor${vs.filter(v => v.type === 'food').length === 1 ? '' : 's'}</p></a><a class="cat cakes" href="#/browse/cakes"><h3>Cakes & Pastries</h3><p>${vs.filter(v => v.type === 'cakes').length} vendor${vs.filter(v => v.type === 'cakes').length === 1 ? '' : 's'}</p></a></div></section>
     ${(S.user?.shops || []).length > 1 ? '' : `<section><div class="card body" style="display:flex;gap:12px;align-items:center;justify-content:space-between;flex-wrap:wrap"><div><h3>Sell on UniBite</h3><p class="mute">Run a food or cake business? Get your own shop page and dashboard.</p></div><a class="btn coral sm" href="${S.user ? '#/vendor-apply' : '#/auth/vendor'}">${S.user?.shops?.length ? 'Add another shop' : 'Become a vendor'}</a></div></section>`}
-    ${vs.length ? [['food', 'Food vendors'], ['cakes', 'Cakes & Pastries vendors']].map(([k, t]) => { const l = vs.filter(v => v.type === k).sort((a, b) => isOpen(b) - isOpen(a)); return l.length ? `<section><div class="row"><h2>${t} <span class="mute">(${l.length})</span></h2><a href="#/browse/${k}">Open section</a></div><div class="grid vgrid">${l.map(vendorCard).join('')}</div></section>` : ''; }).join('') : '<section><div class="card body mute">No vendors have joined yet. Check back soon.</div></section>'}
-    ${pop.length ? `<section><h2 style="margin-bottom:12px">Popular right now</h2><div class="grid">${pop.map(p => `<a class="card" href="#/vendor/${p.vendorId}">${prodRow(p, vm[p.vendorId]).replace('card prod', 'prod').replace(/<(button|div class="qty")[\s\S]*$/, '</div>')}</a>`).join('')}</div></section>` : ''}`;
+    ${vs.length ? [['food', 'Food vendors'], ['cakes', 'Cakes & Pastries vendors']].map(([k, t]) => { const l = vs.filter(v => v.type === k).sort((a, b) => isOpen(b) - isOpen(a) || (cn[b.id] || 0) - (cn[a.id] || 0)); return l.length ? `<section><div class="row"><h2>${t} <span class="mute">(${l.length})</span></h2><a href="#/browse/${k}">Open section</a></div><div class="grid vgrid">${l.map(v => vendorCard(v, cn)).join('')}</div></section>` : ''; }).join('') : '<section><div class="card body mute">No vendors have joined yet. Check back soon.</div></section>'}
+    ${pop.length ? `<section><h2 style="margin-bottom:12px">On the menu today</h2><div class="grid">${pop.map(p => `<a class="card" href="#/vendor/${p.vendorId}">${prodRow(p, vm[p.vendorId]).replace('card prod', 'prod').replace(/<(button|div class="qty")[\s\S]*$/, '</div>')}</a>`).join('')}</div></section>` : ''}`;
   },
   async browse(type, q) {
     q = (q || '').toLowerCase();
-    let vs = await api.vendors(type === 'all' ? '' : type);
-    if (q) { const ps = await api.products(); const hit = new Set(ps.filter(p => p.name.toLowerCase().includes(q)).map(p => p.vendorId)); vs = vs.filter(v => v.name.toLowerCase().includes(q) || hit.has(v.id)); }
+    let vs = await api.vendors(type === 'all' ? '' : type); const cn = await api.counts();
+    if (q) { const ps = await api.products(); const hit = new Set(ps.filter(p => !expired(p) && p.name.toLowerCase().includes(q)).map(p => p.vendorId)); vs = vs.filter(v => v.name.toLowerCase().includes(q) || hit.has(v.id)); }
+    if (S.openOnly) vs = vs.filter(isOpen);
     const t = type === 'all' ? '' : `<div class="tabs" role="tablist">${Object.entries(TYPES).map(([k, n]) => `<button role="tab" aria-selected="${k === type}" data-go="#/browse/${k}">${n}</button>`).join('')}</div>`;
-    return `<h1 style="font-size:1.6rem;margin-bottom:14px">${type === 'all' ? 'Search' : TYPES[type]}</h1>${t}<form data-form="search" style="margin-bottom:14px"><input name="q" type="search" value="${esc(q)}" placeholder="Search vendors or dishes" aria-label="Search"></form>${vs.length ? `<div class="grid vgrid">${vs.map(vendorCard).join('')}</div>` : empty('No vendors found', q ? 'Try a different search.' : 'No vendors have joined this section yet.', '#/browse/food', 'Explore Food')}`;
+    return `<h1 style="font-size:1.6rem;margin-bottom:14px">${type === 'all' ? 'Search' : TYPES[type]}</h1>${t}<form data-form="search" style="margin-bottom:14px"><input name="q" type="search" value="${esc(q)}" placeholder="Search vendors or dishes" aria-label="Search"></form><div class="chips"><button type="button" class="chip ${S.openOnly ? 'on' : ''}" data-act="openonly" aria-pressed="${!!S.openOnly}">Open now</button></div>${vs.length ? `<div class="grid vgrid">${vs.map(v => vendorCard(v, cn)).join('')}</div>` : empty('No vendors found', q ? 'Try a different search.' : 'No vendors have joined this section yet.', '#/browse/food', 'Explore Food')}`;
   },
   async vendor(id) {
     const v = await api.vendor(id); if (!v) return empty('Vendor not found', 'This vendor may no longer be on UniBite.', '#/', 'Back home');
-    const ps = await api.products(id), cats = [...new Set(ps.map(p => p.category))];
-    return `<div class="card">${ph(v.img, 'Vendor image')}<div class="body"><span class="badge ${v.type}">${TYPES[v.type]}</span> <span class="badge ${isOpen(v) ? '' : 'off'}">${esc(openInfo(v))}</span><h1 style="font-size:1.5rem;margin-top:6px">${esc(v.name)}</h1>${ownShop(v.id) ? `<button class="btn ghost sm" style="margin:6px 0" data-act="editshop" data-id="${v.id}">Edit business profile</button>` : ''}<p class="mute">${esc(v.desc || 'No description yet.')}</p><p class="mute" style="margin-top:6px">${meta(v)}</p></div></div>
+    const ps = (await api.products(id)).filter(p => !expired(p)), cats = [...new Set(ps.map(p => p.category))], n = (await api.counts())[id] || 0;
+    return `<div class="card">${ph(v.img, 'Vendor image')}<div class="body"><span class="badge ${v.type}">${TYPES[v.type]}</span> <span class="badge ${isOpen(v) ? '' : 'off'}">${esc(openInfo(v))}</span><h1 style="font-size:1.5rem;margin-top:6px">${esc(v.name)}</h1>${ownShop(v.id) ? `<button class="btn ghost sm" style="margin:6px 0" data-act="editshop" data-id="${v.id}">Edit business profile</button>` : ''}<p class="mute">${esc(v.desc || 'No description yet.')}</p><p class="mute" style="margin-top:6px">${meta(v)}</p>${n ? `<p class="todayline"><b>${n}</b> item${n > 1 ? 's' : ''} posted today</p>` : ''}${contactRow(v.phone, `Hi ${v.name}, I found your shop on UniBite.`)}</div></div>
     ${cats.map(c => `<section><h2 style="margin-bottom:10px">${esc(c)}</h2><div class="grid">${ps.filter(p => p.category === c).map(p => prodRow(p, v)).join('')}</div></section>`).join('') || empty('No items yet', 'This vendor has not added a menu.')}
     ${await reviewsHtml(v)}
     ${cartCount() && S.cart.vendorId === id ? `<div style="position:sticky;bottom:calc(var(--nav) + 8px);margin-top:20px"><a class="btn coral block" href="#/cart">View your order · ${cartCount()} item(s)</a></div>` : ''}`;
   },
   async cart() {
     if (!cartCount()) return empty('Your cart is empty', 'Add items from one vendor to start an order.', '#/browse/food', 'Explore Food');
-    const v = await api.vendor(S.cart.vendorId), ps = await api.products(v.id), rows = ps.filter(p => S.cart.items[p.id]);
-    const total = rows.reduce((a, p) => a + p.price * S.cart.items[p.id], 0);
+    const v = await api.vendor(S.cart.vendorId);
+    if (!v) { resetCart(); return empty('That shop is no longer available', 'Your cart was cleared. Pick something from another vendor.', '#/browse/food', 'Explore Food'); }
+    const ps = await api.products(v.id), rows = ps.filter(p => S.cart.items[p.id] && p.available && !expired(p));
+    if (pruneCart(rows)) { toast('Some items are no longer available and were removed.'); if (!cartCount()) return empty('Your cart is empty', 'Add items from one vendor to start an order.', '#/browse/food', 'Explore Food'); }
+    const total = rows.reduce((a, p) => a + p.price * S.cart.items[p.id], 0), eta = orderEta(rows);
     return `<div class="narrow"><h1 style="font-size:1.5rem">Your order from ${esc(v.name)}</h1><p class="mute" style="margin:4px 0 14px">Each vendor handles its own payment and delivery, so orders are placed one vendor at a time.</p>
-    <div class="card body">${rows.map(p => `<div class="line"><span>${esc(p.name)}<br><span class="mute">${money(p.price)}</span></span>${qtyCtl(p.id, S.cart.items[p.id])}</div>`).join('')}<div class="line total"><span>Total</span><span>${money(total)}</span></div></div>
+    <div class="card body">${rows.map(p => `<div class="line"><span>${esc(p.name)}<br><span class="mute">${money(p.price)}</span></span>${qtyCtl(p.id, S.cart.items[p.id])}</div>`).join('')}<div class="line total"><span>Total</span><span>${money(total)}</span></div></div>${etaBox(eta)}${contactRow(v.phone, `Hi ${v.name}, I have a question about my UniBite order.`)}
     ${isOpen(v) ? '<a class="btn coral block" style="margin-top:14px" href="#/checkout">Continue to checkout</a>' : `<p class="err" style="margin-top:12px">${esc(v.name)} is closed right now (${esc(whyClosed(v))}).</p><button class="btn block" style="margin-top:8px" disabled>Shop is closed</button>`}<button class="btn ghost block" style="margin-top:8px" data-act="clear">Clear cart</button></div>`;
   },
   async checkout() {
     if (!cartCount()) return location.hash = '#/cart', '';
     if (!S.user) { sessionStorage.setItem('ub_next', '#/checkout'); return location.hash = '#/auth', ''; }
     delete cache['v:' + S.cart.vendorId];
-    const v = await api.vendor(S.cart.vendorId), ps = await api.products(v.id), rows = ps.filter(p => S.cart.items[p.id]);
-    const total = rows.reduce((a, p) => a + p.price * S.cart.items[p.id], 0), b = v.bank, ready = !!(b.accountNumber && b.bankName), open = isOpen(v); pendingReceipt = null; S.orderKey ||= newOrderId();
-    return `<div class="narrow"><h1 style="font-size:1.5rem">Checkout</h1><p class="mute">Order from ${esc(v.name)}</p>${open ? '' : `<p class="err">${esc(v.name)} is closed right now (${esc(whyClosed(v))}).</p>`}
+    const v = await api.vendor(S.cart.vendorId);
+    if (!v) { resetCart(); toast('That shop is no longer available. Your cart was cleared.'); return location.hash = '#/', ''; }
+    const ps = await api.products(v.id), rows = ps.filter(p => S.cart.items[p.id] && p.available && !expired(p));
+    if (pruneCart(rows)) { toast('Some items are no longer available and were removed.'); if (!cartCount()) return location.hash = '#/cart', ''; }
+    const total = rows.reduce((a, p) => a + p.price * S.cart.items[p.id], 0), b = v.bank || {}, ready = !!(b.accountNumber && b.bankName), open = isOpen(v), eta = orderEta(rows); pendingReceipt = null; S.orderKey ||= newOrderId();
+    return `<div class="narrow"><h1 style="font-size:1.5rem">Checkout</h1><p class="mute">Order from ${esc(v.name)}</p>${etaBox(eta)}${contactRow(v.phone, `Hi ${v.name}, I am about to order on UniBite.`)}${open ? '' : `<p class="err">${esc(v.name)} is closed right now (${esc(whyClosed(v))}).</p>`}
     <div class="card body" style="margin-top:12px">${rows.map(p => `<div class="line"><span>${esc(p.name)} × ${S.cart.items[p.id]}</span><span>${money(p.price * S.cart.items[p.id])}</span></div>`).join('')}<div class="line total"><span>Total</span><span>${money(total)}</span></div></div>
     <form data-form="checkout" novalidate><input type="hidden" name="paybank" value="${esc(b.bankName)}"><input type="hidden" name="payname" value="${esc(b.accountName)}"><input type="hidden" name="payacct" value="${esc(b.accountNumber)}"><label>Name</label><input name="name" maxlength="80" value="${esc(S.user.name)}" required><label>Phone number (the vendor will call you about delivery)</label><input name="phone" maxlength="20" type="tel" autocomplete="tel" value="${esc(S.user.phone)}" required><label>Delivery location on campus (hostel, room or landmark)</label><input name="loc" maxlength="150" value="${esc(S.user.location || '')}" placeholder="Hostel, room or landmark" required><label>Note (optional)</label><textarea name="note" rows="2" maxlength="300"></textarea>
     <div class="pay"><b>Pay ${esc(v.name)} directly</b>${v.bankVerified ? ' <span class="badge">Verified by UniBite</span>' : ''}${acctBox(b)}${b.instructions ? `<p style="margin-bottom:6px">${esc(b.instructions)}</p>` : ''}<p class="mute">${ready ? `Transfer ${money(total)} to this account, then upload your receipt below. The vendor checks it before preparing your order.` : 'This vendor has not added payment details yet. Please try again later.'}</p></div>
@@ -473,8 +485,8 @@ const views = {
     ${list.length ? `<div class="grid">${list.map(orderCard).join('')}</div>` : empty(S.tab === 'active' ? 'No orders yet.' : 'No past orders', 'Your orders will show up here.', '#/browse/food', 'Explore Food')}`;
   },
   async favourites() {
-    const vs = (await api.vendors()).filter(v => S.favs.includes(v.id));
-    return `<h1 style="font-size:1.6rem;margin-bottom:14px">Favourites</h1>${vs.length ? `<div class="grid vgrid">${vs.map(vendorCard).join('')}</div>` : empty('No favourites yet', 'Tap the heart on a vendor to save it.', '#/browse/food', 'Explore Food')}`;
+    const vs = (await api.vendors()).filter(v => S.favs.includes(v.id)), cn = await api.counts();
+    return `<h1 style="font-size:1.6rem;margin-bottom:14px">Favourites</h1>${vs.length ? `<div class="grid vgrid">${vs.map(v => vendorCard(v, cn)).join('')}</div>` : empty('No favourites yet', 'Tap the heart on a vendor to save it.', '#/browse/food', 'Explore Food')}`;
   },
   async profile() {
     if (!S.user) return needAuth('Log in to manage your profile.');
@@ -497,7 +509,7 @@ views['vendor-profile'] = async () => {
   const v = await api.vendor(S.user.vendorId); pendingImg = v.img || null;
   return `<div class="narrow">${vtabs('vendor-profile')}<h1 style="font-size:1.6rem">Business profile</h1><p class="mute" style="margin:4px 0">This is what students see on your vendor card.</p><form data-form="vprofile" novalidate>
   <label>Photo or logo</label><div class="ph" id="imgPrev" style="border-radius:var(--r);overflow:hidden">${safeImg(v.img) ? `<img src="${safeImg(v.img)}" alt="">` : 'No image yet'}</div><input type="file" accept="image/*" data-img style="margin-top:8px"><button type="button" class="btn ghost sm" style="margin-top:8px" data-act="rmimg">Remove photo</button>
-  <label>Business name</label><input name="name" maxlength="80" value="${esc(v.name)}" required><label>Description</label><textarea name="desc" rows="3" maxlength="160">${esc(v.desc)}</textarea><label>Location</label><input name="location" maxlength="150" value="${esc(v.location)}" required><p class="err" id="fe" role="alert"></p><button class="btn coral block" style="margin-top:14px">Save changes</button></form></div>`;
+  <label>Business name</label><input name="name" maxlength="80" value="${esc(v.name)}" required><label>Description</label><textarea name="desc" rows="3" maxlength="160">${esc(v.desc)}</textarea><label>Location</label><input name="location" maxlength="150" value="${esc(v.location)}" required><label>Phone number (students can call or WhatsApp you)</label><input name="phone" type="tel" maxlength="20" autocomplete="tel" value="${esc(v.phone || '')}" required><p class="err" id="fe" role="alert"></p><button class="btn coral block" style="margin-top:14px">Save changes</button></form></div>`;
 };
 async function reviewsHtml(v) {
   const rs = await api.reviews(v.id), mine = S.user && rs.find(r => r.uid === S.user.uid), own = ownShop(v.id), done = S.user ? (await api.orders()).find(o => o.vendorId === v.id && o.status === 'delivered') : null;
@@ -514,7 +526,7 @@ const vGuard = async () => {
   const v = await api.myVendor(), s = await api.settings(); const sh = S.user.shops.find(x => x.id === v.id); if (sh) { sh.status = v.status; sh.name = v.name; } const m = { pending: ['Application under review', 'We have your receipt. You get access to your vendor dashboard once the admin confirms your payment.'], rejected: ['Application not approved', 'The admin could not confirm your registration payment.'], suspended: ['Account suspended', 'Your vendor account is on hold.'] }[st(v)];
   return m ? `<div class="narrow">${shopHead()}${empty(m[0], m[1] + ` Need help? WhatsApp ${CARE}.`)}</div>` : null;
 };
-const label = o => o.status === 'rejected' ? 'Payment not confirmed' : STATUS.find(s => s[0] === o.status)[1];
+const label = o => o.status === 'rejected' ? 'Payment not confirmed' : STATUS.find(s => s[0] === o.status)?.[1] || 'Unknown';
 const stagePicker = o => {
   if (o.status === 'rejected' || o.status === 'delivered') return '';
   const cur = STATUS.findIndex(s => s[0] === o.status);
@@ -533,9 +545,9 @@ views['vendor-hours'] = async () => {
 const kmodeBar = () => `<div class="card body line" style="align-items:center;margin-bottom:12px"><div><b>Kitchen mode ${S.kmode ? 'ON' : 'OFF'}</b><p class="mute">Keeps your screen awake and rings loudly for every new order. Keep UniBite open on this phone.</p></div><button class="sw ${S.kmode ? 'on' : ''}" data-act="kmode" role="switch" aria-checked="${!!S.kmode}" aria-label="Kitchen mode"><span></span></button></div>`;
 const vOrder = o => { const pay = o.paymentStatus || (o.status === 'pending' ? 'pending' : 'confirmed'); return `<article class="card body"><div class="line"><b>${o.id}</b><span class="badge ${pay === 'confirmed' ? '' : 'off'}">${{ pending: 'Payment to verify', confirmed: 'Payment confirmed', rejected: 'Not confirmed' }[pay]}</span></div>
   <p><b>${esc(o.name)}</b> · <a href="tel:${esc(o.phone)}" style="color:var(--coral)">${esc(o.phone)}</a><br><span class="mute">${esc(o.location)}${o.note ? ' · Note: ' + esc(o.note) : ''}</span></p>
-  <p style="margin:6px 0">${o.items.map(i => `${esc(i.name)} × ${i.qty}`).join('<br>')}</p><div class="line"><b class="price">${money(o.total)}</b><span class="mute">${new Date(o.createdAt).toLocaleString('en-NG', { dateStyle: 'short', timeStyle: 'short' })}</span></div>
+  <p style="margin:6px 0">${itemsHtml(o)}</p><div class="line"><b class="price">${money(o.total)}</b><span class="mute">${new Date(o.createdAt).toLocaleString('en-NG', { dateStyle: 'short', timeStyle: 'short' })}</span></div>
   ${o.paymentRef ? `<p class="mute">Reference: ${esc(o.paymentRef)}</p>` : ''}${o.payTo ? `<p class="mute">Student was told to pay: ${esc(o.payTo.bankName)} · ${esc(o.payTo.accountNumber)}</p>` : ''}${o.receipt || o.hasReceipt ? `<button class="btn ghost sm" style="margin-top:6px" data-act="receipt" data-id="${o.id}">View receipt</button>` : ''}
-  <p class="mute" style="margin-top:8px">Status: <b>${label(o)}</b></p><div class="actions"><a class="btn sm" href="tel:${esc(o.phone)}">Call customer</a><a class="btn ghost sm" target="_blank" rel="noopener" href="${waLink(o.phone, `Hi ${o.name}, this is ${o.vendorName}. Your UniBite order ${o.id} is now: ${label(o)}.`)}">WhatsApp</a></div>${stagePicker(o)}</article>`; };
+  <p class="mute" style="margin-top:8px">Status: <b>${label(o)}</b>${orderEtaOf(o) ? ` · Promised: ${etaText(orderEtaOf(o))}` : ''}</p><div class="actions"><a class="btn sm" href="tel:${esc(o.phone)}">Call customer</a><a class="btn ghost sm" target="_blank" rel="noopener" href="${waLink(o.phone, `Hi ${o.name}, this is ${o.vendorName}. Your UniBite order ${o.id} is now: ${label(o)}.`)}">WhatsApp</a></div>${stagePicker(o)}</article>`; };
 views['vendor-orders'] = async () => {
   const g = await vGuard(); if (g !== null) return g;
   const vend = await api.vendor(S.user.vendorId), all = await api.vendorOrders(), day = new Date().toDateString(), fin = o => ['delivered', 'rejected'].includes(o.status), list = all.filter(o => fin(o) === (S.vtab === 'done'));
@@ -543,7 +555,7 @@ views['vendor-orders'] = async () => {
   const del = sum(paid.filter(o => o.status === 'delivered')), tot = sum(paid), tod = sum(paid.filter(o => new Date(o.createdAt).toDateString() === day));
   const revCard = `<div class="rev"><p>Total revenue</p><h2>${money(tot)}</h2><p>${paid.length ? `From ${paid.length} paid order${paid.length > 1 ? 's' : ''} since ${new Date(first).toLocaleDateString('en-NG', { dateStyle: 'medium' })}` : 'Your revenue appears here once you confirm your first payment.'}</p><div class="revrow"><span>Delivered<b>${money(del)}</b></span><span>In progress<b>${money(tot - del)}</b></span><span>Today<b>${money(tod)}</b></span></div><p style="font-size:.75rem;margin-top:10px">Counts every order whose payment you confirmed, all time.</p></div>`;
   const st = [['Orders today', all.filter(o => new Date(o.createdAt).toDateString() === day).length], ['Payments to verify', all.filter(o => o.status === 'pending').length], ['Preparing', all.filter(o => o.status === 'preparing').length], ['Delivered orders', all.filter(o => o.status === 'delivered').length]];
-  return `${vtabs('vendor-orders')}${kitchenBar(vend)}${kmodeBar()}${revCard}<div class="stats">${st.map(([l, n]) => `<div class="card body"><b class="price" style="font-size:1.2rem">${n}</b><p class="mute">${l}</p></div>`).join('')}</div>
+  return `${vtabs('vendor-orders')}${vend.phone ? '' : '<div class="pay" style="margin-bottom:12px"><b>Add your phone number</b><p class="mute" style="margin:4px 0 8px">Students can call or WhatsApp you about their orders, but only if you add a number.</p><a class="btn sm" href="#/vendor-profile">Add phone number</a></div>'}${kitchenBar(vend)}${kmodeBar()}${revCard}<div class="stats">${st.map(([l, n]) => `<div class="card body"><b class="price" style="font-size:1.2rem">${n}</b><p class="mute">${l}</p></div>`).join('')}</div>
   <div class="tabs" role="tablist">${[['todo', 'To do'], ['done', 'Completed']].map(([k, n]) => `<button role="tab" aria-selected="${S.vtab === k}" data-act="vtab" data-id="${k}">${n}</button>`).join('')}</div>
   ${list.length ? `<div class="grid">${list.map(vOrder).join('')}</div>` : empty(S.vtab === 'todo' ? 'No orders to handle' : 'Nothing completed yet', 'New orders from students will appear here.')}`;
 };
@@ -555,16 +567,18 @@ views['vendor-payment'] = async () => {
 };
 views['vendor-menu'] = async () => {
   const g = await vGuard(); if (g !== null) return g;
-  pendingImg = null; const ps = await api.products(S.user.vendorId);
-  return `<div class="narrow">${vtabs('vendor-menu')}<h1 style="font-size:1.6rem">Menu</h1><p class="mute" style="margin-bottom:6px">New items are added to <b>${esc(S.user.shops.find(s => s.id === S.user.vendorId)?.name || '')}</b>.</p><form data-form="vprod" novalidate><label>Item name</label><input name="name" maxlength="80" required><label>Price (₦)</label><input name="price" type="number" min="50" inputmode="numeric" required><label>Quantity available</label><input name="qty" type="number" min="1" step="1" inputmode="numeric" placeholder="How many do you have?" required><label>Category</label><input name="category" maxlength="40" placeholder="e.g. Rice, Drinks, Cakes" required><label>Short description</label><input name="desc" maxlength="80"><label>Photo (optional)</label><div class="ph" id="imgPrev" style="aspect-ratio:1;max-width:160px;overflow:hidden;border-radius:10px">No image</div><input type="file" accept="image/*" data-img data-shape="square" style="margin-top:8px"><p class="err" id="fe" role="alert"></p><button class="btn coral block" style="margin-top:14px">Add item</button></form>
-  <section><h2 style="margin-bottom:10px">Your items</h2><button class="btn ghost sm" style="margin-bottom:10px" data-act="optimize">Make my photos load faster</button>${ps.length ? ps.map(p => `<div class="card prod" style="margin-bottom:10px">${ph(p.img, 'Photo')}<div class="info"><h3>${esc(p.name)}</h3><span class="price">${money(p.price)}</span><p>${esc(p.category)} · ${stockLabel(p)}${p.available ? '' : ' · Unavailable'}</p></div><div style="display:grid;gap:6px"><button class="btn sm" data-act="restock" data-id="${p.id}">Add stock</button><a class="btn ghost sm" href="#/vendor-edit/${p.id}">Edit</a><button class="btn ghost sm" data-act="pavail" data-id="${p.id}">${p.available ? 'Mark unavailable' : 'Mark available'}</button><button class="btn ghost sm" data-act="pdel" data-id="${p.id}">Delete</button></div></div>`).join('') : '<p class="mute">No items yet. Add your first item above.</p>'}</section></div>`;
+  pendingImg = null; const all = await api.products(S.user.vendorId), live = all.filter(p => !expired(p)), old = all.filter(expired), eta = load('ub_eta', [20, 30]);
+  const row = (p, dead) => `<div class="card prod" style="margin-bottom:10px">${ph(p.img, 'Photo')}<div class="info"><h3>${esc(p.name)}</h3><span class="price">${money(p.price)}</span><p style="white-space:normal">${esc(p.category)} · ${stockLabel(p)}${p.available ? '' : ' · Unavailable'}</p><p style="white-space:normal">${etaOf(p) ? 'Ready in ' + etaText(etaOf(p)) + ' · ' : ''}${dead ? '<span class="low">Expired, hidden from students</span>' : 'Live for ' + leftLabel(p) + ' more'}</p></div><div style="display:grid;gap:6px">${dead ? `<button class="btn sm" data-act="repost" data-id="${p.id}">Repost for 24h</button>` : `<button class="btn sm" data-act="restock" data-id="${p.id}">Add stock</button><a class="btn ghost sm" href="#/vendor-edit/${p.id}">Edit</a><button class="btn ghost sm" data-act="pavail" data-id="${p.id}">${p.available ? 'Mark unavailable' : 'Mark available'}</button>`}<button class="btn ghost sm" data-act="pdel" data-id="${p.id}">Delete</button></div></div>`;
+  return `<div class="narrow">${vtabs('vendor-menu')}<h1 style="font-size:1.6rem">Menu</h1><p class="mute" style="margin-bottom:6px">New items are added to <b>${esc(S.user.shops.find(s => s.id === S.user.vendorId)?.name || '')}</b>. Each item stays live for 24 hours, then disappears on its own. You can delete it sooner, or repost it in one tap.</p><form data-form="vprod" novalidate><label>Item name</label><input name="name" maxlength="80" required><label>Price (₦)</label><input name="price" type="number" min="50" inputmode="numeric" required><label>Quantity available</label><input name="qty" type="number" min="1" step="1" inputmode="numeric" placeholder="How many do you have?" required><label>Ready in (minutes)</label><div class="eta2"><input name="etaMin" type="number" min="1" max="600" step="1" inputmode="numeric" value="${eta[0]}" aria-label="Fastest, in minutes" required><span class="mute">to</span><input name="etaMax" type="number" min="1" max="600" step="1" inputmode="numeric" value="${eta[1]}" aria-label="Slowest, in minutes" required></div><p class="mute" style="margin-top:4px">Students see this estimate before they order, for example 20 to 30 minutes.</p><label>Category</label><input name="category" maxlength="40" placeholder="e.g. Rice, Drinks, Cakes" required><label>Short description</label><input name="desc" maxlength="80"><label>Photo (optional)</label><div class="ph" id="imgPrev" style="aspect-ratio:1;max-width:160px;overflow:hidden;border-radius:10px">No image</div><input type="file" accept="image/*" data-img data-shape="square" style="margin-top:8px"><p class="err" id="fe" role="alert"></p><button class="btn coral block" style="margin-top:14px">Add item</button></form>
+  <section><div class="row"><h2>Live now (${live.length})</h2></div><button class="btn ghost sm" style="margin-bottom:10px" data-act="optimize">Make my photos load faster</button>${live.length ? live.map(p => row(p, false)).join('') : '<p class="mute">Nothing is live right now. Add an item above or repost an expired one.</p>'}</section>
+  ${old.length ? `<section><div class="row"><h2>Expired (${old.length})</h2></div><p class="mute" style="margin-bottom:10px">Students cannot see these. They are cleared automatically soon, or you can repost them now.</p>${old.map(p => row(p, true)).join('')}</section>` : ''}</div>`;
 };
 views['vendor-edit'] = async id => {
   const g = await vGuard(); if (g !== null) return g;
   const s = await getDoc(doc(db, 'products', id)), p = s.exists() ? { ...s.data(), id } : null;
   if (!p || p.vendorId !== S.user.vendorId) return empty('Item not found', 'This item does not exist or belongs to another shop.', '#/vendor-menu', 'Back to menu');
   pendingImg = p.img || '';
-  return `<div class="narrow">${vtabs('vendor-menu')}<h1 style="font-size:1.6rem;margin-bottom:6px">Edit item</h1><form data-form="vedit" data-id="${p.id}" novalidate><label>Item name</label><input name="name" maxlength="80" value="${esc(p.name)}" required><label>Price (₦)</label><input name="price" type="number" min="50" inputmode="numeric" value="${p.price}" required><label>Quantity available</label><input name="qty" type="number" min="0" step="1" inputmode="numeric" value="${p.qty ?? ''}" required><label>Category</label><input name="category" maxlength="40" value="${esc(p.category)}" required><label>Short description</label><input name="desc" maxlength="80" value="${esc(p.desc)}"><label>Photo</label><div class="ph" id="imgPrev" style="aspect-ratio:1;max-width:160px;overflow:hidden;border-radius:10px">${safeImg(p.img) ? `<img src="${safeImg(p.img)}" alt="">` : 'No image'}</div><input type="file" accept="image/*" data-img data-shape="square" style="margin-top:8px"><button type="button" class="btn ghost sm" style="margin-top:8px" data-act="rmimg">Remove photo</button><p class="err" id="fe" role="alert"></p><button class="btn coral block" style="margin-top:14px">Save changes</button><a class="btn ghost block" style="margin-top:8px" href="#/vendor-menu">Cancel</a></form></div>`;
+  return `<div class="narrow">${vtabs('vendor-menu')}<h1 style="font-size:1.6rem;margin-bottom:6px">Edit item</h1><form data-form="vedit" data-id="${p.id}" novalidate><label>Item name</label><input name="name" maxlength="80" value="${esc(p.name)}" required><label>Price (₦)</label><input name="price" type="number" min="50" inputmode="numeric" value="${p.price}" required><label>Quantity available</label><input name="qty" type="number" min="0" step="1" inputmode="numeric" value="${p.qty ?? ''}" required><label>Ready in (minutes)</label><div class="eta2"><input name="etaMin" type="number" min="1" max="600" step="1" inputmode="numeric" value="${p.etaMin ?? 20}" aria-label="Fastest, in minutes" required><span class="mute">to</span><input name="etaMax" type="number" min="1" max="600" step="1" inputmode="numeric" value="${p.etaMax ?? 30}" aria-label="Slowest, in minutes" required></div><label>Category</label><input name="category" maxlength="40" value="${esc(p.category)}" required><label>Short description</label><input name="desc" maxlength="80" value="${esc(p.desc)}"><label>Photo</label><div class="ph" id="imgPrev" style="aspect-ratio:1;max-width:160px;overflow:hidden;border-radius:10px">${safeImg(p.img) ? `<img src="${safeImg(p.img)}" alt="">` : 'No image'}</div><input type="file" accept="image/*" data-img data-shape="square" style="margin-top:8px"><button type="button" class="btn ghost sm" style="margin-top:8px" data-act="rmimg">Remove photo</button><p class="err" id="fe" role="alert"></p><button class="btn coral block" style="margin-top:14px">Save changes</button><a class="btn ghost block" style="margin-top:8px" href="#/vendor-menu">Cancel</a></form></div>`;
 };
 views['vendor-apply'] = async () => {
   if (!S.user) return needAuth('Log in first, then apply to sell on UniBite.');
@@ -580,7 +594,7 @@ views['vendor-apply'] = async () => {
 const vAdmin = (v, all = []) => { const s = st(v), b = (a, l, c = '') => `<button class="btn ${c} sm" data-act="${a}" data-id="${v.id}">${l}</button>`; return `<article class="card body"><div class="line"><b>${esc(v.name)}</b><span class="badge ${v.type}">${TYPES[v.type]}</span></div>
   <p class="mute">${esc(v.ownerName || 'Seed vendor')}${v.ownerEmail ? ' · ' + esc(v.ownerEmail) : ''}${v.phone ? ' · ' + esc(v.phone) : ''}</p>${v.ownerUid !== 'demo' && all.some(x => x.ownerUid === v.ownerUid && x.id !== v.id) ? `<p class="mute">Also owns a ${all.filter(x => x.ownerUid === v.ownerUid && x.id !== v.id).map(x => TYPES[x.type]).join(', ')} shop. This is an additional registration.</p>` : ''}<p style="margin:6px 0">${esc(v.desc || '')}</p><p class="mute">${esc(v.location || '')}</p>
   ${v.bank?.accountNumber ? `<p class="mute" style="margin-top:6px">Payout account: ${esc(v.bank.bankName)} · ${esc(v.bank.accountName)} · ${esc(v.bank.accountNumber)} (${v.bankVerified ? 'verified' : 'not verified'})</p>` : ''}
-  <div class="actions">${v.regReceipt ? b('vreceipt', 'View receipt', 'ghost') : ''}${s === 'pending' ? b('vapprove', 'Approve') + b('vreject', 'Reject', 'ghost') : s === 'approved' ? b('vsuspend', 'Suspend', 'ghost') + (v.bank?.accountNumber ? b('bverify', v.bankVerified ? 'Unverify account' : 'Verify account', 'ghost') : '') : b('vapprove', s === 'suspended' ? 'Reactivate' : 'Approve')}</div></article>`; };
+  <div class="actions">${v.regReceipt ? b('vreceipt', 'View receipt', 'ghost') : ''}${s === 'pending' ? b('vapprove', 'Approve') + b('vreject', 'Reject', 'ghost') : s === 'approved' ? b('vsuspend', 'Suspend', 'ghost') + (v.bank?.accountNumber ? b('bverify', v.bankVerified ? 'Unverify account' : 'Verify account', 'ghost') : '') : b('vapprove', s === 'suspended' ? 'Reactivate' : 'Approve') + (s === 'rejected' ? b('vreset', 'Let them re-apply', 'ghost') : '')}</div></article>`; };
 const studentsHtml = list => list.length ? `<p class="mute" style="margin-bottom:10px">${list.length} account${list.length > 1 ? 's' : ''}. Suspend anyone who is not a University of Ilesha student.</p><div class="grid">${list.map(u => `<article class="card body"><div class="line"><b>${esc(u.name)}</b>${u.suspended ? '<span class="badge off">Suspended</span>' : u.unilesha ? '<span class="badge">Confirmed</span>' : '<span class="badge off">Not confirmed</span>'}</div><p class="mute">${esc(u.email)}${u.phone ? ' · ' + esc(u.phone) : ''}</p><p class="mute">${esc(u.location || 'No delivery location')}</p>${String(u.email || '').toLowerCase() === ADMIN_EMAIL ? '' : `<div class="actions"><button class="btn ${u.suspended ? '' : 'ghost'} sm" data-act="${u.suspended ? 'stuon' : 'stuoff'}" data-id="${u.id}">${u.suspended ? 'Reactivate' : 'Suspend'}</button></div>`}</article>`).join('')}</div>` : empty('No students yet', 'Accounts will appear here as people sign up.');
 views.admin = async () => {
   if (!S.user) return needAuth('Log in with the admin email.');
@@ -596,18 +610,16 @@ views.admin = async () => {
 };
 views.notifications = async () => {
   if (!S.user) return needAuth('Log in to see your notifications.');
-  const ns = await api.notifs(), perm = 'Notification' in window ? Notification.permission : 'unsupported', seenBefore = feedSeen(), fl = feedFresh().slice(0, 10);
-  localStorage.setItem('ub_feedseen', String(Date.now())); chrome();
-  const feedList = fl.length ? `<h2 style="margin:16px 0 4px">New from vendors</h2>${fl.map(x => `<a class="card body" style="display:flex;gap:12px;align-items:center;margin-top:8px;${Number(x.createdAt) > seenBefore ? 'border-left:4px solid var(--gold)' : ''}" href="#/vendor/${esc(x.vendorId)}"><div class="npimg">${safeImg(x.img) ? `<img src="${safeImg(x.img)}" alt="" loading="lazy">` : ic('bag')}</div><div style="flex:1;min-width:0"><div class="line"><b>${esc(x.vendorName)}</b><span class="mute">${ago(x.createdAt)}</span></div><p class="mute">just posted <b style="color:var(--ink)">${esc(x.name)}</b> · ${money(x.price)}</p></div></a>`).join('')}<h2 style="margin:18px 0 4px">Your updates</h2>` : '';
+  const ns = await api.notifs(), perm = 'Notification' in window ? Notification.permission : 'unsupported';
+  chrome();
   return `<div class="narrow"><div class="row"><h1 style="font-size:1.6rem">Notifications</h1>${ns.some(n => !n.read) ? '<a href="#" data-act="readall">Mark all read</a>' : ''}</div>
   ${perm === 'default' ? '<div class="pay"><b>Get alerts on this device</b><p class="mute" style="margin:4px 0 8px">Allow notifications to get order updates as pop-ups on this device.</p><button class="btn sm" data-act="allow">Allow notifications</button></div>' : ''}${perm === 'granted' ? `<div class="card body line" style="align-items:center;margin-top:10px"><span class="mute">${S.pushToken ? 'Alerts are ON for this device, even when UniBite is closed.' : 'Alerts show while UniBite is open.'}</span><button class="btn ghost sm" data-act="testn">Send test</button></div>` : ''}${perm === 'denied' ? '<p class="err">Notifications are blocked. Tap the lock icon in your browser address bar, open Notifications and choose Allow.</p>' : ''}
-  ${feedList}
   ${ns.length ? ns.map(n => `<a class="card body" style="display:block;margin-top:10px;${n.read ? '' : 'border-left:4px solid var(--coral)'}" href="#" data-act="openn" data-id="${n.id}"><div class="line"><b>${esc(n.title)}</b><span class="mute">${ago(n.createdAt)}</span></div><p class="mute">${esc(n.body)}</p></a>`).join('') : empty('No notifications yet', 'Order updates will show up here.', '#/browse/food', 'Explore Food')}</div>`;
 };
-views.terms = async () => `<div class="narrow terms"><h1 style="font-size:1.6rem">Terms &amp; Privacy</h1><p class="mute">Short and simple. Last updated October 2026.</p>
+views.terms = async () => `<div class="narrow terms"><h1 style="font-size:1.6rem">Terms &amp; Privacy</h1><p class="mute">Short and simple. Last updated November 2026.</p>
 <h2>Who can use UniBite</h2><p>UniBite is for <b>current students of the University of Ilesha (UNILESHA) only</b>. Vendors on UniBite serve students on the University of Ilesha campus. When you sign up you confirm this. We may suspend any account that is not eligible.</p>
 <h2>Orders and payment</h2><ul><li>Vendors are independent businesses. UniBite connects you to them; it does not cook, deliver or hold your money.</li><li>You pay the vendor directly by bank transfer to the account shown at checkout, then upload your receipt. The vendor confirms your payment before preparing your order.</li><li>Always check the account name and number before you pay. Never upload a fake or edited receipt.</li><li>One order is with one vendor. If there is a problem, WhatsApp customer care on ${CARE}.</li></ul>
-<h2>Vendors</h2><ul><li>You are responsible for your food, prices, stock, delivery and for keeping your payment details correct.</li><li>Pay the registration fee shown when you apply. Each shop type (food, or cakes and pastries) is registered separately.</li><li>Shops that break these rules can be suspended.</li></ul>
+<h2>Vendors</h2><ul><li>You are responsible for your food, prices, stock, delivery and for keeping your payment details correct.</li><li>Pay the registration fee shown when you apply. Each shop type (food, or cakes and pastries) is registered separately.</li><li>Items you post stay live for 24 hours and are then removed automatically. Your shop’s phone number is shown to students so they can call you about orders.</li><li>Shops that break these rules can be suspended.</li></ul>
 <h2>Your information</h2><ul><li>We keep your name, email, phone number, delivery location, orders and the receipts you upload, to run the service.</li><li>A vendor you order from can see your name, phone number, delivery location, order and receipt so they can deliver and confirm payment.</li><li>We do not sell your information. Data is stored with Google Firebase.</li><li>To correct or delete your account, WhatsApp customer care on ${CARE}.</li></ul>
 <h2>Behaviour</h2><p>No harassment, no fake orders, no fake receipts. Accounts can be suspended for misuse.</p></div>`;
 views.help = async () => {
@@ -620,13 +632,15 @@ const vendorBlock = u => {
   return `${sh.length ? `<h3 style="margin:6px 0 8px">My shops</h3>${sh.map(s => `<div class="card body line" style="margin-bottom:8px;align-items:center"><span><span class="badge ${s.type}">${TYPES[s.type]}</span> <b>${esc(s.name)}</b></span><span class="mute">${lab[st(s)]}</span></div>`).join('')}<a class="btn coral block" style="margin-bottom:8px" href="#/vendor-orders">Vendor dashboard</a>` : ''}${miss.length ? `<a class="btn ghost block" style="margin-bottom:8px" href="#/vendor-apply">${sh.length ? 'Add a ' + TYPES[miss[0]] + ' shop' : 'Become a vendor'}</a>${sh.length ? '<p class="mute" style="margin:-2px 0 8px">A second shop type has its own registration fee.</p>' : ''}` : ''}`;
 };
 const needAuth = m => `<div class="empty">${ic('user')}<h3>You’re not signed in</h3><p class="mute">${m}</p><div style="display:flex;gap:8px;justify-content:center;flex-wrap:wrap;margin-top:14px"><a class="btn" href="#/auth">Log in</a><a class="btn ghost" href="#/auth/register">Create account</a></div><p style="margin-top:16px"><a href="#/auth/vendor" style="color:var(--coral);font-weight:600">Sell on UniBite? Create a vendor account</a></p></div>`;
-const orderCardBase = o => { const cur = STATUS.findIndex(s => s[0] === o.status); return `<article class="card body"><div class="line"><b>${o.id}</b><span class="badge ${o.type}">${TYPES[o.type]}</span></div><p class="mute">${esc(o.vendorName)} · ${new Date(o.createdAt).toLocaleDateString('en-NG')}</p><p style="margin:6px 0">${o.items.map(i => `${esc(i.name)} × ${i.qty}`).join('<br>')}</p><b class="price">${money(o.total)}</b>
-  <ul class="steps">${STATUS.map((s, i) => `<li class="${i < cur || cur === 5 ? 'done' : i === cur ? 'now' : ''}">${s[1]}</li>`).join('')}</ul></article>`; };
+const orderCardBase = o => { const cur = STATUS.findIndex(s => s[0] === o.status); return `<article class="card body"><div class="line"><b>${o.id}</b><span class="badge ${o.type}">${TYPES[o.type]}</span></div><p class="mute">${esc(o.vendorName)} · ${new Date(o.createdAt).toLocaleDateString('en-NG')}</p><p style="margin:6px 0">${itemsHtml(o)}</p><b class="price">${money(o.total)}</b>${o.status !== 'delivered' && orderEtaOf(o) ? `<p class="mute" style="margin-top:6px">${ic('clock')} Estimated ready time: <b>${etaText(orderEtaOf(o))}</b></p>` : ''}
+  <ul class="steps">${STATUS.map((s, i) => `<li class="${i < cur || cur === 5 ? 'done' : i === cur ? 'now' : ''}">${s[1]}</li>`).join('')}</ul>${o.status !== 'delivered' ? contactRow(o.vendorPhone, `Hi ${o.vendorName}, about my UniBite order ${o.id}.`) : ''}</article>`; };
 
-const orderCard = o => o.status !== 'rejected' ? orderCardBase(o) : `<article class="card body"><div class="line"><b>${o.id}</b><span class="badge off">Payment not confirmed</span></div><p class="mute">${esc(o.vendorName)}</p><p style="margin:6px 0">${o.items.map(i => `${esc(i.name)} × ${i.qty}`).join('<br>')}</p><b class="price">${money(o.total)}</b><p class="err" style="margin-top:8px">The vendor could not confirm your payment. Chat with customer care on WhatsApp or place a new order.</p></article>`;
+const orderCard = o => o.status !== 'rejected' ? orderCardBase(o) : `<article class="card body"><div class="line"><b>${o.id}</b><span class="badge off">Payment not confirmed</span></div><p class="mute">${esc(o.vendorName)}</p><p style="margin:6px 0">${itemsHtml(o)}</p><b class="price">${money(o.total)}</b><p class="err" style="margin-top:8px">The vendor could not confirm your payment. Chat with customer care on WhatsApp or place a new order.</p>${contactRow(o.vendorPhone, `Hi ${o.vendorName}, about my UniBite order ${o.id}.`)}</article>`;
 /* ---------- Actions ---------- */
 async function addItem(id, d = 1) {
-  const p = (await api.product(id)); if (!p || (!p.available && d > 0)) return toast('This item is unavailable');
+  const p = (await api.product(id));
+  if (d < 0 && !p) { delete S.cart.items[id]; if (!cartCount()) S.cart.vendorId = null; saveCart(); return render(); }
+  if (!p || (d > 0 && (!p.available || expired(p)))) return toast('This item is unavailable');
   if (ownShop(p.vendorId) && d > 0) return toast('You can’t order from your own shop');
   if (d > 0) {
     if (soldOut(p)) return toast('Sold out');
@@ -634,13 +648,14 @@ async function addItem(id, d = 1) {
     if (S.cart.vendorId === p.vendorId && !S.cart.items[id] && Object.keys(S.cart.items).length >= 7) return toast('You can order up to 7 different items at once. Place this order first.');
     const sv = await api.vendor(p.vendorId); if (!isOpen(sv)) return toast('This shop is closed right now');
   }
-  if (S.cart.vendorId && S.cart.vendorId !== p.vendorId && cartCount()) { const v = await api.vendor(S.cart.vendorId); if (!await ask('Start a new order?', `Your cart has items from ${esc(v.name)}. Each vendor is a separate order.`, 'Start new')) return; S.cart = { vendorId: null, items: {} }; }
+  if (S.cart.vendorId && S.cart.vendorId !== p.vendorId && cartCount()) { const v = await api.vendor(S.cart.vendorId); if (v && !await ask('Start a new order?', `Your cart has items from ${esc(v.name)}. Each vendor is a separate order.`, 'Start new')) return; S.cart = { vendorId: null, items: {} }; }
   S.cart.vendorId = p.vendorId; const q = (S.cart.items[id] || 0) + d; q > 0 ? S.cart.items[id] = q : delete S.cart.items[id];
   if (!cartCount()) S.cart.vendorId = null; saveCart(); render();
 }
 const act = {
   add: id => addItem(id), inc: id => addItem(id), dec: id => addItem(id, -1),
   clear: () => { S.cart = { vendorId: null, items: {} }; saveCart(); render(); },
+  openonly: () => { S.openOnly = !S.openOnly; render(); },
   fav: id => { S.favs = S.favs.includes(id) ? S.favs.filter(x => x !== id) : [...S.favs, id]; save('ub_favs', S.favs); render(); },
   tab: id => { S.tab = id; render(); },
   shop: id => { S.user.vendorId = id; localStorage.setItem('ub_shop', id); bust(); render(); },
@@ -664,15 +679,14 @@ const act = {
     } catch (e) { console.error(e); toast('Could not finish. Please try again.'); }
     finally { S.opt = false; render(); }
   },
-  closepost: () => { clearTimeout(showPost.t); postShowing = false; const b = $('#newpost'); if (b) b.innerHTML = ''; if (postQ.length) setTimeout(showPost, 300); },
-  seepost: id => { act.closepost(); if (/^[\w@.-]{1,60}$/.test(String(id))) location.hash = '#/vendor/' + id; },
   atab: id => { S.atab = id; render(); },
   async regtoggle() { const s = await api.settings(); await api.saveSettings({ registrationOpen: !s.registrationOpen }); toast(s.registrationOpen ? 'Registration closed' : 'Registration opened'); render(); },
-  async vreceipt(id) { const v = (await api.allVendors()).find(x => x.id === id), d = $('#dlg'); if (!safeImg(v.regReceipt)) return toast('No valid receipt found'); d.innerHTML = `<img src="${safeImg(v.regReceipt)}" alt="Registration receipt from ${esc(v.name)}" style="width:100%;border-radius:8px"><div class="btns"><button class="btn sm" value="x">Close</button></div>`; d.onclick = e => e.target.value && d.close(); d.showModal(); },
+  async vreceipt(id) { const [pv, sh] = await Promise.all([getDoc(doc(db, 'vendorPrivate', id)), getDoc(doc(db, 'vendors', id))]), v = { ...(sh.data() || {}), ...(pv.data() || {}) }, d = $('#dlg'); if (!safeImg(v.regReceipt)) return toast('No valid receipt found'); d.innerHTML = `<img src="${safeImg(v.regReceipt)}" alt="Registration receipt from ${esc(v.name)}" style="width:100%;border-radius:8px"><div class="btns"><button class="btn sm" value="x">Close</button></div>`; d.onclick = e => e.target.value && d.close(); d.showModal(); },
   async vapprove(id) { await api.setVendorStatus(id, 'approved'); toast('Vendor approved'); render(); },
   async vreject(id) { if (!await ask('Reject this application?', 'The vendor will see that their application was not approved.', 'Reject')) return; await api.setVendorStatus(id, 'rejected'); toast('Application rejected'); render(); },
   async vsuspend(id) { if (!await ask('Suspend this vendor?', 'Their shop is hidden from students and their dashboard is locked.', 'Suspend')) return; await api.setVendorStatus(id, 'suspended'); toast('Vendor suspended'); render(); },
-  async bverify(id) { const v = (await api.allVendors()).find(x => x.id === id); await api.setBankVerified(id, !v.bankVerified); render(); },
+  async vreset(id) { if (!await ask('Let this vendor apply again?', 'This deletes the rejected application and its receipt. They can then submit a new one.', 'Reset')) return; await api.resetVendor(id); toast('Application reset'); render(); },
+  async bverify(id) { const v = (await getDoc(doc(db, 'vendors', id))).data() || {}; await api.setBankVerified(id, !v.bankVerified); render(); },
   readall: () => { api.markRead(); render(); },
   openn: id => { const n = C.notifs.find(x => x.id === id); api.markRead([id]); location.hash = n?.href || '#/'; render(); },
   async allow() { if (!('Notification' in window)) return toast('This browser does not support notifications'); const r = await Notification.requestPermission(); if (r === 'granted') await enablePush(); toast(r === 'granted' ? 'Notifications on' : 'Notifications are blocked in browser settings'); chrome(); render(); },
@@ -711,6 +725,7 @@ const act = {
   },
   async reject(id) { if (!await ask('Payment not received?', 'The student will be told you could not confirm their payment.', 'Mark not received')) return; await api.setStatus(id, 'rejected'); toast('Order closed'); render(); },
   async pavail(id) { const p = (await api.product(id)); await api.updateProduct(id, { available: !p.available }); render(); },
+  async repost(id) { await api.repostProduct(id); toast('Reposted. It is live for 24 hours.'); render(); },
   async pdel(id) { if (!await ask('Delete this item?', 'Students will no longer see it.', 'Delete')) return; await api.deleteProduct(id); toast('Item deleted'); render(); },
   star: n => { $('[name=stars]').value = n; document.querySelectorAll('#starIn button').forEach((b, i) => b.classList.toggle('on', i < n)); },
   login: () => { sessionStorage.setItem('ub_next', location.hash); location.hash = '#/auth'; },
@@ -721,13 +736,13 @@ const forms = {
   async vapply(f) {
     const d = Object.fromEntries(new FormData(f)), fe = $('#fe');
     if (d.name.trim().length < 2 || d.desc.trim().length < 10 || !d.location.trim() || d.phone.replace(/\D/g, '').length < 10 || !pendingReceipt) return fe.textContent = 'Add your business name, a description (10+ characters), location, phone and your payment receipt.';
-    await api.applyVendor({ name: d.name.trim(), type: d.type, desc: d.desc.trim(), location: d.location.trim(), phone: d.phone, regReceipt: pendingReceipt });
+    await api.applyVendor({ name: d.name.trim(), type: d.type, desc: nl(d.desc), location: d.location.trim(), phone: d.phone, regReceipt: pendingReceipt });
     chrome(); toast('Application sent. The admin will confirm your payment.'); location.hash = '#/vendor-orders';
   },
   async vprofile(f) {
     const d = Object.fromEntries(new FormData(f)), fe = $('#fe');
-    if (d.name.trim().length < 2 || !d.location.trim()) return fe.textContent = 'Business name and location are required.';
-    await api.updateVendor(S.user.vendorId, { name: d.name.trim(), desc: d.desc.trim(), location: d.location.trim(), img: pendingImg || '' });
+    if (d.name.trim().length < 2 || !d.location.trim() || d.phone.replace(/\D/g, '').length < 10) return fe.textContent = 'Business name, location and a phone number (10+ digits) are required.';
+    await api.updateVendor(S.user.vendorId, { name: d.name.trim(), desc: nl(d.desc), location: d.location.trim(), phone: d.phone.trim(), img: pendingImg || '' });
     if (!(await api.vendor(S.user.vendorId)).bank?.accountNumber) { toast('Profile saved. Now add your payment details.'); return location.hash = '#/vendor-payment'; }
     toast('Profile saved'); location.hash = '#/vendor/' + S.user.vendorId;
   },
@@ -735,21 +750,21 @@ const forms = {
     const d = Object.fromEntries(new FormData(f)), fe = $('#fe'), n = +d.stars;
     if (n < 1) return fe.textContent = 'Tap a star to rate.';
     if (!d.orderId) return fe.textContent = 'You can review after your order is delivered.';
-    await api.saveReview({ vendorId: f.dataset.vid, uid: S.user.uid, name: S.user.name.split(' ')[0].slice(0, 40), stars: n, comment: d.comment.trim(), orderId: d.orderId });
+    await api.saveReview({ vendorId: f.dataset.vid, uid: S.user.uid, name: S.user.name.split(' ')[0].slice(0, 40), stars: n, comment: nl(d.comment), orderId: d.orderId });
     toast('Thanks for your review'); render();
   },
   async asettings(f) {
     const d = Object.fromEntries(new FormData(f)), fe = $('#fe');
     if (d.accountNumber.trim() && !/^\d{10}$/.test(d.accountNumber.trim())) return fe.textContent = 'Account number must be 10 digits.';
     if (!(+d.fee >= 0)) return fe.textContent = 'Enter a valid fee.';
-    await api.saveSettings({ fee: Math.round(+d.fee || 0), contact: d.contact.trim(), bank: { bankName: d.bankName.trim(), accountName: d.accountName.trim(), accountNumber: d.accountNumber.trim(), instructions: d.instructions.trim() } });
+    await api.saveSettings({ fee: Math.round(+d.fee || 0), contact: d.contact.trim(), bank: { bankName: d.bankName.trim(), accountName: d.accountName.trim(), accountNumber: d.accountNumber.trim(), instructions: nl(d.instructions) } });
     toast('Settings saved'); render();
   },
   async vpay(f) {
     const d = Object.fromEntries(new FormData(f)), fe = $('#fe');
     if (!d.bankName.trim() || !d.accountName.trim() || !/^\d{10}$/.test(d.accountNumber.trim())) return fe.textContent = 'Enter the bank name, account name and a 10-digit account number.';
     /* Real flow: save with bankVerified:false and let an admin verify; checkout should only show verified details. */
-    await api.updateVendor(S.user.vendorId, { bank: { bankName: d.bankName.trim(), accountName: d.accountName.trim(), accountNumber: d.accountNumber.trim(), instructions: d.instructions.trim() }, bankVerified: false });
+    await api.updateVendor(S.user.vendorId, { bank: { bankName: d.bankName.trim(), accountName: d.accountName.trim(), accountNumber: d.accountNumber.trim(), instructions: nl(d.instructions) }, bankVerified: false });
     toast('Payment details saved'); render();
   },
   async hours(f) {
@@ -765,14 +780,17 @@ const forms = {
   async vedit(f) {
     const d = Object.fromEntries(new FormData(f)), fe = $('#fe');
     if (d.name.trim().length < 2 || !(+d.price >= 50) || !d.category.trim() || d.qty === '' || !(Number.isInteger(+d.qty) && +d.qty >= 0)) return fe.textContent = 'Check the name, a price of ₦50 or more, a quantity of 0 or more, and the category.';
-    await api.updateProduct(f.dataset.id, { name: d.name.trim(), price: Math.round(+d.price), qty: Math.floor(+d.qty), category: d.category.trim(), desc: d.desc.trim(), img: pendingImg || '' });
+    const a = Math.floor(+d.etaMin), b = Math.floor(+d.etaMax); if (!(a >= 1 && b >= a && b <= 600)) return fe.textContent = 'Enter how long it takes to get this ready, for example 20 to 30 minutes.';
+    await api.updateProduct(f.dataset.id, { name: d.name.trim(), price: Math.round(+d.price), qty: Math.floor(+d.qty), category: d.category.trim(), desc: d.desc.trim(), img: pendingImg || '', etaMin: a, etaMax: b });
     toast('Item updated'); location.hash = '#/vendor-menu';
   },
   async vprod(f) {
-    const d = Object.fromEntries(new FormData(f)), fe = $('#fe');
+    const d = Object.fromEntries(new FormData(f)), fe = $('#fe'), a = Math.floor(+d.etaMin), b = Math.floor(+d.etaMax);
     if (d.name.trim().length < 2 || !(+d.price >= 50) || !d.category.trim() || !(Number.isInteger(+d.qty) && +d.qty >= 1)) return fe.textContent = 'Add an item name, a price of ₦50 or more, a quantity of 1 or more, and a category.';
-    const r = await api.addProduct({ name: d.name.trim(), price: Math.round(+d.price), qty: Math.floor(+d.qty), category: d.category.trim(), desc: d.desc.trim(), img: pendingImg || '', available: true });
-    toast(r.announced ? 'Item added. Students have been notified.' : r.closed ? 'Item added. Students are told about new items only while your kitchen is open.' : 'Item added'); render();
+    if (!(a >= 1 && b >= a && b <= 600)) return fe.textContent = 'Enter how long it takes to get this ready, for example 20 to 30 minutes.';
+    await api.addProduct({ name: d.name.trim(), price: Math.round(+d.price), qty: Math.floor(+d.qty), category: d.category.trim(), desc: d.desc.trim(), img: pendingImg || '', available: true, etaMin: a, etaMax: b });
+    try { save('ub_eta', [a, b]); } catch {}
+    toast('Item added. It stays live for 24 hours.'); render();
   },
   async unilesha(f) {
     const d = Object.fromEntries(new FormData(f)), fe = $('#fe');
@@ -800,14 +818,17 @@ const forms = {
     const d = Object.fromEntries(new FormData(f)), fe = $('#fe');
     if (!d.name.trim() || d.phone.replace(/\D/g, '').length < 10 || !d.loc.trim() || !pendingReceipt) return fe.textContent = 'Fill in your name, phone and location, and upload your payment receipt.';
     if (!d.payacct) return fe.textContent = 'This vendor has not added payment details yet.';
-    const v = await api.vendor(S.cart.vendorId), ps = await api.products(v.id), items = ps.filter(p => S.cart.items[p.id] && p.available).map(p => ({ productId: p.id, name: p.name, price: p.price, qty: S.cart.items[p.id] }));
+    const v = await api.vendor(S.cart.vendorId); if (!v) { resetCart(); toast('That shop is no longer available. Your cart was cleared.'); return location.hash = '#/'; }
+    const ps = await api.products(v.id), liveRows = ps.filter(p => S.cart.items[p.id] && p.available && !expired(p)), eta = orderEta(liveRows), items = liveRows.map(p => ({ productId: p.id, name: p.name, price: p.price, qty: S.cart.items[p.id] }));
     if (!items.length) return fe.textContent = 'Those items are no longer available.';
-    try { await api.placeOrder({ id: S.orderKey || (S.orderKey = newOrderId()), uid: S.user.uid, vendorId: v.id, vendorName: v.name, ownerUid: v.ownerUid, payTo: { bankName: d.paybank, accountName: d.payname, accountNumber: d.payacct }, type: v.type, items, total: items.reduce((a, i) => a + i.price * i.qty, 0), name: d.name, phone: d.phone, location: d.loc, note: d.note, paymentRef: d.ref.trim(), receipt: pendingReceipt, paymentStatus: 'pending', status: 'pending', createdAt: Date.now(), updatedAt: Date.now() }); }
+    try { await api.placeOrder({ id: S.orderKey || (S.orderKey = newOrderId()), uid: S.user.uid, vendorId: v.id, vendorName: v.name, ownerUid: v.ownerUid, payTo: { bankName: d.paybank, accountName: d.payname, accountNumber: d.payacct }, type: v.type, items, total: items.reduce((a, i) => a + i.price * i.qty, 0), name: d.name.trim(), phone: d.phone.trim(), location: d.loc.trim(), note: nl(d.note), paymentRef: d.ref.trim(), vendorPhone: v.phone || '', ...(eta ? { etaMin: eta[0], etaMax: eta[1] } : {}), receipt: pendingReceipt, paymentStatus: 'pending', status: 'pending', createdAt: Date.now(), updatedAt: Date.now() }); }
     catch (e) {
+      if (e.moved) { bust(); toast(`The price of ${e.moved.join(', ')} just changed. Check your order and try again.`); return location.hash = '#/cart'; }
       if (e.bankChanged) { bust(); toast('This vendor just changed their payment details. Check the new account before you pay.'); return render(); }
       if (e.closed) { bust(); toast(`${v.name} is closed right now${e.info ? ' (' + e.info + ')' : ''}.`); return render(); }
       if (e.short) { e.short.forEach(s => { if (s.left > 0) S.cart.items[s.id] = s.left; else delete S.cart.items[s.id]; }); if (!cartCount()) S.cart.vendorId = null; saveCart(); bust(); toast('Stock changed: ' + e.short.map(s => s.left > 0 ? `only ${s.left} of ${s.name}` : `${s.name} is sold out`).join(', ') + '. Your cart was updated.'); return location.hash = S.cart.vendorId ? '#/cart' : '#/'; }
-      throw e;
+      if (e.code === 'permission-denied') { const ex = await getDoc(doc(db, 'orders', S.orderKey)).catch(() => null); if (!ex?.exists()) throw e; } /* the order was saved but the reply was lost: treat it as placed */
+      else throw e;
     }
     S.orderKey = null; S.cart = { vendorId: null, items: {} }; S.tab = 'active'; saveCart(); toast('Order placed. Waiting for vendor to confirm payment.'); location.hash = '#/orders';
   }
@@ -819,7 +840,7 @@ function chrome() {
   $('#nav').innerHTML = [['home', '#/', 'Home', 'home'], ['browse', '#/search/', 'Browse', 'search'], ['orders', '#/orders', 'Orders', 'orders'], ['favourites', '#/favourites', 'Favourites', 'heart'], ['profile', '#/profile', S.user ? 'Profile' : 'Log in', 'user']].map(([k, h, l, i]) => `<a href="${h}" ${cur === k ? 'aria-current="page"' : ''}>${ic(i)}<span>${l}</span></a>`).join('');
   $('#cartIcon').innerHTML = ic('bag'); $('#bellIcon').innerHTML = ic('bell'); $('#loginBtn').hidden = !!S.user; $('#bellBtn').hidden = !S.user;
   $('#care').href = waLink(CARE, `Hello UniBite customer care. ${S.user ? 'I am ' + S.user.name + '. ' : ''}My issue: `);
-  $('#perm').innerHTML = S.user && 'Notification' in window && Notification.permission === 'default' && !sessionStorage.getItem('ub_noperm') ? `<div class="permbar"><span>Turn on alerts so ${S.user.shops?.length ? 'new orders ring' : 'order updates pop up'} on this device while UniBite is open.</span><button class="btn coral sm" data-act="allow">Turn on</button><button class="btn ghost sm" data-act="noperm">Not now</button></div>` : ''; const nc = C.notifs.filter(n => !n.read).length + feedUnseen(); $('#bellCount').hidden = !nc; $('#bellCount').textContent = nc > 9 ? '9+' : nc; document.title = (nc ? `(${nc}) ` : '') + 'UniBite · Good Food. Right Around Campus.'; try { nc ? navigator.setAppBadge?.(nc) : navigator.clearAppBadge?.(); } catch {} const n = cartCount(); $('#cartCount').hidden = !n; $('#cartCount').textContent = n;
+  $('#perm').innerHTML = S.user && 'Notification' in window && Notification.permission === 'default' && !sessionStorage.getItem('ub_noperm') ? `<div class="permbar"><span>Turn on alerts so ${S.user.shops?.length ? 'new orders ring' : 'order updates pop up'} on this device while UniBite is open.</span><button class="btn coral sm" data-act="allow">Turn on</button><button class="btn ghost sm" data-act="noperm">Not now</button></div>` : ''; const nc = C.notifs.filter(n => !n.read).length; $('#bellCount').hidden = !nc; $('#bellCount').textContent = nc > 9 ? '9+' : nc; document.title = (nc ? `(${nc}) ` : '') + 'UniBite · Good Food. Right Around Campus.'; try { nc ? navigator.setAppBadge?.(nc) : navigator.clearAppBadge?.(); } catch {} const n = cartCount(); $('#cartCount').hidden = !n; $('#cartCount').textContent = n;
 }
 const gateHtml = r => {
   if (!S.user || adminEmail() || r === 'help' || r === 'terms') return null;
@@ -827,7 +848,7 @@ const gateHtml = r => {
   if (!S.user.unilesha) return `<div class="narrow"><h1 style="font-size:1.6rem">One quick step</h1><p class="mute" style="margin:6px 0 4px">UniBite is for University of Ilesha students only. Please confirm to keep using your account.</p><form data-form="unilesha" novalidate><label class="chk" style="margin-top:14px;align-items:flex-start"><input type="checkbox" name="student"> <span>I confirm I am a current student of the University of Ilesha (or, for vendors, that my shop serves UNILESHA students only). I agree to the <a href="#/terms" style="color:var(--coral)">Terms</a>.</span></label><p class="err" id="fe" role="alert"></p><button class="btn coral block" style="margin-top:14px">Confirm and continue</button></form><button class="btn ghost block" style="margin-top:8px" data-act="logout">Log out</button></div>`;
   return null;
 };
-let renderId = 0; /* only the newest render may draw, so a slow page can never overwrite the one you moved to */
+let renderId = 0, lastHash = null; /* only the newest render may draw, so a slow page can never overwrite the one you moved to */
 async function render() {
   if (!S.ready) return;
   const my = ++renderId;
@@ -836,7 +857,7 @@ async function render() {
   try {
     const html = gateHtml(r) ?? (r === '' ? await views.home() : r === 'browse' ? await views.browse(a in TYPES ? a : 'food') : r === 'search' ? await views.browse('all', decodeURIComponent(a)) : r === 'vendor' ? await views.vendor(a) : r === 'auth' ? await views.auth(a) : r === 'vendor-edit' ? await views['vendor-edit'](a) : views[r] ? await views[r]() : empty('Page not found', 'That page does not exist.', '#/', 'Back home'));
     if (my !== renderId) return;
-    if (html !== '') { app.innerHTML = html; app.dataset.r = location.hash; scrollTo(0, app.dataset.keep ? y : y); }
+    if (html !== '') { app.innerHTML = html; app.dataset.r = location.hash; scrollTo(0, lastHash === location.hash ? y : 0); lastHash = location.hash; }
   } catch (e) { console.error(e); if (my !== renderId) return; app.innerHTML = `<div class="empty"><h3>Something went wrong</h3><p class="mute">${e.code === 'permission-denied' ? 'The database rules have not been published yet.' : 'Check your connection and try again.'}</p><button class="btn" onclick="render()">Retry</button></div>`; }
 }
 document.addEventListener('click', e => {
@@ -881,7 +902,6 @@ onAuthStateChanged(auth, async u => {
   if (busy) return;
   try { await loadUser(u); } catch (e) { console.error(e); S.user = null; }
   S.ready = true; window.__ubReady = true; render();
-  if (!S.feedOn) { S.feedOn = true; startFeed(); }
 });
 </script>
 </body>
